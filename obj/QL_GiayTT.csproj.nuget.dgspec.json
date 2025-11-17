@@ -1,0 +1,70 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\word\\QL_GiayTT\\QL_GiayTT.csproj": {}
+  },
+  "projects": {
+    "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\word\\QL_GiayTT\\QL_GiayTT.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\word\\QL_GiayTT\\QL_GiayTT.csproj",
+        "projectName": "QL_GiayTT",
+        "projectPath": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\word\\QL_GiayTT\\QL_GiayTT.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\word\\QL_GiayTT\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "UsingMicrosoftNETSdk": false,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "Oracle.ManagedDataAccess": {
+              "target": "Package",
+              "version": "[23.26.0, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-arm64": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
