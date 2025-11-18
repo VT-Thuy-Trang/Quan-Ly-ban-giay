@@ -61,3 +61,42 @@ G:\DoAn\QL_GiayTT\obj\Debug\QL_GiayTT.Admin.frmQuanLyKhachHang.resources
 G:\DoAn\QL_GiayTT\obj\Debug\QL_GiayTT.Admin.frmQuanLyNhanVien.resources
 G:\DoAn\QL_GiayTT\obj\Debug\QL_GiayTT.Admin.frmQuanLyNhapKho.resources
 G:\DoAn\QL_GiayTT\obj\Debug\QL_GiayTT.Admin.frmQuanLySanPham.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\QL_GiayTT.exe.config
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\QL_GiayTT.exe
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\QL_GiayTT.pdb
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\EntityFramework.SqlServer.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\EntityFramework.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\Oracle.ManagedDataAccess.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\Oracle.ManagedDataAccess.EntityFramework.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\System.Buffers.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\System.Formats.Asn1.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\System.Memory.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\System.Numerics.Vectors.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\System.Text.Encodings.Web.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\System.Text.Json.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\bin\Debug\System.ValueTuple.dll
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.csproj.AssemblyReference.cache
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.csproj.SuggestedBindingRedirects.cache
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.exe.config
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.Admin.DoanhThu.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.Admin.frmQuanLyHoaDon.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.Admin.frmQuanLyKhachHang.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.Admin.frmQuanLyNhanVien.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.Admin.frmQuanLyNhapKho.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.Admin.frmQuanLySanPham.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.frm.frmBanHang.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.frm.frmDangNhap.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.frmLogin.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.frm.SharedForm.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.frm.frmThongTinSP.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.Properties.Resources.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.TrangChu.resources
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.csproj.GenerateResource.cache
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.csproj.CoreCompileInputs.cache
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.csproj.Up2Date
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.exe
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix2\QL_GiayTT\obj\Debug\QL_GiayTT.pdb

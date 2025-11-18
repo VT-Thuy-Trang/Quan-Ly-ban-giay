@@ -28,7 +28,7 @@ namespace QL_GiayTT.Admin
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -69,6 +69,7 @@ namespace QL_GiayTT.Admin
             this.NamSinhKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SDTKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiaChiKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnMaHoaKH = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
@@ -199,9 +200,9 @@ namespace QL_GiayTT.Admin
             this.panel3.Controls.Add(this.label1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(985, 39);
+            this.panel3.Size = new System.Drawing.Size(1022, 39);
             this.panel3.TabIndex = 36;
             // 
             // panel5
@@ -211,20 +212,21 @@ namespace QL_GiayTT.Admin
             this.panel5.Controls.Add(this.panel6);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 39);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(985, 260);
+            this.panel5.Size = new System.Drawing.Size(1022, 260);
             this.panel5.TabIndex = 37;
             // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.btnMaHoaKH);
             this.panel4.Controls.Add(this.groupBox3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 195);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(885, 65);
+            this.panel4.Size = new System.Drawing.Size(922, 65);
             this.panel4.TabIndex = 39;
             // 
             // groupBox3
@@ -279,7 +281,7 @@ namespace QL_GiayTT.Admin
             this.gB_TTKH.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gB_TTKH.Location = new System.Drawing.Point(0, 0);
             this.gB_TTKH.Name = "gB_TTKH";
-            this.gB_TTKH.Size = new System.Drawing.Size(885, 195);
+            this.gB_TTKH.Size = new System.Drawing.Size(922, 195);
             this.gB_TTKH.TabIndex = 38;
             this.gB_TTKH.TabStop = false;
             this.gB_TTKH.Text = "Thông tin khách hàng";
@@ -413,8 +415,8 @@ namespace QL_GiayTT.Admin
             this.panel6.Controls.Add(this.flowLayoutPanel1);
             this.panel6.Controls.Add(this.panel1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(885, 0);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel6.Location = new System.Drawing.Point(922, 0);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(100, 260);
             this.panel6.TabIndex = 36;
@@ -429,7 +431,7 @@ namespace QL_GiayTT.Admin
             this.flowLayoutPanel1.Controls.Add(this.btnReset);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 33);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(100, 227);
             this.flowLayoutPanel1.TabIndex = 33;
@@ -459,7 +461,7 @@ namespace QL_GiayTT.Admin
             this.panel2.Location = new System.Drawing.Point(0, 299);
             this.panel2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(985, 27);
+            this.panel2.Size = new System.Drawing.Size(1022, 35);
             this.panel2.TabIndex = 38;
             // 
             // label12
@@ -477,14 +479,14 @@ namespace QL_GiayTT.Admin
             // dtGV_KhachHang
             // 
             this.dtGV_KhachHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtGV_KhachHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtGV_KhachHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dtGV_KhachHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGV_KhachHang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaKH,
@@ -494,12 +496,12 @@ namespace QL_GiayTT.Admin
             this.SDTKH,
             this.DiaChiKH});
             this.dtGV_KhachHang.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtGV_KhachHang.Location = new System.Drawing.Point(0, 326);
+            this.dtGV_KhachHang.Location = new System.Drawing.Point(0, 334);
             this.dtGV_KhachHang.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.dtGV_KhachHang.Name = "dtGV_KhachHang";
             this.dtGV_KhachHang.RowHeadersWidth = 51;
             this.dtGV_KhachHang.RowTemplate.Height = 24;
-            this.dtGV_KhachHang.Size = new System.Drawing.Size(985, 288);
+            this.dtGV_KhachHang.Size = new System.Drawing.Size(1022, 280);
             this.dtGV_KhachHang.TabIndex = 39;
             // 
             // MaKH
@@ -532,17 +534,27 @@ namespace QL_GiayTT.Admin
             this.DiaChiKH.HeaderText = "Địa chỉ";
             this.DiaChiKH.Name = "DiaChiKH";
             // 
+            // btnMaHoaKH
+            // 
+            this.btnMaHoaKH.Location = new System.Drawing.Point(275, 15);
+            this.btnMaHoaKH.Name = "btnMaHoaKH";
+            this.btnMaHoaKH.Size = new System.Drawing.Size(117, 33);
+            this.btnMaHoaKH.TabIndex = 36;
+            this.btnMaHoaKH.Text = "Mã Hóa";
+            this.btnMaHoaKH.UseVisualStyleBackColor = true;
+            this.btnMaHoaKH.Click += new System.EventHandler(this.btnMaHoaKH_Click);
+            // 
             // frmQuanLyKhachHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(985, 614);
+            this.ClientSize = new System.Drawing.Size(1022, 614);
             this.Controls.Add(this.dtGV_KhachHang);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmQuanLyKhachHang";
             this.Text = "Quản Lý Khách Hàng";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -609,5 +621,6 @@ namespace QL_GiayTT.Admin
         private System.Windows.Forms.DataGridViewTextBoxColumn NamSinhKH;
         private System.Windows.Forms.DataGridViewTextBoxColumn SDTKH;
         private System.Windows.Forms.DataGridViewTextBoxColumn DiaChiKH;
+        private System.Windows.Forms.Button btnMaHoaKH;
     }
 }

@@ -36,6 +36,12 @@ namespace QL_GiayTT.Admin
             string selectStr = "Select * from KHACHHANG";
             data = new OracleDataAdapter(selectStr, connsql);
             data.Fill(tb_KhachHang);
+
+            foreach (DataRow row in tb_KhachHang.Rows)
+            {
+                row["SDTKH"] = MaHoa.Decrypt(row["SDTKH"].ToString());
+            }
+
             int count = tb_KhachHang.Rows.Count;
             DataColumn[] key = new DataColumn[1];
             key[0] = tb_KhachHang.Columns["MaKH"];
@@ -205,7 +211,10 @@ namespace QL_GiayTT.Admin
                         string insertStr = "INSERT INTO KHACHHANG (TenKH, SDTKH, DiaChiKH, GioiTinhKH, NamSinhKH) VALUES (:TenKH, :SDTKH, :DiaChiKH, :GioiTinhKH, :NamSinhKH)";
                         OracleCommand cmdInsert = new OracleCommand(insertStr, connsql);
                         cmdInsert.Parameters.Add(":TenKH", OracleDbType.Varchar2).Value = txtTenKH.Text;
-                        cmdInsert.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = txtSDT.Text;
+                        //cmdInsert.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = txtSDT.Text;
+                        string sdtMaHoa = MaHoa.Encrypt(txtSDT.Text);
+                        cmdInsert.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = sdtMaHoa;
+
                         cmdInsert.Parameters.Add(":DiaChiKH", OracleDbType.Varchar2).Value = txtDiaChi.Text;
                         cmdInsert.Parameters.Add(":GioiTinhKH", OracleDbType.Varchar2).Value = cboGioiTinh.Text;
                         if (string.IsNullOrWhiteSpace(txtNamSinh.Text))
@@ -221,7 +230,10 @@ namespace QL_GiayTT.Admin
                         string updateStr = "UPDATE KHACHHANG SET TenKH = :TenKH, SDTKH = :SDTKH, DiaChiKH = :DiaChiKH, GioiTinhKH = :GioiTinhKH, NamSinhKH = :NamSinhKH WHERE MaKH = :MaKH";
                         OracleCommand cmdUpdate = new OracleCommand(updateStr, connsql);
                         cmdUpdate.Parameters.Add(":TenKH", OracleDbType.Varchar2).Value = txtTenKH.Text;
-                        cmdUpdate.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = txtSDT.Text;
+                        //cmdUpdate.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = txtSDT.Text;
+                        string sdtMaHoa = MaHoa.Encrypt(txtSDT.Text);
+                        cmdUpdate.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = sdtMaHoa;
+
                         cmdUpdate.Parameters.Add(":DiaChiKH", OracleDbType.Varchar2).Value = txtDiaChi.Text;
                         cmdUpdate.Parameters.Add(":GioiTinhKH", OracleDbType.Varchar2).Value = cboGioiTinh.Text;
                         if (string.IsNullOrWhiteSpace(txtNamSinh.Text))
@@ -283,6 +295,70 @@ namespace QL_GiayTT.Admin
                     closeSql();
                 }
             }
+        }
+
+        private void btnMaHoaKH_Click(object sender, EventArgs e)
+        {
+            // 1. Xác nh?n t? ng??i dùng
+            DialogResult r = MessageBox.Show(
+                "B?n có mu?n mã hóa toàn b? S? ?i?n tho?i khách hàng ch?a ???c b?o m?t không?",
+                "Xác nh?n mã hóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (r == DialogResult.No) return;
+
+            try
+            {
+                if (connsql.State == ConnectionState.Closed) connsql.Open();
+
+                // 2. Load toàn b? d? li?u khách hàng
+                string selectStr = "Select * from KHACHHANG";
+                OracleDataAdapter da = new OracleDataAdapter(selectStr, connsql);
+                da.MissingSchemaAction = MissingSchemaAction.AddWithKey; 
+
+                DataTable dtTemp = new DataTable();
+                da.Fill(dtTemp);
+
+                int count = 0;
+
+                // 3. Duy?t qua t?ng khách hàng và x? lý SDTKH
+                foreach (DataRow row in dtTemp.Rows)
+                {
+                    if (row["SDTKH"] != DBNull.Value)
+                    {
+                        string val = row["SDTKH"].ToString();
+                        if (IsNumber(val))
+                        {
+                            row["SDTKH"] = MaHoa.Encrypt(val);
+                            count++;
+                        }
+                    }
+                }
+
+                // 4. C?p nh?t xu?ng Database
+                if (count > 0)
+                {
+                    OracleCommandBuilder cb = new OracleCommandBuilder(da);
+                    da.Update(dtTemp);
+                    MessageBox.Show($"?ã mã hóa thành công {count} s? ?i?n tho?i khách hàng!");
+                    loadDGV_KhachHang();
+                }
+                else
+                {
+                    MessageBox.Show("T?t c? d? li?u khách hàng ?ã ???c mã hóa tr??c ?ó r?i!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("L?i: " + ex.Message + "\n(Hãy ??m b?o b?n ?ã m? r?ng c?t SDTKH trong Oracle lên VARCHAR2(200))");
+            }
+        }
+
+        // Ph??ng th?c ki?m tra xem chu?i có ph?i là s? không
+        private bool IsNumber(string value)
+        {
+            return long.TryParse(value, out _);
         }
     }
 }

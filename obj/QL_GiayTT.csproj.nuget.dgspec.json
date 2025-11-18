@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\DoAn\\QL_GiayTT\\QL_GiayTT.csproj": {}
+    "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix2\\QL_GiayTT\\QL_GiayTT.csproj": {}
   },
   "projects": {
-    "G:\\DoAn\\QL_GiayTT\\QL_GiayTT.csproj": {
+    "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix2\\QL_GiayTT\\QL_GiayTT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\DoAn\\QL_GiayTT\\QL_GiayTT.csproj",
+        "projectUniqueName": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix2\\QL_GiayTT\\QL_GiayTT.csproj",
         "projectName": "QL_GiayTT",
-        "projectPath": "G:\\DoAn\\QL_GiayTT\\QL_GiayTT.csproj",
-        "packagesPath": "C:\\Users\\Duc-Nam\\.nuget\\packages\\",
-        "outputPath": "G:\\DoAn\\QL_GiayTT\\obj\\",
+        "projectPath": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix2\\QL_GiayTT\\QL_GiayTT.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix2\\QL_GiayTT\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "UsingMicrosoftNETSdk": false,
@@ -19,7 +19,7 @@
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Duc-Nam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -45,6 +45,10 @@
         "net472": {
           "dependencies": {
             "Oracle.ManagedDataAccess": {
+              "target": "Package",
+              "version": "[23.26.0, )"
+            },
+            "Oracle.ManagedDataAccess.EntityFramework": {
               "target": "Package",
               "version": "[23.26.0, )"
             }

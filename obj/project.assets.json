@@ -2,6 +2,32 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.7.2": {
+      "EntityFramework/6.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations"
+        ],
+        "compile": {
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/EntityFramework.props": {},
+          "buildTransitive/EntityFramework.targets": {}
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -35,6 +61,19 @@
         },
         "runtime": {
           "lib/net472/Oracle.ManagedDataAccess.dll": {}
+        }
+      },
+      "Oracle.ManagedDataAccess.EntityFramework/23.26.0": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "[6.5.1, 7.0.0)",
+          "Oracle.ManagedDataAccess": "[23.26.0, 24.0.0)"
+        },
+        "compile": {
+          "lib/net472/Oracle.ManagedDataAccess.EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net472/Oracle.ManagedDataAccess.EntityFramework.dll": {}
         }
       },
       "System.Buffers/4.6.0": {
@@ -234,6 +273,32 @@
       }
     },
     ".NETFramework,Version=v4.7.2/win": {
+      "EntityFramework/6.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations"
+        ],
+        "compile": {
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/EntityFramework.props": {},
+          "buildTransitive/EntityFramework.targets": {}
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -267,6 +332,19 @@
         },
         "runtime": {
           "lib/net472/Oracle.ManagedDataAccess.dll": {}
+        }
+      },
+      "Oracle.ManagedDataAccess.EntityFramework/23.26.0": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "[6.5.1, 7.0.0)",
+          "Oracle.ManagedDataAccess": "[23.26.0, 24.0.0)"
+        },
+        "compile": {
+          "lib/net472/Oracle.ManagedDataAccess.EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net472/Oracle.ManagedDataAccess.EntityFramework.dll": {}
         }
       },
       "System.Buffers/4.6.0": {
@@ -466,6 +544,32 @@
       }
     },
     ".NETFramework,Version=v4.7.2/win-arm64": {
+      "EntityFramework/6.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations"
+        ],
+        "compile": {
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/EntityFramework.props": {},
+          "buildTransitive/EntityFramework.targets": {}
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -499,6 +603,19 @@
         },
         "runtime": {
           "lib/net472/Oracle.ManagedDataAccess.dll": {}
+        }
+      },
+      "Oracle.ManagedDataAccess.EntityFramework/23.26.0": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "[6.5.1, 7.0.0)",
+          "Oracle.ManagedDataAccess": "[23.26.0, 24.0.0)"
+        },
+        "compile": {
+          "lib/net472/Oracle.ManagedDataAccess.EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net472/Oracle.ManagedDataAccess.EntityFramework.dll": {}
         }
       },
       "System.Buffers/4.6.0": {
@@ -698,6 +815,32 @@
       }
     },
     ".NETFramework,Version=v4.7.2/win-x64": {
+      "EntityFramework/6.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations"
+        ],
+        "compile": {
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/EntityFramework.props": {},
+          "buildTransitive/EntityFramework.targets": {}
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -731,6 +874,19 @@
         },
         "runtime": {
           "lib/net472/Oracle.ManagedDataAccess.dll": {}
+        }
+      },
+      "Oracle.ManagedDataAccess.EntityFramework/23.26.0": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "[6.5.1, 7.0.0)",
+          "Oracle.ManagedDataAccess": "[23.26.0, 24.0.0)"
+        },
+        "compile": {
+          "lib/net472/Oracle.ManagedDataAccess.EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net472/Oracle.ManagedDataAccess.EntityFramework.dll": {}
         }
       },
       "System.Buffers/4.6.0": {
@@ -930,6 +1086,32 @@
       }
     },
     ".NETFramework,Version=v4.7.2/win-x86": {
+      "EntityFramework/6.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations"
+        ],
+        "compile": {
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/EntityFramework.props": {},
+          "buildTransitive/EntityFramework.targets": {}
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -963,6 +1145,19 @@
         },
         "runtime": {
           "lib/net472/Oracle.ManagedDataAccess.dll": {}
+        }
+      },
+      "Oracle.ManagedDataAccess.EntityFramework/23.26.0": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "[6.5.1, 7.0.0)",
+          "Oracle.ManagedDataAccess": "[23.26.0, 24.0.0)"
+        },
+        "compile": {
+          "lib/net472/Oracle.ManagedDataAccess.EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net472/Oracle.ManagedDataAccess.EntityFramework.dll": {}
         }
       },
       "System.Buffers/4.6.0": {
@@ -1163,6 +1358,68 @@
     }
   },
   "libraries": {
+    "EntityFramework/6.5.1": {
+      "sha512": "sQRP2lWg1i3aAGWqdliAM8zrGx7LHMUk+9/MoxUjwfTZYGMXvZ2JYZTlyTm1PqDxvn3c9E3U76TWDON7Y5+CVA==",
+      "type": "package",
+      "path": "entityframework/6.5.1",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "README.md",
+        "build/EntityFramework.DefaultItems.props",
+        "build/EntityFramework.props",
+        "build/EntityFramework.targets",
+        "build/Microsoft.Data.Entity.Build.Tasks.dll",
+        "build/net6.0/EntityFramework.props",
+        "build/net6.0/EntityFramework.targets",
+        "buildTransitive/EntityFramework.props",
+        "buildTransitive/EntityFramework.targets",
+        "buildTransitive/net6.0/EntityFramework.props",
+        "buildTransitive/net6.0/EntityFramework.targets",
+        "content/net40/App.config.install.xdt",
+        "content/net40/App.config.transform",
+        "content/net40/Web.config.install.xdt",
+        "content/net40/Web.config.transform",
+        "entityframework.6.5.1.nupkg.sha512",
+        "entityframework.nuspec",
+        "lib/net40/EntityFramework.SqlServer.dll",
+        "lib/net40/EntityFramework.SqlServer.xml",
+        "lib/net40/EntityFramework.dll",
+        "lib/net40/EntityFramework.xml",
+        "lib/net45/EntityFramework.SqlServer.dll",
+        "lib/net45/EntityFramework.SqlServer.xml",
+        "lib/net45/EntityFramework.dll",
+        "lib/net45/EntityFramework.xml",
+        "lib/netstandard2.1/EntityFramework.SqlServer.dll",
+        "lib/netstandard2.1/EntityFramework.SqlServer.xml",
+        "lib/netstandard2.1/EntityFramework.dll",
+        "lib/netstandard2.1/EntityFramework.xml",
+        "tools/EntityFramework6.PS2.psd1",
+        "tools/EntityFramework6.PS2.psm1",
+        "tools/EntityFramework6.psd1",
+        "tools/EntityFramework6.psm1",
+        "tools/about_EntityFramework6.help.txt",
+        "tools/init.ps1",
+        "tools/install.ps1",
+        "tools/net40/any/ef6.exe",
+        "tools/net40/any/ef6.pdb",
+        "tools/net40/win-arm64/ef6.exe",
+        "tools/net40/win-arm64/ef6.pdb",
+        "tools/net40/win-x86/ef6.exe",
+        "tools/net40/win-x86/ef6.pdb",
+        "tools/net45/any/ef6.exe",
+        "tools/net45/any/ef6.pdb",
+        "tools/net45/win-arm64/ef6.exe",
+        "tools/net45/win-arm64/ef6.pdb",
+        "tools/net45/win-x86/ef6.exe",
+        "tools/net45/win-x86/ef6.pdb",
+        "tools/net6.0/any/ef6.dll",
+        "tools/net6.0/any/ef6.pdb",
+        "tools/net6.0/any/ef6.runtimeconfig.json"
+      ]
+    },
     "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
       "sha512": "3WA9q9yVqJp222P3x1wYIGDAkpjAku0TMUaaQV22g6L67AI0LdOIrVS7Ht2vJfLHGSPVuqN94vIr15qn+HEkHw==",
       "type": "package",
@@ -1211,6 +1468,25 @@
         "lib/net472/Oracle.ManagedDataAccess.dll",
         "oracle.manageddataaccess.23.26.0.nupkg.sha512",
         "oracle.manageddataaccess.nuspec",
+        "oracle.png"
+      ]
+    },
+    "Oracle.ManagedDataAccess.EntityFramework/23.26.0": {
+      "sha512": "71D+IvdNxq0Z9X6+7Ai76KUGuoQaB2CkKXCVr3QzcBPEcyBV3UFwQCEepPTJxRRo5Nj19dUU1S1/Joka0XY8mg==",
+      "type": "package",
+      "path": "oracle.manageddataaccess.entityframework/23.26.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "content/net472/App.config.install.xdt",
+        "content/net472/App.config.uninstall.xdt",
+        "content/net472/Web.config.install.xdt",
+        "content/net472/Web.config.uninstall.xdt",
+        "lib/net472/Oracle.ManagedDataAccess.EntityFramework.dll",
+        "oracle.manageddataaccess.entityframework.23.26.0.nupkg.sha512",
+        "oracle.manageddataaccess.entityframework.nuspec",
         "oracle.png"
       ]
     },
@@ -1525,21 +1801,22 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
-      "Oracle.ManagedDataAccess >= 23.26.0"
+      "Oracle.ManagedDataAccess >= 23.26.0",
+      "Oracle.ManagedDataAccess.EntityFramework >= 23.26.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Duc-Nam\\.nuget\\packages\\": {},
+    "C:\\Users\\LENOVO\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\DoAn\\QL_GiayTT\\QL_GiayTT.csproj",
+      "projectUniqueName": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix2\\QL_GiayTT\\QL_GiayTT.csproj",
       "projectName": "QL_GiayTT",
-      "projectPath": "G:\\DoAn\\QL_GiayTT\\QL_GiayTT.csproj",
-      "packagesPath": "C:\\Users\\Duc-Nam\\.nuget\\packages\\",
-      "outputPath": "G:\\DoAn\\QL_GiayTT\\obj\\",
+      "projectPath": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix2\\QL_GiayTT\\QL_GiayTT.csproj",
+      "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+      "outputPath": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix2\\QL_GiayTT\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "UsingMicrosoftNETSdk": false,
@@ -1547,7 +1824,7 @@
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Duc-Nam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1573,6 +1850,10 @@
       "net472": {
         "dependencies": {
           "Oracle.ManagedDataAccess": {
+            "target": "Package",
+            "version": "[23.26.0, )"
+          },
+          "Oracle.ManagedDataAccess.EntityFramework": {
             "target": "Package",
             "version": "[23.26.0, )"
           }

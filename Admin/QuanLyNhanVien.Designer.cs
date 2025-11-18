@@ -81,14 +81,14 @@ namespace QL_GiayTT.Admin
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.dtGV_TaiKhoan = new System.Windows.Forms.DataGridView();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.dtGV_NhanVien = new System.Windows.Forms.DataGridView();
             this.MaTKDN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TAIKHOAN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MATKHAU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LOAITK = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.dtGV_NhanVien = new System.Windows.Forms.DataGridView();
             this.MaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SDTNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -99,6 +99,7 @@ namespace QL_GiayTT.Admin
             this.NVL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Lương = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MATK = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnMaHoaALL = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -134,9 +135,9 @@ namespace QL_GiayTT.Admin
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1144, 292);
+            this.panel3.Size = new System.Drawing.Size(1497, 292);
             this.panel3.TabIndex = 29;
             // 
             // panel4
@@ -147,7 +148,7 @@ namespace QL_GiayTT.Admin
             this.panel4.Location = new System.Drawing.Point(0, 234);
             this.panel4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1144, 58);
+            this.panel4.Size = new System.Drawing.Size(1497, 58);
             this.panel4.TabIndex = 31;
             // 
             // groupBox3
@@ -190,13 +191,14 @@ namespace QL_GiayTT.Admin
             this.panel6.Controls.Add(this.gb_TTNV);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 39);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1144, 195);
+            this.panel6.Size = new System.Drawing.Size(1497, 195);
             this.panel6.TabIndex = 30;
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.btnMaHoaALL);
             this.panel7.Controls.Add(this.panel1);
             this.panel7.Controls.Add(this.btnXoa);
             this.panel7.Controls.Add(this.btnThem);
@@ -209,9 +211,9 @@ namespace QL_GiayTT.Admin
             this.panel7.Controls.Add(this.btnLuu);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(780, 0);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(364, 195);
+            this.panel7.Size = new System.Drawing.Size(717, 195);
             this.panel7.TabIndex = 29;
             // 
             // panel1
@@ -225,7 +227,7 @@ namespace QL_GiayTT.Admin
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(364, 32);
+            this.panel1.Size = new System.Drawing.Size(717, 32);
             this.panel1.TabIndex = 25;
             // 
             // pictureBox1
@@ -629,9 +631,9 @@ namespace QL_GiayTT.Admin
             this.panel5.Controls.Add(this.label1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1144, 39);
+            this.panel5.Size = new System.Drawing.Size(1497, 39);
             this.panel5.TabIndex = 23;
             // 
             // panel2
@@ -663,9 +665,9 @@ namespace QL_GiayTT.Admin
             this.panel8.Controls.Add(this.panel9);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(0, 292);
-            this.panel8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1144, 195);
+            this.panel8.Size = new System.Drawing.Size(1497, 274);
             this.panel8.TabIndex = 30;
             // 
             // panel10
@@ -674,9 +676,9 @@ namespace QL_GiayTT.Admin
             this.panel10.Controls.Add(this.panel11);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(867, 0);
-            this.panel10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel10.Margin = new System.Windows.Forms.Padding(2);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(277, 195);
+            this.panel10.Size = new System.Drawing.Size(630, 274);
             this.panel10.TabIndex = 1;
             // 
             // dtGV_TaiKhoan
@@ -710,9 +712,31 @@ namespace QL_GiayTT.Admin
             this.dtGV_TaiKhoan.Name = "dtGV_TaiKhoan";
             this.dtGV_TaiKhoan.RowHeadersWidth = 51;
             this.dtGV_TaiKhoan.RowTemplate.Height = 24;
-            this.dtGV_TaiKhoan.Size = new System.Drawing.Size(277, 168);
+            this.dtGV_TaiKhoan.Size = new System.Drawing.Size(630, 247);
             this.dtGV_TaiKhoan.TabIndex = 33;
             this.dtGV_TaiKhoan.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dtGV_TaiKhoan_RowValidating);
+            // 
+            // MaTKDN
+            // 
+            this.MaTKDN.HeaderText = "Mã Tài Khoản";
+            this.MaTKDN.Name = "MaTKDN";
+            // 
+            // TAIKHOAN
+            // 
+            this.TAIKHOAN.HeaderText = "Tài Khoản";
+            this.TAIKHOAN.Name = "TAIKHOAN";
+            // 
+            // MATKHAU
+            // 
+            this.MATKHAU.HeaderText = "Mật Khẩu";
+            this.MATKHAU.Name = "MATKHAU";
+            // 
+            // LOAITK
+            // 
+            this.LOAITK.HeaderText = "Loại Tài Khoản";
+            this.LOAITK.Name = "LOAITK";
+            this.LOAITK.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.LOAITK.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // panel11
             // 
@@ -723,7 +747,7 @@ namespace QL_GiayTT.Admin
             this.panel11.Location = new System.Drawing.Point(0, 0);
             this.panel11.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(277, 27);
+            this.panel11.Size = new System.Drawing.Size(630, 27);
             this.panel11.TabIndex = 31;
             // 
             // label13
@@ -743,9 +767,9 @@ namespace QL_GiayTT.Admin
             this.panel9.Controls.Add(this.panel2);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel9.Margin = new System.Windows.Forms.Padding(2);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(867, 195);
+            this.panel9.Size = new System.Drawing.Size(867, 274);
             this.panel9.TabIndex = 0;
             // 
             // dtGV_NhanVien
@@ -785,31 +809,9 @@ namespace QL_GiayTT.Admin
             this.dtGV_NhanVien.Name = "dtGV_NhanVien";
             this.dtGV_NhanVien.RowHeadersWidth = 51;
             this.dtGV_NhanVien.RowTemplate.Height = 24;
-            this.dtGV_NhanVien.Size = new System.Drawing.Size(867, 168);
+            this.dtGV_NhanVien.Size = new System.Drawing.Size(867, 247);
             this.dtGV_NhanVien.TabIndex = 32;
             this.dtGV_NhanVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGV_NhanVien_CellClick);
-            // 
-            // MaTKDN
-            // 
-            this.MaTKDN.HeaderText = "Mã Tài Khoản";
-            this.MaTKDN.Name = "MaTKDN";
-            // 
-            // TAIKHOAN
-            // 
-            this.TAIKHOAN.HeaderText = "Tài Khoản";
-            this.TAIKHOAN.Name = "TAIKHOAN";
-            // 
-            // MATKHAU
-            // 
-            this.MATKHAU.HeaderText = "Mật Khẩu";
-            this.MATKHAU.Name = "MATKHAU";
-            // 
-            // LOAITK
-            // 
-            this.LOAITK.HeaderText = "Loại Tài Khoản";
-            this.LOAITK.Name = "LOAITK";
-            this.LOAITK.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.LOAITK.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // MaNV
             // 
@@ -861,15 +863,25 @@ namespace QL_GiayTT.Admin
             this.MATK.HeaderText = "Mã tài khoản";
             this.MATK.Name = "MATK";
             // 
+            // btnMaHoaALL
+            // 
+            this.btnMaHoaALL.Location = new System.Drawing.Point(428, 48);
+            this.btnMaHoaALL.Name = "btnMaHoaALL";
+            this.btnMaHoaALL.Size = new System.Drawing.Size(127, 35);
+            this.btnMaHoaALL.TabIndex = 21;
+            this.btnMaHoaALL.Text = "Mã Hóa ALL";
+            this.btnMaHoaALL.UseVisualStyleBackColor = true;
+            this.btnMaHoaALL.Click += new System.EventHandler(this.btnMaHoaALL_Click_1);
+            // 
             // frmQuanLyNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1144, 487);
+            this.ClientSize = new System.Drawing.Size(1497, 566);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmQuanLyNhanVien";
             this.Text = "Quản Lý Nhân Viên";
             this.Load += new System.EventHandler(this.frmQuanLyNhanVien_Load);
@@ -967,5 +979,6 @@ namespace QL_GiayTT.Admin
         private System.Windows.Forms.DataGridViewTextBoxColumn NVL;
         private System.Windows.Forms.DataGridViewTextBoxColumn Lương;
         private System.Windows.Forms.DataGridViewTextBoxColumn MATK;
+        private System.Windows.Forms.Button btnMaHoaALL;
     }
 }
