@@ -11,6 +11,7 @@ using Oracle.ManagedDataAccess.Client;
 using QL_GiayTT.frm;
 using QL_GiayTT.Class;
 using QL_GiayTT.ObjectClass;
+using QL_GiayTT.frm.Cls;
 
 namespace QL_GiayTT.frm
 {
@@ -136,6 +137,29 @@ namespace QL_GiayTT.frm
             string selectStr = "Select MaSP, TenSP, GiaBan, SoLuongTon from SANPHAM";
             load_FLP_DMSO(selectStr);
             dtGV_GioHang.AllowUserToAddRows = false;
+            
+            // Đảm bảo cột SoLuong có thể chỉnh sửa
+            if (dtGV_GioHang.Columns["SoLuong"] != null)
+            {
+                dtGV_GioHang.Columns["SoLuong"].ReadOnly = false;
+            }
+            
+            // Sau khi load xong, nếu có nhân viên trong danh sách thì chọn nhân viên đầu tiên
+            // và enable các control thanh toán
+            if (cbo_NhanVien.Items.Count > 0)
+            {
+                cbo_NhanVien.SelectedIndex = 0;
+                // Gọi hàm enable các control vì SelectionChangeCommitted không tự động trigger khi set SelectedIndex
+                if (cbo_NhanVien.SelectedIndex >= 0)
+                {
+                    cbo_HTThanhToan.Enabled = true;
+                    cbo_HTGiamGia.Enabled = true;
+                    btnThanhToan.Enabled = true;
+                    chk_ChuaThanhToan.Enabled = true;
+                    chk_DatCoc.Enabled = true;
+                    txtGhiChu.Enabled = true;
+                }
+            }
         }
 
         // Xử lý sự kiện click trên Panel
@@ -161,11 +185,30 @@ namespace QL_GiayTT.frm
             dtGV_GioHang.Columns[4].DataPropertyName = "GiaBan";
             dtGV_GioHang.Columns[5].DataPropertyName = "ThanhTien";
 
+            // Đảm bảo các cột không thể chỉnh sửa trừ cột SoLuong
+            dtGV_GioHang.Columns["MaSP"].ReadOnly = true;
+            dtGV_GioHang.Columns["TenSP"].ReadOnly = true;
+            dtGV_GioHang.Columns["KichThuoc"].ReadOnly = true;
+            dtGV_GioHang.Columns["SoLuong"].ReadOnly = false; // Cho phép chỉnh sửa số lượng
+            dtGV_GioHang.Columns["GiaBan"].ReadOnly = true;
+            dtGV_GioHang.Columns["ThanhTien"].ReadOnly = true;
+
             dtGV_GioHang.DataSource = listGH;
 
             cbo_NhanVien.Enabled = true;
             txtTenKH.Enabled = true;
             mtxt_SDTKH.Enabled = true;
+
+            // Đảm bảo các control thanh toán được enable nếu đã chọn nhân viên
+            if (cbo_NhanVien.SelectedIndex >= 0 && cbo_NhanVien.SelectedValue != null)
+            {
+                cbo_HTThanhToan.Enabled = true;
+                cbo_HTGiamGia.Enabled = true;
+                btnThanhToan.Enabled = true;
+                chk_ChuaThanhToan.Enabled = true;
+                chk_DatCoc.Enabled = true;
+                txtGhiChu.Enabled = true;
+            }
 
             capNhapThanhToan(QuanLyGioHang.Instance.TongThanhToan);
         }
@@ -222,7 +265,7 @@ namespace QL_GiayTT.frm
 
         private void cbo_NhanVien_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (cbo_NhanVien.SelectedIndex == 0)
+            if (cbo_NhanVien.SelectedIndex < 0)
             {
                 cbo_HTThanhToan.Enabled = false;
                 cbo_HTGiamGia.Enabled = false;
@@ -353,9 +396,17 @@ namespace QL_GiayTT.frm
             try
             {
                 // Kiểm tra nhân viên đã được chọn chưa
-                if (cbo_NhanVien.SelectedIndex <= 0 || cbo_NhanVien.SelectedValue == null)
+                if (cbo_NhanVien.SelectedIndex < 0)
                 {
                     MessageBox.Show("Vui lòng chọn nhân viên!!!");
+                    return;
+                }
+                
+                // Kiểm tra SelectedValue
+                object selectedValue = cbo_NhanVien.SelectedValue;
+                if (selectedValue == null || selectedValue == DBNull.Value)
+                {
+                    MessageBox.Show("Lỗi: Không thể lấy thông tin nhân viên! Vui lòng chọn lại nhân viên.");
                     return;
                 }
 
@@ -366,18 +417,29 @@ namespace QL_GiayTT.frm
                     return;
                 }
 
-                // Parse tiền thừa - xử lý format có dấu phẩy
-                string tienThuaStr = lbTienThua.Text.Replace("đ", "").Replace(",", "").Trim();
-                double tienThua = 0;
-                if (!string.IsNullOrEmpty(tienThuaStr))
+                // Kiểm tra tiền thừa chỉ khi chọn hình thức thanh toán "Tiền mặt"
+                if (cbo_HTThanhToan.SelectedIndex == 1) // Tiền mặt
                 {
-                    double.TryParse(tienThuaStr, out tienThua);
-                }
-                
-                if (tienThua < 0)
-                {
-                    MessageBox.Show("TIỀN NHẬN KHÔNG ĐỦ!!!");
-                    return;
+                    // Parse tiền thừa - xử lý format có dấu phẩy
+                    string tienThuaStr = lbTienThua.Text.Replace("đ", "").Replace(",", "").Trim();
+                    double tienThua = 0;
+                    if (!string.IsNullOrEmpty(tienThuaStr))
+                    {
+                        double.TryParse(tienThuaStr, out tienThua);
+                    }
+                    
+                    // Kiểm tra nếu chưa nhập tiền nhận
+                    if (string.IsNullOrEmpty(txtTienNhan.Text.Trim()))
+                    {
+                        MessageBox.Show("Vui lòng nhập số tiền nhận!!!");
+                        return;
+                    }
+                    
+                    if (tienThua < 0)
+                    {
+                        MessageBox.Show("TIỀN NHẬN KHÔNG ĐỦ!!!");
+                        return;
+                    }
                 }
 
                 if (chk_DatCoc.Checked == true)
@@ -424,11 +486,11 @@ namespace QL_GiayTT.frm
                 else
                     cmdHD.Parameters.Add(":MaKH", OracleDbType.Int32).Value = DBNull.Value;
                 
-                // Kiểm tra SelectedValue không null
-                string maNV = cbo_NhanVien.SelectedValue?.ToString();
-                if (string.IsNullOrEmpty(maNV))
+                // Lấy mã nhân viên từ SelectedValue
+                string maNV = selectedValue.ToString();
+                if (string.IsNullOrWhiteSpace(maNV))
                 {
-                    MessageBox.Show("Lỗi: Không thể lấy mã nhân viên!");
+                    MessageBox.Show("Lỗi: Mã nhân viên không hợp lệ!");
                     return;
                 }
                 cmdHD.Parameters.Add(":MaNV", OracleDbType.Varchar2).Value = maNV;
@@ -587,18 +649,74 @@ namespace QL_GiayTT.frm
             if (dtGV_GioHang.Columns[e.ColumnIndex].Name == "SoLuong")
             {
                 DataGridViewRow dongHienTai = dtGV_GioHang.Rows[e.RowIndex];
-                double donGia = double.Parse(dongHienTai.Cells["GiaBan"].Value.ToString());
-                int soLuong = int.Parse(dtGV_GioHang.CurrentCell.Value.ToString());
-                dongHienTai.Cells["ThanhTien"].Value = (soLuong * donGia).ToString("N0");
-
-                DataGridViewColumn cotCuoiCung = dtGV_GioHang.Columns[dtGV_GioHang.Columns.Count - 1];
-                double tongTien = 0;
-                foreach (DataGridViewRow row in dtGV_GioHang.Rows)
+                
+                // Kiểm tra nếu row không hợp lệ
+                if (dongHienTai.IsNewRow || dongHienTai.Cells["MaSP"].Value == null)
+                    return;
+                
+                string giaBanStr = dongHienTai.Cells["GiaBan"].Value?.ToString()?.Replace(",", "") ?? "0";
+                if (!double.TryParse(giaBanStr, out double donGia))
+                    return;
+                
+                // Lấy giá trị từ NumericUpDown
+                int soLuong = 1;
+                object soLuongValue = dongHienTai.Cells["SoLuong"].Value;
+                if (soLuongValue != null)
                 {
-                    tongTien += double.Parse(row.Cells["ThanhTien"].Value.ToString());
+                    string soLuongStr = soLuongValue.ToString().Replace(",", "").Trim();
+                    if (!int.TryParse(soLuongStr, out soLuong) || soLuong < 1)
+                    {
+                        soLuong = 1;
+                        dongHienTai.Cells["SoLuong"].Value = "1";
+                    }
+                }
+                else
+                {
+                    dongHienTai.Cells["SoLuong"].Value = "1";
+                }
+                    
+                double thanhTien = soLuong * donGia;
+                dongHienTai.Cells["ThanhTien"].Value = thanhTien.ToString("N0");
+                
+                // Cập nhật vào DataTable trong QuanLyGioHang
+                DataTable listGH = QuanLyGioHang.Instance.LayDuLieuGioHang();
+                string maSP = dongHienTai.Cells["MaSP"].Value?.ToString();
+                string kichCo = dongHienTai.Cells["KichThuoc"].Value?.ToString();
+                if (!string.IsNullOrEmpty(maSP) && !string.IsNullOrEmpty(kichCo))
+                {
+                    DataRow[] rows = listGH.Select("MaSP = '" + maSP + "' AND KichCo = '" + kichCo + "'");
+                    foreach (DataRow row in rows)
+                    {
+                        row["SoLuong"] = soLuong.ToString();
+                        row["ThanhTien"] = thanhTien.ToString("N0");
+                    }
                 }
 
+                // Tính lại tổng tiền từ DataTable
+                double tongTien = 0;
+                foreach (DataRow row in listGH.Rows)
+                {
+                    string thanhTienStr = row["ThanhTien"].ToString().Replace(",", "");
+                    if (double.TryParse(thanhTienStr, out double tt))
+                    {
+                        tongTien += tt;
+                    }
+                }
+                
+                // Cập nhật TongThanhToan trong QuanLyGioHang
+                QuanLyGioHang.Instance.TongThanhToan = tongTien;
+
                 capNhapThanhToan(tongTien);
+            }
+        }
+        
+        private void dtGV_GioHang_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            // Xử lý khi giá trị thay đổi (kể cả khi không edit)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dtGV_GioHang.Columns[e.ColumnIndex].Name == "SoLuong")
+            {
+                // Gọi lại logic tính toán
+                dtGV_GioHang_CellEndEdit(sender, new DataGridViewCellEventArgs(e.ColumnIndex, e.RowIndex));
             }
         }
 
@@ -621,19 +739,83 @@ namespace QL_GiayTT.frm
 
         private void tsmi_Xoa_Click(object sender, EventArgs e)
         {
-            int rowIndex = (int)cms_dtGVGioHang.Tag;
-            double thanhTienDongHienTai = double.Parse(dtGV_GioHang.Rows[rowIndex].Cells["ThanhTien"].Value.ToString());
-            dtGV_GioHang.Rows.RemoveAt(rowIndex);
-            double tongTien = 0;
-            foreach (DataGridViewRow row in dtGV_GioHang.Rows)
+            // Kiểm tra Tag có giá trị không
+            if (cms_dtGVGioHang.Tag == null)
             {
-                tongTien += double.Parse(row.Cells["ThanhTien"].Value.ToString());
+                MessageBox.Show("Không thể xác định sản phẩm cần xóa!");
+                return;
             }
-            if (dtGV_GioHang.RowCount == 0)
+
+            int rowIndex = (int)cms_dtGVGioHang.Tag;
+            
+            // Kiểm tra rowIndex có hợp lệ không
+            if (rowIndex < 0 || rowIndex >= dtGV_GioHang.Rows.Count)
+            {
+                MessageBox.Show("Chỉ số hàng không hợp lệ!");
+                return;
+            }
+
+            // Lấy thông tin từ DataGridView trước khi xóa
+            DataGridViewRow selectedRow = dtGV_GioHang.Rows[rowIndex];
+            if (selectedRow == null || selectedRow.IsNewRow)
+            {
+                MessageBox.Show("Không thể xóa hàng này!");
+                return;
+            }
+
+            string maSP = selectedRow.Cells["MaSP"].Value?.ToString();
+            string kichCo = selectedRow.Cells["KichThuoc"].Value?.ToString();
+            
+            if (string.IsNullOrEmpty(maSP) || string.IsNullOrEmpty(kichCo))
+            {
+                MessageBox.Show("Không thể lấy thông tin sản phẩm!");
+                return;
+            }
+            
+            // Xóa khỏi DataTable trong QuanLyGioHang
+            // Vì DataGridView đang bind với DataTable qua DataSource,
+            // nên khi xóa từ DataTable, DataGridView sẽ tự động cập nhật
+            DataTable listGH = QuanLyGioHang.Instance.LayDuLieuGioHang();
+            DataRow[] rowsToDelete = listGH.Select("MaSP = '" + maSP + "' AND KichCo = '" + kichCo + "'");
+            
+            if (rowsToDelete.Length == 0)
+            {
+                MessageBox.Show("Không tìm thấy sản phẩm trong giỏ hàng!");
+                return;
+            }
+            
+            // Xóa tất cả các dòng khớp (trường hợp có nhiều dòng cùng sản phẩm và size)
+            foreach (DataRow row in rowsToDelete)
+            {
+                listGH.Rows.Remove(row);
+            }
+            
+            // DataGridView sẽ tự động cập nhật vì nó bind với DataTable
+            // Không cần gọi RemoveAt nữa
+            
+            // Tính lại tổng tiền từ DataTable
+            double tongTien = 0;
+            foreach (DataRow row in listGH.Rows)
+            {
+                string thanhTienStr = row["ThanhTien"].ToString().Replace(",", "");
+                if (double.TryParse(thanhTienStr, out double thanhTien))
+                {
+                    tongTien += thanhTien;
+                }
+            }
+            
+            // Cập nhật TongThanhToan trong QuanLyGioHang
+            QuanLyGioHang.Instance.TongThanhToan = tongTien;
+            
+            // Kiểm tra giỏ hàng còn sản phẩm không
+            if (listGH.Rows.Count == 0)
             {
                 xoaThongTinBanHang(sender, e);
             }
-            capNhapThanhToan(tongTien);
+            else
+            {
+                capNhapThanhToan(tongTien);
+            }
         }
 
         private void chk_ChuaThanhToan_CheckedChanged(object sender, EventArgs e)

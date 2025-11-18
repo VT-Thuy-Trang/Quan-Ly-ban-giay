@@ -34,12 +34,13 @@
             this.txtHost = new System.Windows.Forms.TextBox();
             this.lblHost = new System.Windows.Forms.Label();
             this.lblLogin = new System.Windows.Forms.Label();
+            this.chk_HienMK = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnLogin
             // 
             this.btnLogin.BackColor = System.Drawing.Color.Moccasin;
-            this.btnLogin.Location = new System.Drawing.Point(53, 383);
+            this.btnLogin.Location = new System.Drawing.Point(54, 394);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(5);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(295, 66);
@@ -154,11 +155,24 @@
             this.lblLogin.Text = "LOGIN";
             this.lblLogin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // chk_HienMK
+            // 
+            this.chk_HienMK.AutoSize = true;
+            this.chk_HienMK.Location = new System.Drawing.Point(136, 362);
+            this.chk_HienMK.Margin = new System.Windows.Forms.Padding(2);
+            this.chk_HienMK.Name = "chk_HienMK";
+            this.chk_HienMK.Size = new System.Drawing.Size(135, 25);
+            this.chk_HienMK.TabIndex = 48;
+            this.chk_HienMK.Text = "Hiện mật khẩu";
+            this.chk_HienMK.UseVisualStyleBackColor = true;
+            this.chk_HienMK.CheckedChanged += new System.EventHandler(this.chk_HienMK_CheckedChanged);
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 465);
+            this.Controls.Add(this.chk_HienMK);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.lblPassword);
@@ -174,7 +188,7 @@
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "frmLogin";
-            this.Text = "frmLogin";
+            this.Text = "Ket Noi Oracle";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,6 +206,7 @@
         public System.Windows.Forms.TextBox txtHost;
         private System.Windows.Forms.Label lblHost;
         private System.Windows.Forms.Label lblLogin;
+        private System.Windows.Forms.CheckBox chk_HienMK;
     }
 }
 

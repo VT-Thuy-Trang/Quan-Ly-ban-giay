@@ -51,5 +51,12 @@ namespace QL_GiayTT
                 MessageBox.Show("Kết nối thất bại!");
             }
         }
+
+        private void chk_HienMK_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_HienMK.Checked == true)
+                txtPassword.PasswordChar = '\0';
+            else txtPassword.PasswordChar = '*';
+        }
     }
 }

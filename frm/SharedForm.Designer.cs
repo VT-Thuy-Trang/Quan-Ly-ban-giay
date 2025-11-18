@@ -33,10 +33,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnDoanhThu = new System.Windows.Forms.Button();
             this.btnDongTab = new System.Windows.Forms.Button();
             this.btnDangXuat = new System.Windows.Forms.Button();
-            this.btnNhapKho = new System.Windows.Forms.Button();
             this.btnKhachHang = new System.Windows.Forms.Button();
             this.btnSanPham = new System.Windows.Forms.Button();
             this.btnNhanVien = new System.Windows.Forms.Button();
@@ -89,10 +87,8 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.LightGray;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.btnDoanhThu);
             this.panel2.Controls.Add(this.btnDongTab);
             this.panel2.Controls.Add(this.btnDangXuat);
-            this.panel2.Controls.Add(this.btnNhapKho);
             this.panel2.Controls.Add(this.btnKhachHang);
             this.panel2.Controls.Add(this.btnSanPham);
             this.panel2.Controls.Add(this.btnNhanVien);
@@ -105,18 +101,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1185, 33);
             this.panel2.TabIndex = 14;
-            // 
-            // btnDoanhThu
-            // 
-            this.btnDoanhThu.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDoanhThu.Location = new System.Drawing.Point(695, -1);
-            this.btnDoanhThu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnDoanhThu.Name = "btnDoanhThu";
-            this.btnDoanhThu.Size = new System.Drawing.Size(117, 32);
-            this.btnDoanhThu.TabIndex = 9;
-            this.btnDoanhThu.Text = "Doanh Thu";
-            this.btnDoanhThu.UseVisualStyleBackColor = true;
-            this.btnDoanhThu.Click += new System.EventHandler(this.btnDoanhThu_Click);
             // 
             // btnDongTab
             // 
@@ -143,18 +127,6 @@
             this.btnDangXuat.Text = "Đăng Xuất";
             this.btnDangXuat.UseVisualStyleBackColor = true;
             this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
-            // 
-            // btnNhapKho
-            // 
-            this.btnNhapKho.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNhapKho.Location = new System.Drawing.Point(574, -1);
-            this.btnNhapKho.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnNhapKho.Name = "btnNhapKho";
-            this.btnNhapKho.Size = new System.Drawing.Size(117, 32);
-            this.btnNhapKho.TabIndex = 6;
-            this.btnNhapKho.Text = "Nhập Kho";
-            this.btnNhapKho.UseVisualStyleBackColor = true;
-            this.btnNhapKho.Click += new System.EventHandler(this.btnNhapKho_Click);
             // 
             // btnKhachHang
             // 
@@ -284,9 +256,7 @@
         private System.Windows.Forms.Button btnNhanVien;
         private System.Windows.Forms.Button btnKhachHang;
         private System.Windows.Forms.Button btnSanPham;
-        private System.Windows.Forms.Button btnNhapKho;
         private System.Windows.Forms.Button btnDongTab;
         private System.Windows.Forms.Button btnDangXuat;
-        private System.Windows.Forms.Button btnDoanhThu;
     }
 }

@@ -79,7 +79,7 @@
             this.MaSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KichThuoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SoLuong = new QL_GiayTT.frm.Cls.DataGridViewNumericUpDownColumn();
             this.GiaBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ThanhTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -666,6 +666,7 @@
             this.dtGV_GioHang.TabIndex = 22;
             this.dtGV_GioHang.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dtGV_GioHang_CellContextMenuStripNeeded);
             this.dtGV_GioHang.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGV_GioHang_CellEndEdit);
+            this.dtGV_GioHang.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGV_GioHang_CellValueChanged);
             // 
             // MaSP
             // 
@@ -692,6 +693,10 @@
             this.SoLuong.HeaderText = "Số lượng";
             this.SoLuong.MinimumWidth = 8;
             this.SoLuong.Name = "SoLuong";
+            this.SoLuong.Minimum = new decimal(new int[] {1, 0, 0, 0});
+            this.SoLuong.Maximum = new decimal(new int[] {999, 0, 0, 0});
+            this.SoLuong.Increment = new decimal(new int[] {1, 0, 0, 0});
+            this.SoLuong.DecimalPlaces = 0;
             // 
             // GiaBan
             // 
@@ -973,7 +978,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MaSP;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenSP;
         private System.Windows.Forms.DataGridViewTextBoxColumn KichThuoc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SoLuong;
+        private QL_GiayTT.frm.Cls.DataGridViewNumericUpDownColumn SoLuong;
         private System.Windows.Forms.DataGridViewTextBoxColumn GiaBan;
         private System.Windows.Forms.DataGridViewTextBoxColumn ThanhTien;
     }

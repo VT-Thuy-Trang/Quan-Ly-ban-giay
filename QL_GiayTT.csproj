@@ -93,6 +93,7 @@
     <Compile Include="frm\BanHang.Designer.cs">
       <DependentUpon>BanHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm\Cls\DataGridViewNumericUpDownColumn.cs" />
     <Compile Include="frm\Cls\GioHang.cs" />
     <Compile Include="frm\Cls\QuanLyGioHang.cs" />
     <Compile Include="frm\Cls\ThongTinKhachHang.cs" />

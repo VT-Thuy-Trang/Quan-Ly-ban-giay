@@ -31,8 +31,6 @@ namespace QL_GiayTT.frm
                 btnSanPham.Enabled = false;
                 btnNhanVien.Enabled = false;
                 btnKhachHang.Enabled = false;
-                btnNhapKho.Enabled = false;
-                btnDoanhThu.Enabled = false;
             }
         }
 
@@ -174,20 +172,6 @@ namespace QL_GiayTT.frm
             }
         }
 
-        private void btnNhapKho_Click(object sender, EventArgs e)
-        {
-            frmQuanLyNhapKho uc = new frmQuanLyNhapKho();
-            string tagName = uc.Text;
-            Form fromTonTan = kiemTraFormTonTai(tagName);
-
-            if (fromTonTan == null)
-                addTabControl(uc, tagName);
-            else
-            {
-                uc.Close();
-                tabControl.SelectedTab = fromTonTan.Parent as TabPage;
-            }
-        }
 
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
@@ -222,20 +206,6 @@ namespace QL_GiayTT.frm
             }
         }
 
-        private void btnDoanhThu_Click(object sender, EventArgs e)
-        {
-            DoanhThu uc = new DoanhThu();
-            string tagName = uc.Text;
-            Form fromTonTan = kiemTraFormTonTai(tagName);
-
-            if (fromTonTan == null)
-                addTabControl(uc, tagName);
-            else
-            {
-                uc.Close();
-                tabControl.SelectedTab = fromTonTan.Parent as TabPage;
-            }
-        }
 
     }
 }

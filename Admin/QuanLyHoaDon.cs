@@ -47,7 +47,13 @@ namespace QL_GiayTT.Admin
 
         public void load_DtGV_HoaDon()
         {
-            string selectStr = "select * from HOADON";
+            // Xóa dữ liệu cũ trước khi load lại
+            if (QL_ShopQuanAo.Tables.Contains("HOADON"))
+            {
+                QL_ShopQuanAo.Tables["HOADON"].Clear();
+            }
+            
+            string selectStr = "select * from HOADON ORDER BY MaHD DESC";
             data = new OracleDataAdapter(selectStr, connsql);
             data.Fill(QL_ShopQuanAo, "HOADON");
 
@@ -69,6 +75,12 @@ namespace QL_GiayTT.Admin
 
         public void load_DtGV_CTHD()
         {
+            // Xóa dữ liệu cũ trước khi load lại
+            if (QL_ShopQuanAo.Tables.Contains("CTHD"))
+            {
+                QL_ShopQuanAo.Tables["CTHD"].Clear();
+            }
+            
             string selectStr = "select * from CTHD";
             data = new OracleDataAdapter(selectStr, connsql);
             data.Fill(QL_ShopQuanAo, "CTHD");
@@ -146,19 +158,66 @@ namespace QL_GiayTT.Admin
 
         private void loadDGV_CTHD(string maHD)
         {
-            if (maHD != string.Empty)
+            if (maHD != string.Empty && !string.IsNullOrWhiteSpace(maHD))
             {
-                DataTable dtTable = QL_ShopQuanAo.Tables["CTHD"];
-                DataRow[] tableTheoMa = dtTable.Select("MaHD = '" + maHD + "'");
-                if (tableTheoMa.Length == 0)
+                // Đảm bảo DataTable CTHD đã được load
+                if (!QL_ShopQuanAo.Tables.Contains("CTHD") || QL_ShopQuanAo.Tables["CTHD"].Rows.Count == 0)
                 {
-                    dtGV_CTHD.DataSource = QL_ShopQuanAo.Tables["CTHD"];
-                    return;
+                    // Reload lại từ database nếu chưa có dữ liệu
+                    load_DtGV_CTHD();
                 }
-                DataTable TableCopy = tableTheoMa.CopyToDataTable();
-                dtGV_CTHD.DataSource = TableCopy;
+                
+                DataTable dtTable = QL_ShopQuanAo.Tables["CTHD"];
+                
+                // MaHD là Int32, cần convert để so sánh đúng
+                if (int.TryParse(maHD, out int maHDInt))
+                {
+                    // Sử dụng LINQ để filter an toàn hơn
+                    // Kiểm tra kiểu dữ liệu của MaHD trong DataTable
+                    var filteredRows = dtTable.AsEnumerable()
+                        .Where(row => {
+                            object maHDValue = row["MaHD"];
+                            if (maHDValue == null || maHDValue == DBNull.Value)
+                                return false;
+                            
+                            // Chuyển đổi sang int để so sánh
+                            int rowMaHD = Convert.ToInt32(maHDValue);
+                            return rowMaHD == maHDInt;
+                        })
+                        .ToArray();
+                    
+                    if (filteredRows.Length == 0)
+                    {
+                        // Tạo DataTable rỗng với cùng cấu trúc
+                        DataTable emptyTable = dtTable.Clone();
+                        dtGV_CTHD.DataSource = emptyTable;
+                        return;
+                    }
+                    
+                    // Copy các dòng tìm được vào DataTable mới
+                    DataTable TableCopy = dtTable.Clone();
+                    foreach (var row in filteredRows)
+                    {
+                        TableCopy.ImportRow(row);
+                    }
+                    dtGV_CTHD.DataSource = TableCopy;
+                }
+                else
+                {
+                    // Nếu không parse được, hiển thị bảng rỗng
+                    DataTable emptyTable = dtTable.Clone();
+                    dtGV_CTHD.DataSource = emptyTable;
+                }
             }
-            else load_DtGV_HoaDon();
+            else
+            {
+                // Hiển thị tất cả chi tiết hóa đơn
+                if (!QL_ShopQuanAo.Tables.Contains("CTHD"))
+                {
+                    load_DtGV_CTHD();
+                }
+                dtGV_CTHD.DataSource = QL_ShopQuanAo.Tables["CTHD"];
+            }
         }
 
         private void dtGV_HoaDon_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -218,51 +277,93 @@ namespace QL_GiayTT.Admin
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            DialogResult r = MessageBox.Show("B?n có Xoá hoá don cùng nh?ng chi ti?t c?a hoá donô đang được chọn ch??", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            DialogResult r = MessageBox.Show("Bạn có muốn xóa hóa đơn cùng những chi tiết của hóa đơn đang được chọn không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (r == DialogResult.Yes)
             {
                 if (dtGV_HoaDon.SelectedCells.Count > 0)
                 {
                     try
                     {
-                        // L?y ô d?u tiên du?c ch?n
+                        // Lấy ô đầu tiên được chọn
                         DataGridViewCell selectedCell = dtGV_HoaDon.SelectedCells[0];
 
-                        // L?y dòng tuong ?ng v?i ch? s? dòng
+                        // Lấy dòng tương ứng với chỉ số dòng
                         DataGridViewRow selectedRow = dtGV_HoaDon.Rows[selectedCell.RowIndex];
 
-                        string maHD = selectedRow.Cells["MaHD"].Value.ToString();
-                        //Xoá chi ti?t hoá don tru?c
-                        OpenConnection();
-                        OracleCommand command = new OracleCommand("DELETE FROM CTHD WHERE MaHD = :MaHD", connsql);
-                        command.Parameters.Add(":MaHD", OracleDbType.Varchar2).Value = maHD;
-                        command.ExecuteNonQuery();
-                        // C?p nh?t l?i dtGV_CTHD
-                        DataRow[] dataRow = QL_ShopQuanAo.Tables["CTHD"].Select("MaHD = '" + maHD + "'");
-                        foreach (DataRow deleteRow in dataRow)
+                        if (selectedRow.Cells["MaHD"].Value == null)
                         {
-                            deleteRow.Delete();
+                            MessageBox.Show("Không thể lấy mã hóa đơn!");
+                            return;
                         }
-                        QL_ShopQuanAo.Tables["CTHD"].AcceptChanges();
-                        dtGV_CTHD.DataSource = QL_ShopQuanAo.Tables["CTHD"];
 
-                        //Xoá Hoá don
-                        command = new OracleCommand("DELETE FROM HOADON WHERE MaHD = :MaHD", connsql);
-                        command.Parameters.Add(":MaHD", OracleDbType.Varchar2).Value = maHD;
-                        command.ExecuteNonQuery();
-                        QL_ShopQuanAo.Tables["HOADON"].Rows.Find(maHD).Delete();
-                        QL_ShopQuanAo.Tables["HOADON"].AcceptChanges();
-                        CloseConnection();
-                        MessageBox.Show("Thành công");
+                        string maHD = selectedRow.Cells["MaHD"].Value.ToString();
+                        
+                        // Chuyển đổi MaHD sang Int32 để xóa
+                        if (!int.TryParse(maHD, out int maHDInt))
+                        {
+                            MessageBox.Show("Mã hóa đơn không hợp lệ!");
+                            return;
+                        }
+
+                        OpenConnection();
+                        
+                        // Sử dụng transaction để đảm bảo tính nhất quán
+                        OracleTransaction transaction = connsql.BeginTransaction();
+                        
+                        try
+                        {
+                            // Xóa chi tiết hóa đơn trước
+                            OracleCommand command = new OracleCommand("DELETE FROM CTHD WHERE MaHD = :MaHD", connsql);
+                            command.Transaction = transaction;
+                            command.Parameters.Add(":MaHD", OracleDbType.Int32).Value = maHDInt;
+                            int rowsDeletedCTHD = command.ExecuteNonQuery();
+                            
+                            // Xóa Hóa đơn
+                            command = new OracleCommand("DELETE FROM HOADON WHERE MaHD = :MaHD", connsql);
+                            command.Transaction = transaction;
+                            command.Parameters.Add(":MaHD", OracleDbType.Int32).Value = maHDInt;
+                            int rowsDeletedHD = command.ExecuteNonQuery();
+                            
+                            if (rowsDeletedHD == 0)
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Không tìm thấy hóa đơn cần xóa!");
+                                CloseConnection();
+                                return;
+                            }
+                            
+                            // Commit transaction
+                            transaction.Commit();
+                            CloseConnection();
+                            
+                            // Reload lại dữ liệu từ database để đảm bảo đồng bộ
+                            load_DtGV_HoaDon();
+                            load_DtGV_CTHD();
+                            
+                            // Xóa chi tiết hóa đơn đang hiển thị (nếu đang hiển thị hóa đơn đã xóa)
+                            DataTable emptyTable = QL_ShopQuanAo.Tables["CTHD"].Clone();
+                            dtGV_CTHD.DataSource = emptyTable;
+                            
+                            // Cập nhật lại tổng doanh thu
+                            tinhTongDoanhThu();
+                            
+                            MessageBox.Show("Xóa hóa đơn thành công!");
+                        }
+                        catch (Exception exTrans)
+                        {
+                            // Rollback nếu có lỗi
+                            transaction.Rollback();
+                            throw exTrans;
+                        }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("L?i: " + ex.Message);
+                        MessageBox.Show("Lỗi: " + ex.Message);
                         CloseConnection();
                     }
 
                 }
-                else MessageBox.Show("Th?t b?i");
+                else MessageBox.Show("Vui lòng chọn hóa đơn cần xóa!");
             }
         }
 

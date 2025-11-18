@@ -92,8 +92,19 @@ namespace QL_GiayTT.Admin
             this.label19 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.MaLSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GiaBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,6 +116,8 @@ namespace QL_GiayTT.Admin
             this.DaBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TinhTrang = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaLSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -129,9 +142,9 @@ namespace QL_GiayTT.Admin
             this.panel5.Controls.Add(this.label1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1167, 39);
+            this.panel5.Size = new System.Drawing.Size(1167, 34);
             this.panel5.TabIndex = 23;
             // 
             // label1
@@ -146,7 +159,7 @@ namespace QL_GiayTT.Admin
             // 
             // cboDanhMuc
             // 
-            this.cboDanhMuc.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboDanhMuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboDanhMuc.FormattingEnabled = true;
             this.cboDanhMuc.Location = new System.Drawing.Point(357, 142);
             this.cboDanhMuc.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -157,7 +170,7 @@ namespace QL_GiayTT.Admin
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.Location = new System.Drawing.Point(248, 142);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(64, 16);
@@ -166,7 +179,7 @@ namespace QL_GiayTT.Admin
             // 
             // txtGiaBan
             // 
-            this.txtGiaBan.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtGiaBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGiaBan.Location = new System.Drawing.Point(121, 53);
             this.txtGiaBan.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtGiaBan.Name = "txtGiaBan";
@@ -178,7 +191,7 @@ namespace QL_GiayTT.Admin
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(15, 54);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(51, 16);
@@ -191,7 +204,7 @@ namespace QL_GiayTT.Admin
             this.panel8.Controls.Add(this.panel10);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(0, 292);
-            this.panel8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(1167, 195);
             this.panel8.TabIndex = 32;
@@ -202,7 +215,7 @@ namespace QL_GiayTT.Admin
             this.panel9.Controls.Add(this.panel2);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel9.Margin = new System.Windows.Forms.Padding(2);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(834, 195);
             this.panel9.TabIndex = 2;
@@ -212,7 +225,7 @@ namespace QL_GiayTT.Admin
             this.dtGV_SanPham.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Sitka Text", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -233,7 +246,7 @@ namespace QL_GiayTT.Admin
             this.MaL});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -263,7 +276,7 @@ namespace QL_GiayTT.Admin
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Sitka Text", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(358, 3);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
@@ -278,7 +291,7 @@ namespace QL_GiayTT.Admin
             this.panel10.Controls.Add(this.panel11);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel10.Location = new System.Drawing.Point(834, 0);
-            this.panel10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel10.Margin = new System.Windows.Forms.Padding(2);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(333, 195);
             this.panel10.TabIndex = 1;
@@ -288,7 +301,7 @@ namespace QL_GiayTT.Admin
             this.dtGV_DanhMuc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Sitka Text", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -300,7 +313,7 @@ namespace QL_GiayTT.Admin
             this.TenL});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -323,14 +336,14 @@ namespace QL_GiayTT.Admin
             this.pn_DM.Controls.Add(this.label4);
             this.pn_DM.Dock = System.Windows.Forms.DockStyle.Top;
             this.pn_DM.Location = new System.Drawing.Point(0, 27);
-            this.pn_DM.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pn_DM.Margin = new System.Windows.Forms.Padding(2);
             this.pn_DM.Name = "pn_DM";
             this.pn_DM.Size = new System.Drawing.Size(333, 65);
             this.pn_DM.TabIndex = 32;
             // 
             // txtTenDM
             // 
-            this.txtTenDM.Font = new System.Drawing.Font("Franklin Gothic Medium", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTenDM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTenDM.Location = new System.Drawing.Point(123, 36);
             this.txtTenDM.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTenDM.Name = "txtTenDM";
@@ -340,7 +353,7 @@ namespace QL_GiayTT.Admin
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Sitka Text", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(13, 35);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(89, 18);
@@ -349,7 +362,7 @@ namespace QL_GiayTT.Admin
             // 
             // txtMaDM
             // 
-            this.txtMaDM.Font = new System.Drawing.Font("Franklin Gothic Medium", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaDM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaDM.Location = new System.Drawing.Point(123, 12);
             this.txtMaDM.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtMaDM.Name = "txtMaDM";
@@ -359,7 +372,7 @@ namespace QL_GiayTT.Admin
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Sitka Text", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(13, 12);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(86, 18);
@@ -384,7 +397,7 @@ namespace QL_GiayTT.Admin
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Sitka Text", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(170, 3);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
@@ -394,7 +407,7 @@ namespace QL_GiayTT.Admin
             // 
             // txtThongTin
             // 
-            this.txtThongTin.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtThongTin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtThongTin.Location = new System.Drawing.Point(357, 52);
             this.txtThongTin.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtThongTin.Multiline = true;
@@ -404,7 +417,7 @@ namespace QL_GiayTT.Admin
             // 
             // cbo_GioiTinh
             // 
-            this.cbo_GioiTinh.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbo_GioiTinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbo_GioiTinh.FormattingEnabled = true;
             this.cbo_GioiTinh.Location = new System.Drawing.Point(121, 77);
             this.cbo_GioiTinh.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -419,7 +432,7 @@ namespace QL_GiayTT.Admin
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1167, 292);
             this.panel3.TabIndex = 31;
@@ -429,10 +442,10 @@ namespace QL_GiayTT.Admin
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.groupBox3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 234);
+            this.panel4.Location = new System.Drawing.Point(0, 229);
             this.panel4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1167, 58);
+            this.panel4.Size = new System.Drawing.Size(1167, 63);
             this.panel4.TabIndex = 31;
             // 
             // groupBox3
@@ -474,8 +487,8 @@ namespace QL_GiayTT.Admin
             this.panel6.Controls.Add(this.panel7);
             this.panel6.Controls.Add(this.gb_TTSP);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 39);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel6.Location = new System.Drawing.Point(0, 34);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(1167, 195);
             this.panel6.TabIndex = 30;
@@ -494,7 +507,7 @@ namespace QL_GiayTT.Admin
             this.panel7.Controls.Add(this.btnLuu);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(742, 0);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(425, 195);
             this.panel7.TabIndex = 29;
@@ -546,7 +559,7 @@ namespace QL_GiayTT.Admin
             // 
             // btnXoa
             // 
-            this.btnXoa.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.Image = global::QL_GiayTT.Properties.Resources.xao;
             this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnXoa.Location = new System.Drawing.Point(9, 96);
@@ -561,7 +574,7 @@ namespace QL_GiayTT.Admin
             // 
             // btnThem
             // 
-            this.btnThem.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.Image = global::QL_GiayTT.Properties.Resources.icons8_add_36;
             this.btnThem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThem.Location = new System.Drawing.Point(9, 44);
@@ -576,7 +589,7 @@ namespace QL_GiayTT.Admin
             // 
             // btnSuaDM
             // 
-            this.btnSuaDM.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSuaDM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSuaDM.Image = ((System.Drawing.Image)(resources.GetObject("btnSuaDM.Image")));
             this.btnSuaDM.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSuaDM.Location = new System.Drawing.Point(296, 147);
@@ -591,7 +604,7 @@ namespace QL_GiayTT.Admin
             // 
             // btnXoaDM
             // 
-            this.btnXoaDM.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoaDM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoaDM.Image = ((System.Drawing.Image)(resources.GetObject("btnXoaDM.Image")));
             this.btnXoaDM.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnXoaDM.Location = new System.Drawing.Point(296, 96);
@@ -606,7 +619,7 @@ namespace QL_GiayTT.Admin
             // 
             // btnTaoDM
             // 
-            this.btnTaoDM.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTaoDM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTaoDM.Image = ((System.Drawing.Image)(resources.GetObject("btnTaoDM.Image")));
             this.btnTaoDM.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTaoDM.Location = new System.Drawing.Point(296, 44);
@@ -614,14 +627,14 @@ namespace QL_GiayTT.Admin
             this.btnTaoDM.Name = "btnTaoDM";
             this.btnTaoDM.Size = new System.Drawing.Size(113, 39);
             this.btnTaoDM.TabIndex = 7;
-            this.btnTaoDM.Text = "Tạo danh m?c";
+            this.btnTaoDM.Text = "Tạo danh mục";
             this.btnTaoDM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnTaoDM.UseVisualStyleBackColor = true;
             this.btnTaoDM.Click += new System.EventHandler(this.btnTaoDM_Click);
             // 
             // btnReset
             // 
-            this.btnReset.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReset.Image = ((System.Drawing.Image)(resources.GetObject("btnReset.Image")));
             this.btnReset.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReset.Location = new System.Drawing.Point(151, 96);
@@ -637,7 +650,7 @@ namespace QL_GiayTT.Admin
             // btnLuuDM
             // 
             this.btnLuuDM.Enabled = false;
-            this.btnLuuDM.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLuuDM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLuuDM.Image = ((System.Drawing.Image)(resources.GetObject("btnLuuDM.Image")));
             this.btnLuuDM.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLuuDM.Location = new System.Drawing.Point(151, 147);
@@ -645,14 +658,14 @@ namespace QL_GiayTT.Admin
             this.btnLuuDM.Name = "btnLuuDM";
             this.btnLuuDM.Size = new System.Drawing.Size(133, 39);
             this.btnLuuDM.TabIndex = 6;
-            this.btnLuuDM.Text = "Lưu danh m?c";
+            this.btnLuuDM.Text = "Lưu danh mục";
             this.btnLuuDM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLuuDM.UseVisualStyleBackColor = true;
             this.btnLuuDM.Click += new System.EventHandler(this.btnLuuDM_Click);
             // 
             // btnSua
             // 
-            this.btnSua.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSua.Image = global::QL_GiayTT.Properties.Resources.icons8_note_33;
             this.btnSua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSua.Location = new System.Drawing.Point(9, 147);
@@ -668,7 +681,7 @@ namespace QL_GiayTT.Admin
             // btnLuu
             // 
             this.btnLuu.Enabled = false;
-            this.btnLuu.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLuu.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLuu.Image = global::QL_GiayTT.Properties.Resources.load;
             this.btnLuu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLuu.Location = new System.Drawing.Point(151, 44);
@@ -706,7 +719,7 @@ namespace QL_GiayTT.Admin
             this.gb_TTSP.Controls.Add(this.label3);
             this.gb_TTSP.Controls.Add(this.label2);
             this.gb_TTSP.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gb_TTSP.Font = new System.Drawing.Font("Sitka Text", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gb_TTSP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_TTSP.Location = new System.Drawing.Point(0, 0);
             this.gb_TTSP.Name = "gb_TTSP";
             this.gb_TTSP.Size = new System.Drawing.Size(742, 195);
@@ -716,7 +729,7 @@ namespace QL_GiayTT.Admin
             // 
             // txtDaBan
             // 
-            this.txtDaBan.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDaBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDaBan.Location = new System.Drawing.Point(121, 167);
             this.txtDaBan.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtDaBan.Name = "txtDaBan";
@@ -727,7 +740,7 @@ namespace QL_GiayTT.Admin
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.Location = new System.Drawing.Point(15, 169);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(47, 16);
@@ -736,7 +749,7 @@ namespace QL_GiayTT.Admin
             // 
             // txtSLT
             // 
-            this.txtSLT.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSLT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSLT.Location = new System.Drawing.Point(121, 139);
             this.txtSLT.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtSLT.Name = "txtSLT";
@@ -747,7 +760,7 @@ namespace QL_GiayTT.Admin
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(15, 141);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(76, 16);
@@ -756,7 +769,7 @@ namespace QL_GiayTT.Admin
             // 
             // txtKieuDang
             // 
-            this.txtKieuDang.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtKieuDang.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtKieuDang.Location = new System.Drawing.Point(121, 107);
             this.txtKieuDang.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtKieuDang.Name = "txtKieuDang";
@@ -765,7 +778,7 @@ namespace QL_GiayTT.Admin
             // 
             // txtChatLieu
             // 
-            this.txtChatLieu.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtChatLieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtChatLieu.Location = new System.Drawing.Point(357, 96);
             this.txtChatLieu.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtChatLieu.Multiline = true;
@@ -775,7 +788,7 @@ namespace QL_GiayTT.Admin
             // 
             // txtTenSP
             // 
-            this.txtTenSP.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTenSP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTenSP.Location = new System.Drawing.Point(357, 28);
             this.txtTenSP.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTenSP.Name = "txtTenSP";
@@ -785,7 +798,7 @@ namespace QL_GiayTT.Admin
             // 
             // txtTinhTrang
             // 
-            this.txtTinhTrang.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTinhTrang.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTinhTrang.Location = new System.Drawing.Point(357, 168);
             this.txtTinhTrang.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTinhTrang.Name = "txtTinhTrang";
@@ -794,7 +807,7 @@ namespace QL_GiayTT.Admin
             // 
             // txtMaSP
             // 
-            this.txtMaSP.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaSP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaSP.Location = new System.Drawing.Point(121, 27);
             this.txtMaSP.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtMaSP.Name = "txtMaSP";
@@ -804,7 +817,7 @@ namespace QL_GiayTT.Admin
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(15, 78);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(59, 16);
@@ -814,7 +827,7 @@ namespace QL_GiayTT.Admin
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(247, 57);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(62, 16);
@@ -824,7 +837,7 @@ namespace QL_GiayTT.Admin
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.Location = new System.Drawing.Point(15, 109);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(63, 16);
@@ -834,7 +847,7 @@ namespace QL_GiayTT.Admin
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(247, 98);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(61, 16);
@@ -844,7 +857,7 @@ namespace QL_GiayTT.Admin
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.Location = new System.Drawing.Point(248, 169);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(67, 16);
@@ -854,7 +867,7 @@ namespace QL_GiayTT.Admin
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(247, 30);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 16);
@@ -864,22 +877,90 @@ namespace QL_GiayTT.Admin
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(15, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 16);
             this.label2.TabIndex = 0;
             this.label2.Text = "Mã sản phẩm :";
             // 
-            // MaLSP
+            // dataGridViewTextBoxColumn1
             // 
-            this.MaLSP.HeaderText = "Mã Loai";
-            this.MaLSP.Name = "MaLSP";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Mã Sản Phẩm";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 71;
             // 
-            // TenL
+            // dataGridViewTextBoxColumn2
             // 
-            this.TenL.HeaderText = "Tên Loạii";
-            this.TenL.Name = "TenL";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Tên Sản Phẩm";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Giá Bán";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Giới Tính";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Thông Tin";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Chất Liệu";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Kiểu Dáng";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Số Lượng Tồn";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "Đã Bán";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "Tình Trạng";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "Mã Loại";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "Mã Loai";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.Width = 140;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = "Tên Loạii";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.Width = 140;
             // 
             // MaSP
             // 
@@ -936,6 +1017,16 @@ namespace QL_GiayTT.Admin
             this.MaL.HeaderText = "Mã Loại";
             this.MaL.Name = "MaL";
             // 
+            // MaLSP
+            // 
+            this.MaLSP.HeaderText = "Mã Loai";
+            this.MaLSP.Name = "MaLSP";
+            // 
+            // TenL
+            // 
+            this.TenL.HeaderText = "Tên Loạii";
+            this.TenL.Name = "TenL";
+            // 
             // frmQuanLySanPham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -944,9 +1035,9 @@ namespace QL_GiayTT.Admin
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmQuanLySanPham";
-            this.Text = "Qu?n L� Sản Phẩm";
+            this.Text = "Quản Lý Sản Phẩm";
             this.Load += new System.EventHandler(this.frmQuanLySanPham_Load);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
@@ -1050,5 +1141,18 @@ namespace QL_GiayTT.Admin
         private System.Windows.Forms.DataGridViewTextBoxColumn MaL;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaLSP;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
     }
 }
