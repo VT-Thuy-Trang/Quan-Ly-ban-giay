@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,13 +36,6 @@ namespace QL_GiayTT.Admin
             string selectStr = "Select * from KHACHHANG";
             data = new OracleDataAdapter(selectStr, connsql);
             data.Fill(tb_KhachHang);
-
-            foreach (DataRow row in tb_KhachHang.Rows)
-            {
-                if (row["SDTKH"] != DBNull.Value)
-                    row["SDTKH"] = MaHoa.Decrypt(row["SDTKH"].ToString());
-            }
-
             int count = tb_KhachHang.Rows.Count;
             DataColumn[] key = new DataColumn[1];
             key[0] = tb_KhachHang.Columns["MaKH"];
@@ -149,7 +142,7 @@ namespace QL_GiayTT.Admin
 
             moTextBox();
 
-            //format khi click chu?t vào s? t? d?ng n?m bên ph?i
+            //format khi click chu?t v�o s? t? d?ng n?m b�n ph?i
             foreach (Control item in gB_TTKH.Controls)
             {
                 if (item.GetType() == typeof(TextBox))
@@ -194,7 +187,7 @@ namespace QL_GiayTT.Admin
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            DialogResult r = MessageBox.Show("Luu thay d?i khách hàng ch??", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            DialogResult r = MessageBox.Show("Luu thay d?i kh�ch h�ng ch??", "Th�ng b�o", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (r == DialogResult.No)
                 return;
             else
@@ -205,17 +198,14 @@ namespace QL_GiayTT.Admin
                     {
                         if (txtTenKH.Text == string.Empty)
                         {
-                            MessageBox.Show("B?n ph?i nh?p Tên khách hàng!!!");
+                            MessageBox.Show("B?n ph?i nh?p T�n kh�ch h�ng!!!");
                             return;
                         }
                         openSql();
                         string insertStr = "INSERT INTO KHACHHANG (TenKH, SDTKH, DiaChiKH, GioiTinhKH, NamSinhKH) VALUES (:TenKH, :SDTKH, :DiaChiKH, :GioiTinhKH, :NamSinhKH)";
                         OracleCommand cmdInsert = new OracleCommand(insertStr, connsql);
                         cmdInsert.Parameters.Add(":TenKH", OracleDbType.Varchar2).Value = txtTenKH.Text;
-                        //cmdInsert.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = txtSDT.Text;
-                        string sdtMaHoa = MaHoa.Encrypt(txtSDT.Text);
-                        cmdInsert.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = sdtMaHoa;
-
+                        cmdInsert.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = txtSDT.Text;
                         cmdInsert.Parameters.Add(":DiaChiKH", OracleDbType.Varchar2).Value = txtDiaChi.Text;
                         cmdInsert.Parameters.Add(":GioiTinhKH", OracleDbType.Varchar2).Value = cboGioiTinh.Text;
                         if (string.IsNullOrWhiteSpace(txtNamSinh.Text))
@@ -231,10 +221,7 @@ namespace QL_GiayTT.Admin
                         string updateStr = "UPDATE KHACHHANG SET TenKH = :TenKH, SDTKH = :SDTKH, DiaChiKH = :DiaChiKH, GioiTinhKH = :GioiTinhKH, NamSinhKH = :NamSinhKH WHERE MaKH = :MaKH";
                         OracleCommand cmdUpdate = new OracleCommand(updateStr, connsql);
                         cmdUpdate.Parameters.Add(":TenKH", OracleDbType.Varchar2).Value = txtTenKH.Text;
-                        //cmdUpdate.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = txtSDT.Text;
-                        string sdtMaHoa = MaHoa.Encrypt(txtSDT.Text);
-                        cmdUpdate.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = sdtMaHoa;
-
+                        cmdUpdate.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = txtSDT.Text;
                         cmdUpdate.Parameters.Add(":DiaChiKH", OracleDbType.Varchar2).Value = txtDiaChi.Text;
                         cmdUpdate.Parameters.Add(":GioiTinhKH", OracleDbType.Varchar2).Value = cboGioiTinh.Text;
                         if (string.IsNullOrWhiteSpace(txtNamSinh.Text))
@@ -245,7 +232,7 @@ namespace QL_GiayTT.Admin
                         cmdUpdate.ExecuteNonQuery();
                         closeSql();
                     }
-                    MessageBox.Show("Thành công");
+                    MessageBox.Show("Th�nh c�ng");
                     loadDGV_KhachHang();
                     resetDuLieu();
                 }
@@ -260,7 +247,7 @@ namespace QL_GiayTT.Admin
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true; // H?y b? ký t? không h?p l?
+                e.Handled = true; // H?y b? k� t? kh�ng h?p l?
             }
         }
 
@@ -268,13 +255,13 @@ namespace QL_GiayTT.Admin
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true; // H?y b? ký t? không h?p l?
+                e.Handled = true; // H?y b? k� t? kh�ng h?p l?
             }
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            DialogResult r = MessageBox.Show("B?n có mu?n xoá khách hàng này ch??", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            DialogResult r = MessageBox.Show("B?n c� mu?n xo� kh�ch h�ng n�y ch??", "Th�ng b�o", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (r == DialogResult.Yes)
             {
                 try
@@ -286,7 +273,7 @@ namespace QL_GiayTT.Admin
                     cmdDelete.ExecuteNonQuery();
                     tb_KhachHang.AcceptChanges();
                     closeSql();
-                    MessageBox.Show("Thành công");
+                    MessageBox.Show("Th�nh c�ng");
                     loadDGV_KhachHang();
                     dataBingDing(tb_KhachHang);
                 }
@@ -295,140 +282,6 @@ namespace QL_GiayTT.Admin
                     MessageBox.Show("Error: " + ex.Message);
                     closeSql();
                 }
-            }
-        }
-
-        private void btnMaHoaKH_Click(object sender, EventArgs e)
-        {
-            DialogResult r = MessageBox.Show(
-        "Bạn có muốn mã hóa toàn bộ SĐT khách hàng chưa được bảo mật không?",
-        "Xác nhận mã hóa",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Warning);
-
-            if (r == DialogResult.No) return;
-
-            try
-            {
-                if (connsql.State == ConnectionState.Closed) connsql.Open();
-
-                string selectStr = "Select * from KHACHHANG";
-                OracleDataAdapter da = new OracleDataAdapter(selectStr, connsql);
-                da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-
-                DataTable dtTemp = new DataTable();
-                da.Fill(dtTemp);
-
-                int count = 0;
-
-                foreach (DataRow row in dtTemp.Rows)
-                {
-                    if (row["SDTKH"] != DBNull.Value)
-                    {
-                        string val = row["SDTKH"].ToString();
-                        // Chỉ mã hóa nếu nó là số (chưa bị mã hóa)
-                        if (IsNumber(val))
-                        {
-                            row["SDTKH"] = MaHoa.Encrypt(val);
-                            count++;
-                        }
-                    }
-                }
-
-                if (count > 0)
-                {
-                    OracleCommandBuilder cb = new OracleCommandBuilder(da);
-                    da.Update(dtTemp);
-                    MessageBox.Show($"Đã mã hóa thành công {count} SĐT khách hàng!");
-                    loadDGV_KhachHang();
-                }
-                else
-                {
-                    MessageBox.Show("Tất cả dữ liệu đã được mã hóa trước đó rồi!");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi: " + ex.Message);
-            }
-        }
-
-        // Ph??ng th?c ki?m tra xem chu?i có ph?i là s? không
-        private bool IsNumber(string value)
-        {
-            return long.TryParse(value, out _);
-        }
-
-        private void btnGiaiMa_Click(object sender, EventArgs e)
-        {
-            DialogResult r = MessageBox.Show(
-        "CẢNH BÁO: Bạn có muốn GIẢI MÃ toàn bộ Số điện thoại khách hàng về dạng số thường không?",
-        "Xác nhận giải mã",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Warning);
-
-            if (r == DialogResult.No) return;
-
-            try
-            {
-                if (connsql.State == ConnectionState.Closed) connsql.Open();
-
-                string selectStr = "Select * from KHACHHANG";
-                OracleDataAdapter da = new OracleDataAdapter(selectStr, connsql);
-                da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-
-                DataTable dtTemp = new DataTable();
-                da.Fill(dtTemp);
-
-                int count = 0;
-
-                foreach (DataRow row in dtTemp.Rows)
-                {
-                    // Chỉ xử lý cột SDTKH
-                    if (row["SDTKH"] != DBNull.Value)
-                    {
-                        string val = row["SDTKH"].ToString();
-                        // Kiểm tra nếu là chuỗi đã mã hóa (Base64) thì mới giải mã
-                        if (IsBase64(val))
-                        {
-                            row["SDTKH"] = MaHoa.Decrypt(val);
-                            count++;
-                        }
-                    }
-                }
-
-                if (count > 0)
-                {
-                    OracleCommandBuilder cb = new OracleCommandBuilder(da);
-                    da.Update(dtTemp);
-                    MessageBox.Show($"Đã giải mã thành công cho {count} khách hàng!");
-                    loadDGV_KhachHang(); // Load lại lưới
-                }
-                else
-                {
-                    MessageBox.Show("Dữ liệu SĐT đã ở dạng số thường, không cần giải mã!");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi: " + ex.Message);
-            }
-        }
-        // Kiểm tra chuỗi có phải là Base64 (đã mã hóa) hay không
-        private bool IsBase64(string base64String)
-        {
-            if (string.IsNullOrEmpty(base64String) || base64String.Length % 4 != 0 ||
-                base64String.Contains(" ") || base64String.Contains("\t") ||
-                base64String.Contains("\r") || base64String.Contains("\n"))
-                return false;
-            try
-            {
-                Convert.FromBase64String(base64String);
-                return true;
-            }
-            catch
-            {
-                return false;
             }
         }
     }

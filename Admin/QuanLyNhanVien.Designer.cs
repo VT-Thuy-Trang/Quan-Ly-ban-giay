@@ -29,10 +29,10 @@ namespace QL_GiayTT.Admin
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuanLyNhanVien));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -41,7 +41,6 @@ namespace QL_GiayTT.Admin
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.btnMaHoaALL = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -82,14 +81,14 @@ namespace QL_GiayTT.Admin
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.dtGV_TaiKhoan = new System.Windows.Forms.DataGridView();
-            this.MaTKDN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TAIKHOAN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MATKHAU = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LOAITK = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.panel11 = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.dtGV_NhanVien = new System.Windows.Forms.DataGridView();
+            this.MaTKDN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TAIKHOAN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MATKHAU = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LOAITK = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.MaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SDTNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -100,7 +99,6 @@ namespace QL_GiayTT.Admin
             this.NVL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Lương = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MATK = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnGiaiMaALL = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -136,9 +134,9 @@ namespace QL_GiayTT.Admin
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1497, 292);
+            this.panel3.Size = new System.Drawing.Size(1144, 292);
             this.panel3.TabIndex = 29;
             // 
             // panel4
@@ -149,7 +147,7 @@ namespace QL_GiayTT.Admin
             this.panel4.Location = new System.Drawing.Point(0, 234);
             this.panel4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1497, 58);
+            this.panel4.Size = new System.Drawing.Size(1144, 58);
             this.panel4.TabIndex = 31;
             // 
             // groupBox3
@@ -192,15 +190,13 @@ namespace QL_GiayTT.Admin
             this.panel6.Controls.Add(this.gb_TTNV);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 39);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1497, 195);
+            this.panel6.Size = new System.Drawing.Size(1144, 195);
             this.panel6.TabIndex = 30;
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.btnGiaiMaALL);
-            this.panel7.Controls.Add(this.btnMaHoaALL);
             this.panel7.Controls.Add(this.panel1);
             this.panel7.Controls.Add(this.btnXoa);
             this.panel7.Controls.Add(this.btnThem);
@@ -213,20 +209,10 @@ namespace QL_GiayTT.Admin
             this.panel7.Controls.Add(this.btnLuu);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(780, 0);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2);
+            this.panel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(717, 195);
+            this.panel7.Size = new System.Drawing.Size(364, 195);
             this.panel7.TabIndex = 29;
-            // 
-            // btnMaHoaALL
-            // 
-            this.btnMaHoaALL.Location = new System.Drawing.Point(428, 48);
-            this.btnMaHoaALL.Name = "btnMaHoaALL";
-            this.btnMaHoaALL.Size = new System.Drawing.Size(127, 35);
-            this.btnMaHoaALL.TabIndex = 21;
-            this.btnMaHoaALL.Text = "Mã Hóa ALL";
-            this.btnMaHoaALL.UseVisualStyleBackColor = true;
-            this.btnMaHoaALL.Click += new System.EventHandler(this.btnMaHoaALL_Click_1);
             // 
             // panel1
             // 
@@ -239,7 +225,7 @@ namespace QL_GiayTT.Admin
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(717, 32);
+            this.panel1.Size = new System.Drawing.Size(364, 32);
             this.panel1.TabIndex = 25;
             // 
             // pictureBox1
@@ -643,9 +629,9 @@ namespace QL_GiayTT.Admin
             this.panel5.Controls.Add(this.label1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1497, 39);
+            this.panel5.Size = new System.Drawing.Size(1144, 39);
             this.panel5.TabIndex = 23;
             // 
             // panel2
@@ -677,9 +663,9 @@ namespace QL_GiayTT.Admin
             this.panel8.Controls.Add(this.panel9);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(0, 292);
-            this.panel8.Margin = new System.Windows.Forms.Padding(2);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1497, 274);
+            this.panel8.Size = new System.Drawing.Size(1144, 195);
             this.panel8.TabIndex = 30;
             // 
             // panel10
@@ -688,45 +674,120 @@ namespace QL_GiayTT.Admin
             this.panel10.Controls.Add(this.panel11);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(867, 0);
-            this.panel10.Margin = new System.Windows.Forms.Padding(2);
+            this.panel10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(630, 274);
+            this.panel10.Size = new System.Drawing.Size(277, 195);
             this.panel10.TabIndex = 1;
             // 
             // dtGV_TaiKhoan
             // 
             this.dtGV_TaiKhoan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Sitka Text", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtGV_TaiKhoan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Sitka Text", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtGV_TaiKhoan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dtGV_TaiKhoan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGV_TaiKhoan.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaTKDN,
             this.TAIKHOAN,
             this.MATKHAU,
             this.LOAITK});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtGV_TaiKhoan.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtGV_TaiKhoan.DefaultCellStyle = dataGridViewCellStyle2;
             this.dtGV_TaiKhoan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtGV_TaiKhoan.Location = new System.Drawing.Point(0, 27);
             this.dtGV_TaiKhoan.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.dtGV_TaiKhoan.Name = "dtGV_TaiKhoan";
             this.dtGV_TaiKhoan.RowHeadersWidth = 51;
             this.dtGV_TaiKhoan.RowTemplate.Height = 24;
-            this.dtGV_TaiKhoan.Size = new System.Drawing.Size(630, 247);
+            this.dtGV_TaiKhoan.Size = new System.Drawing.Size(277, 168);
             this.dtGV_TaiKhoan.TabIndex = 33;
             this.dtGV_TaiKhoan.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dtGV_TaiKhoan_RowValidating);
+            // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel11.Controls.Add(this.label13);
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel11.Location = new System.Drawing.Point(0, 0);
+            this.panel11.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(277, 27);
+            this.panel11.TabIndex = 31;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Sitka Text", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(149, 6);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(76, 20);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Tài khoản";
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.dtGV_NhanVien);
+            this.panel9.Controls.Add(this.panel2);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(867, 195);
+            this.panel9.TabIndex = 0;
+            // 
+            // dtGV_NhanVien
+            // 
+            this.dtGV_NhanVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Sitka Text", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtGV_NhanVien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dtGV_NhanVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtGV_NhanVien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.MaNV,
+            this.TenNV,
+            this.SDTNV,
+            this.NgaySinhNV,
+            this.DiaChiNV,
+            this.GioiTinhNV,
+            this.CCCD,
+            this.NVL,
+            this.Lương,
+            this.MATK});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtGV_NhanVien.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dtGV_NhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtGV_NhanVien.Location = new System.Drawing.Point(0, 27);
+            this.dtGV_NhanVien.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.dtGV_NhanVien.Name = "dtGV_NhanVien";
+            this.dtGV_NhanVien.RowHeadersWidth = 51;
+            this.dtGV_NhanVien.RowTemplate.Height = 24;
+            this.dtGV_NhanVien.Size = new System.Drawing.Size(867, 168);
+            this.dtGV_NhanVien.TabIndex = 32;
+            this.dtGV_NhanVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGV_NhanVien_CellClick);
             // 
             // MaTKDN
             // 
@@ -749,81 +810,6 @@ namespace QL_GiayTT.Admin
             this.LOAITK.Name = "LOAITK";
             this.LOAITK.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.LOAITK.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // panel11
-            // 
-            this.panel11.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel11.Controls.Add(this.label13);
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel11.Location = new System.Drawing.Point(0, 0);
-            this.panel11.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(630, 27);
-            this.panel11.TabIndex = 31;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Sitka Text", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(149, 6);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(76, 20);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Tài khoản";
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.dtGV_NhanVien);
-            this.panel9.Controls.Add(this.panel2);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Margin = new System.Windows.Forms.Padding(2);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(867, 274);
-            this.panel9.TabIndex = 0;
-            // 
-            // dtGV_NhanVien
-            // 
-            this.dtGV_NhanVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Sitka Text", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtGV_NhanVien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.dtGV_NhanVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtGV_NhanVien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MaNV,
-            this.TenNV,
-            this.SDTNV,
-            this.NgaySinhNV,
-            this.DiaChiNV,
-            this.GioiTinhNV,
-            this.CCCD,
-            this.NVL,
-            this.Lương,
-            this.MATK});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtGV_NhanVien.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dtGV_NhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtGV_NhanVien.Location = new System.Drawing.Point(0, 27);
-            this.dtGV_NhanVien.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.dtGV_NhanVien.Name = "dtGV_NhanVien";
-            this.dtGV_NhanVien.RowHeadersWidth = 51;
-            this.dtGV_NhanVien.RowTemplate.Height = 24;
-            this.dtGV_NhanVien.Size = new System.Drawing.Size(867, 247);
-            this.dtGV_NhanVien.TabIndex = 32;
-            this.dtGV_NhanVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGV_NhanVien_CellClick);
             // 
             // MaNV
             // 
@@ -875,25 +861,15 @@ namespace QL_GiayTT.Admin
             this.MATK.HeaderText = "Mã tài khoản";
             this.MATK.Name = "MATK";
             // 
-            // btnGiaiMaALL
-            // 
-            this.btnGiaiMaALL.Location = new System.Drawing.Point(428, 98);
-            this.btnGiaiMaALL.Name = "btnGiaiMaALL";
-            this.btnGiaiMaALL.Size = new System.Drawing.Size(127, 35);
-            this.btnGiaiMaALL.TabIndex = 26;
-            this.btnGiaiMaALL.Text = "Giải Mã ALL";
-            this.btnGiaiMaALL.UseVisualStyleBackColor = true;
-            this.btnGiaiMaALL.Click += new System.EventHandler(this.btnGiaiMaALL_Click);
-            // 
             // frmQuanLyNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1497, 566);
+            this.ClientSize = new System.Drawing.Size(1144, 487);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmQuanLyNhanVien";
             this.Text = "Quản Lý Nhân Viên";
             this.Load += new System.EventHandler(this.frmQuanLyNhanVien_Load);
@@ -991,7 +967,5 @@ namespace QL_GiayTT.Admin
         private System.Windows.Forms.DataGridViewTextBoxColumn NVL;
         private System.Windows.Forms.DataGridViewTextBoxColumn Lương;
         private System.Windows.Forms.DataGridViewTextBoxColumn MATK;
-        private System.Windows.Forms.Button btnMaHoaALL;
-        private System.Windows.Forms.Button btnGiaiMaALL;
     }
 }

@@ -52,9 +52,9 @@ namespace QL_GiayTT.Class
                             // Tài khoản tồn tại, lấy mật khẩu và loại TK từ CSDL
                             string dbMatKhau = reader["MATKHAU"].ToString();
                             string dbLoaiTK = reader["LOAITK"].ToString();
-                            string inputEncrypted = MaHoa.Encrypt(this.MatKhau);
+
                             // 2. So sánh mật khẩu người dùng nhập với mật khẩu trong CSDL
-                            if (dbMatKhau == inputEncrypted)
+                            if (dbMatKhau == this.MatKhau)
                             {
                                 // Mật khẩu đúng, kiểm tra loại tài khoản
                                 if (dbLoaiTK.Equals("admin", StringComparison.OrdinalIgnoreCase))
