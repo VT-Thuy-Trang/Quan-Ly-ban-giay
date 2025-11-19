@@ -52,6 +52,8 @@ namespace QL_GiayTT.Admin
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblTongSo = new System.Windows.Forms.Label();
             this.dgvNhatKy = new System.Windows.Forms.DataGridView();
+            this.btnXuatFileMaHoa = new System.Windows.Forms.Button();
+            this.btnXuatFileGiaiMa = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -80,6 +82,8 @@ namespace QL_GiayTT.Admin
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnXuatFileGiaiMa);
+            this.panel2.Controls.Add(this.btnXuatFileMaHoa);
             this.panel2.Controls.Add(this.btnNhapTXT);
             this.panel2.Controls.Add(this.btnXoaTatCa);
             this.panel2.Controls.Add(this.btnThongKe);
@@ -304,6 +308,32 @@ namespace QL_GiayTT.Admin
             this.dgvNhatKy.Size = new System.Drawing.Size(1000, 500);
             this.dgvNhatKy.TabIndex = 0;
             // 
+            // btnXuatFileMaHoa
+            // 
+            this.btnXuatFileMaHoa.BackColor = System.Drawing.Color.Navy;
+            this.btnXuatFileMaHoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXuatFileMaHoa.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnXuatFileMaHoa.Location = new System.Drawing.Point(10, 340);
+            this.btnXuatFileMaHoa.Name = "btnXuatFileMaHoa";
+            this.btnXuatFileMaHoa.Size = new System.Drawing.Size(180, 35);
+            this.btnXuatFileMaHoa.TabIndex = 7;
+            this.btnXuatFileMaHoa.Text = "Xuất file mã hóa";
+            this.btnXuatFileMaHoa.UseVisualStyleBackColor = false;
+            this.btnXuatFileMaHoa.Click += new System.EventHandler(this.btnXuatFileMaHoa_Click);
+            // 
+            // btnXuatFileGiaiMa
+            // 
+            this.btnXuatFileGiaiMa.BackColor = System.Drawing.Color.Navy;
+            this.btnXuatFileGiaiMa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXuatFileGiaiMa.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnXuatFileGiaiMa.Location = new System.Drawing.Point(10, 381);
+            this.btnXuatFileGiaiMa.Name = "btnXuatFileGiaiMa";
+            this.btnXuatFileGiaiMa.Size = new System.Drawing.Size(180, 35);
+            this.btnXuatFileGiaiMa.TabIndex = 8;
+            this.btnXuatFileGiaiMa.Text = "Xuất file Giải mã";
+            this.btnXuatFileGiaiMa.UseVisualStyleBackColor = false;
+            this.btnXuatFileGiaiMa.Click += new System.EventHandler(this.btnXuatFileGiaiMa_Click);
+            // 
             // QuanLyNhatKy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -354,6 +384,8 @@ namespace QL_GiayTT.Admin
         private System.Windows.Forms.Label lblTongSo;
         private System.Windows.Forms.Button btnXoaTatCa;
         private System.Windows.Forms.Button btnNhapTXT;
+        private System.Windows.Forms.Button btnXuatFileMaHoa;
+        private System.Windows.Forms.Button btnXuatFileGiaiMa;
     }
 }
 

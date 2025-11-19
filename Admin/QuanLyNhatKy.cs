@@ -550,6 +550,145 @@ namespace QL_GiayTT.Admin
                     connsql.Close();
             }
         }
+
+        //Hàm hiển thị hộp thoại chọn phương thức mã hóa
+        private string ShowEncryptionOption(string title)
+        {
+            Form prompt = new Form()
+            {
+                Width = 350,
+                Height = 220,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = title,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            Label textLabel = new Label() { Left = 20, Top = 20, Text = "Chọn thuật toán:", AutoSize = true };
+            RadioButton rbAES = new RadioButton() { Left = 20, Top = 50, Text = "Đối xứng (AES) - Mặc định", Checked = true, Width = 250 };
+            RadioButton rbRSA = new RadioButton() { Left = 20, Top = 80, Text = "Bất đối xứng (RSA)", Width = 250 };
+            RadioButton rbHybrid = new RadioButton() { Left = 20, Top = 110, Text = "Lai (Hybrid: RSA + AES)", Width = 250 };
+            Button confirmation = new Button() { Text = "Thực hiện", Left = 220, Width = 100, Top = 140, DialogResult = DialogResult.OK };
+
+            prompt.Controls.Add(textLabel);
+            prompt.Controls.Add(rbAES);
+            prompt.Controls.Add(rbRSA);
+            prompt.Controls.Add(rbHybrid);
+            prompt.Controls.Add(confirmation);
+            prompt.AcceptButton = confirmation;
+
+            return prompt.ShowDialog() == DialogResult.OK ?
+                   (rbAES.Checked ? "AES" : (rbRSA.Checked ? "RSA" : "HYBRID")) : "";
+        }
+
+        //Hàm lấy nội dung nhật ký từ DataGridView
+        private string GetLogContent()
+        {
+            if (dtNhatKy == null || dtNhatKy.Rows.Count == 0) return string.Empty;
+
+            StringBuilder content = new StringBuilder();
+            content.AppendLine("NHẬT KÝ HỆ THỐNG");
+            content.AppendLine("Ngày xuất: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            content.AppendLine("Tổng số bản ghi: " + dtNhatKy.Rows.Count);
+            content.AppendLine();
+            content.AppendLine("Mã\tBảng\tThao tác\tKhóa chính\tNgười dùng\tSession\tIP\tThời gian\tMô tả\tGiá trị cũ\tGiá trị mới");
+
+            foreach (DataRow row in dtNhatKy.Rows)
+            {
+                // Làm sạch các ký tự xuống dòng để giữ format tab
+                string desc = (row["DESCRIPTION"] ?? "").ToString().Replace("\n", " ").Replace("\r", " ");
+                string oldVal = (row["GIA_TRI_CU"] ?? "").ToString().Replace("\n", " ").Replace("\r", " ");
+                string newVal = (row["GIA_TRI_MOI"] ?? "").ToString().Replace("\n", " ").Replace("\r", " ");
+
+                content.AppendLine(
+                    $"{row["AUDIT_ID"]}\t{row["TABLE_NAME"]}\t{row["OPERATION"]}\t{row["PRIMARY_KEY_VALUE"]}\t" +
+                    $"{row["USER_NAME"]}\t{row["SESSION_USER"]}\t{row["IP_ADDRESS"]}\t{row["THOI_GIAN"]}\t" +
+                    $"{desc}\t{oldVal}\t{newVal}"
+                );
+            }
+            return content.ToString();
+        }
+
+        private void btnXuatFileMaHoa_Click(object sender, EventArgs e)
+        {
+            string plainText = GetLogContent();
+            if (string.IsNullOrEmpty(plainText))
+            {
+                MessageBox.Show("Không có dữ liệu để xuất!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string method = ShowEncryptionOption("Chọn phương thức mã hóa file");
+            if (string.IsNullOrEmpty(method)) return;
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = $"Encrypted {method}|*.{method.ToLower()}|All files|*.*";
+            saveFileDialog.FileName = $"NhatKy_{method}_{DateTime.Now:yyyyMMdd_HHmmss}";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string encryptedData = "";
+                    string extraInfo = ""; 
+
+                    if (method == "AES")
+                    {
+                        encryptedData = MaHoa.Encrypt(plainText);
+                    }
+                    else if (method == "RSA")
+                    {
+                        RSAEncryption rsa = new RSAEncryption();
+                        byte[] encBytes = rsa.EncryptLargeData(plainText);
+                        File.WriteAllBytes(saveFileDialog.FileName, encBytes);
+
+                        // Xuất thêm Key để người dùng có thể giải mã
+                        File.WriteAllText(saveFileDialog.FileName + ".key", rsa.GetPrivateKey());
+                        extraInfo = "\n\nĐã xuất kèm file Private Key (.key). Hãy giữ bí mật file này!";
+
+                        MessageBox.Show("Xuất file RSA thành công!" + extraInfo);
+                        return; // RSA lưu file binary nên return luôn
+                    }
+                    else if (method == "HYBRID")
+                    {
+                        encryptedData = MaHoa.HybridEncryption.EncryptHybrid(plainText);
+                    }
+
+
+                    File.WriteAllText(saveFileDialog.FileName, encryptedData, Encoding.UTF8);
+                    MessageBox.Show($"Xuất file ({method}) thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi xuất file: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnXuatFileGiaiMa_Click(object sender, EventArgs e)
+        {
+            string plainText = GetLogContent();
+            if (string.IsNullOrEmpty(plainText))
+            {
+                MessageBox.Show("Không có dữ liệu để xuất!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text File|*.txt|All files|*.*";
+            saveFileDialog.FileName = $"NhatKy_Plain_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    File.WriteAllText(saveFileDialog.FileName, plainText, Encoding.UTF8);
+                    MessageBox.Show("Xuất file nhật ký (dạng thường) thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi xuất file: " + ex.Message);
+                }
+            }
+        }
     }
 }
 

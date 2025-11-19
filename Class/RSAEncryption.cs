@@ -9,9 +9,28 @@ namespace QL_GiayTT.Class
     {
         private RSACryptoServiceProvider rsa;
 
+        // file chua khoa
+        private string keyPath = "private_key.xml";
+
         public RSAEncryption()
         {
             rsa = new RSACryptoServiceProvider(2048); // 2048-bit key
+
+            // luu khoa private vao file
+
+            if (File.Exists(keyPath))
+            {
+                // Nếu đã có file khóa thì load lại
+                string xmlKeys = File.ReadAllText(keyPath);
+                rsa.FromXmlString(xmlKeys);
+            }
+            else
+            {
+                // Nếu chưa có thì tạo mới và lưu lại
+                string xmlKeys = rsa.ToXmlString(true);
+                File.WriteAllText(keyPath, xmlKeys);
+            }
+
         }
 
         // Lấy public key để mã hóa

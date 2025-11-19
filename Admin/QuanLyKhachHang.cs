@@ -316,11 +316,14 @@ namespace QL_GiayTT.Admin
 
         private void btnMaHoaKH_Click(object sender, EventArgs e)
         {
+            string method = ShowEncryptionOption("Chọn phương thức mã hóa");
+            if (string.IsNullOrEmpty(method)) return;
+
             DialogResult r = MessageBox.Show(
-        "Bạn có muốn mã hóa toàn bộ SĐT khách hàng chưa được bảo mật không?",
-        "Xác nhận mã hóa",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Warning);
+                $"Bạn có muốn mã hóa toàn bộ SĐT Khách hàng bằng {method} không?",
+                "Xác nhận mã hóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
             if (r == DialogResult.No) return;
 
@@ -336,16 +339,14 @@ namespace QL_GiayTT.Admin
                 da.Fill(dtTemp);
 
                 int count = 0;
-
                 foreach (DataRow row in dtTemp.Rows)
                 {
                     if (row["SDTKH"] != DBNull.Value)
                     {
                         string val = row["SDTKH"].ToString();
-                        // Chỉ mã hóa nếu nó là số (chưa bị mã hóa)
                         if (IsNumber(val))
                         {
-                            row["SDTKH"] = MaHoa.Encrypt(val);
+                            row["SDTKH"] = ApplyEncrypt(val, method);
                             count++;
                         }
                     }
@@ -355,6 +356,8 @@ namespace QL_GiayTT.Admin
                 {
                     OracleCommandBuilder cb = new OracleCommandBuilder(da);
                     da.Update(dtTemp);
+                    LogActionToDB($"Mã hóa ({method})", $"Đã mã hóa {count} SĐT Khách hàng");
+
                     MessageBox.Show($"Đã mã hóa thành công {count} SĐT khách hàng!");
                     loadDGV_KhachHang();
                 }
@@ -369,7 +372,7 @@ namespace QL_GiayTT.Admin
             }
         }
 
-        // Ph??ng th?c ki?m tra xem chu?i có ph?i là s? không
+        // Kiểm tra chuỗi có phải là số hay không
         private bool IsNumber(string value)
         {
             return long.TryParse(value, out _);
@@ -377,11 +380,15 @@ namespace QL_GiayTT.Admin
 
         private void btnGiaiMa_Click(object sender, EventArgs e)
         {
+            // 1. Chọn thuật toán để giải mã
+            string method = ShowEncryptionOption("Dữ liệu đang được mã hóa bằng gì?");
+            if (string.IsNullOrEmpty(method)) return;
+
             DialogResult r = MessageBox.Show(
-        "CẢNH BÁO: Bạn có muốn GIẢI MÃ toàn bộ Số điện thoại khách hàng về dạng số thường không?",
-        "Xác nhận giải mã",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Warning);
+                $"CẢNH BÁO: Bạn có muốn GIẢI MÃ toàn bộ SĐT Khách hàng (đang dùng {method}) về dạng số thường không?",
+                "Xác nhận giải mã",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
             if (r == DialogResult.No) return;
 
@@ -397,18 +404,23 @@ namespace QL_GiayTT.Admin
                 da.Fill(dtTemp);
 
                 int count = 0;
+                RSAEncryption rsa = new RSAEncryption(); // Khởi tạo 1 lần để dùng lại
 
                 foreach (DataRow row in dtTemp.Rows)
                 {
-                    // Chỉ xử lý cột SDTKH
                     if (row["SDTKH"] != DBNull.Value)
                     {
                         string val = row["SDTKH"].ToString();
                         // Kiểm tra nếu là chuỗi đã mã hóa (Base64) thì mới giải mã
                         if (IsBase64(val))
                         {
-                            row["SDTKH"] = MaHoa.Decrypt(val);
-                            count++;
+                            string decrypted = ApplyDecrypt(val, method, rsa);
+                            // Nếu kết quả khác ban đầu (tức là giải mã được)
+                            if (decrypted != val)
+                            {
+                                row["SDTKH"] = decrypted;
+                                count++;
+                            }
                         }
                     }
                 }
@@ -417,12 +429,16 @@ namespace QL_GiayTT.Admin
                 {
                     OracleCommandBuilder cb = new OracleCommandBuilder(da);
                     da.Update(dtTemp);
+
+                    // Ghi log
+                    LogActionToDB($"Giải mã ({method})", $"Đã giải mã {count} SĐT Khách hàng");
+
                     MessageBox.Show($"Đã giải mã thành công cho {count} khách hàng!");
-                    loadDGV_KhachHang(); // Load lại lưới
+                    loadDGV_KhachHang();
                 }
                 else
                 {
-                    MessageBox.Show("Dữ liệu SĐT đã ở dạng số thường, không cần giải mã!");
+                    MessageBox.Show("Không có dữ liệu nào được giải mã (có thể do chọn sai thuật toán hoặc dữ liệu đã là số thường).");
                 }
             }
             catch (Exception ex)
@@ -430,6 +446,8 @@ namespace QL_GiayTT.Admin
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
+
+
         // Kiểm tra chuỗi có phải là Base64 (đã mã hóa) hay không
         private bool IsBase64(string base64String)
         {
@@ -446,6 +464,93 @@ namespace QL_GiayTT.Admin
             {
                 return false;
             }
+        }
+
+
+        //Hàm hiển thị hộp thoại chọn phương thức
+        private string ShowEncryptionOption(string title)
+        {
+            Form prompt = new Form()
+            {
+                Width = 350,
+                Height = 220,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = title,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            Label textLabel = new Label() { Left = 20, Top = 20, Text = "Chọn thuật toán:", AutoSize = true };
+            RadioButton rbAES = new RadioButton() { Left = 20, Top = 50, Text = "Đối xứng (AES) - Mặc định", Checked = true, Width = 250 };
+            RadioButton rbRSA = new RadioButton() { Left = 20, Top = 80, Text = "Bất đối xứng (RSA)", Width = 250 };
+            RadioButton rbHybrid = new RadioButton() { Left = 20, Top = 110, Text = "Lai (Hybrid: RSA + AES)", Width = 250 };
+            Button confirmation = new Button() { Text = "Thực hiện", Left = 220, Width = 100, Top = 140, DialogResult = DialogResult.OK };
+
+            prompt.Controls.Add(textLabel);
+            prompt.Controls.Add(rbAES);
+            prompt.Controls.Add(rbRSA);
+            prompt.Controls.Add(rbHybrid);
+            prompt.Controls.Add(confirmation);
+            prompt.AcceptButton = confirmation;
+
+            return prompt.ShowDialog() == DialogResult.OK ?
+                   (rbAES.Checked ? "AES" : (rbRSA.Checked ? "RSA" : "HYBRID")) : "";
+        }
+
+        //Hàm xử lý Mã hóa (Tương thích với RSA trả về byte[])
+        private string ApplyEncrypt(string plain, string method)
+        {
+            if (method == "RSA")
+            {
+                byte[] encBytes = new RSAEncryption().Encrypt(plain);
+                return Convert.ToBase64String(encBytes);
+            }
+            if (method == "HYBRID") return MaHoa.HybridEncryption.EncryptHybrid(plain);
+            return MaHoa.Encrypt(plain); 
+        }
+
+        //Hàm xử lý Giải mã
+        private string ApplyDecrypt(string cipherText, string method, RSAEncryption rsaInstance)
+        {
+            if (string.IsNullOrEmpty(cipherText) || !IsBase64(cipherText))
+                return cipherText;
+
+            try
+            {
+                if (method == "AES")
+                {
+                    return MaHoa.Decrypt(cipherText);
+                }
+                else if (method == "RSA")
+                {
+                    string privateKeyXml = rsaInstance.GetPrivateKey();
+                    byte[] dataBytes = Convert.FromBase64String(cipherText);
+                    return rsaInstance.Decrypt(dataBytes, privateKeyXml);
+                }
+                else if (method == "HYBRID")
+                {
+                    return MaHoa.HybridEncryption.DecryptHybrid(cipherText);
+                }
+            }
+            catch
+            {
+                return cipherText; 
+            }
+            return cipherText;
+        }
+
+        //Hàm ghi log vào Database
+        private void LogActionToDB(string action, string desc)
+        {
+            try
+            {
+                if (connsql.State == ConnectionState.Closed) connsql.Open();
+                string sql = "INSERT INTO AUDIT_LOG (TABLE_NAME, OPERATION, USER_NAME, THOI_GIAN, DESCRIPTION) " +
+                             "VALUES ('KHACHHANG', 'MA_HOA_DATA', :User, SYSDATE, :Desc)";
+                OracleCommand cmd = new OracleCommand(sql, connsql);
+                cmd.Parameters.Add(":User", "ADMIN");
+                cmd.Parameters.Add(":Desc", $"{action} - {desc}");
+                cmd.ExecuteNonQuery();
+            }
+            catch { }
         }
     }
 }

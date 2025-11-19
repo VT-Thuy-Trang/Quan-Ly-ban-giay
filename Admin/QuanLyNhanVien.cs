@@ -1,3 +1,5 @@
+using Oracle.ManagedDataAccess.Client;
+using QL_GiayTT.Class;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,8 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Oracle.ManagedDataAccess.Client;
-using QL_GiayTT.Class;
+using static QL_GiayTT.Class.MaHoa;
+using static QL_GiayTT.Class.RSAEncryption;
 
 namespace QL_GiayTT.Admin
 {
@@ -714,52 +716,51 @@ namespace QL_GiayTT.Admin
             }
         }
 
+        // nut ma hoa all
+
         private void btnMaHoaALL_Click_1(object sender, EventArgs e)
         {
-            DialogResult r = MessageBox.Show(
-                "Bạn có muốn mã hóa toàn bộ dữ liệu (SĐT và MẬT KHẨU) chưa được bảo mật không?",
-                "Xác nhận mã hóa",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning);
+            string method = ShowEncryptionOption();
+            if (string.IsNullOrEmpty(method)) return;
 
+            DialogResult r = MessageBox.Show($"Bạn muốn mã hóa bằng {method}?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (r == DialogResult.No) return;
 
             try
             {
                 if (connsql.State == ConnectionState.Closed) connsql.Open();
-                string selectStr = "Select * from NHANVIEN";
-                OracleDataAdapter da = new OracleDataAdapter(selectStr, connsql);
-                da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
 
-                DataTable dtTemp = new DataTable();
-                da.Fill(dtTemp);
+                // 1. Xử lý Nhân viên (SĐT, CCCD)
+                OracleDataAdapter daNV = new OracleDataAdapter("Select * from NHANVIEN", connsql);
+                OracleCommandBuilder cbNV = new OracleCommandBuilder(daNV);
+                DataTable dtNV = new DataTable();
+                daNV.Fill(dtNV);
 
-                int countNV = 0;
-                foreach (DataRow row in dtTemp.Rows)
+                int count = 0;
+                foreach (DataRow row in dtNV.Rows)
                 {
-                    bool isUpdated = false;
-                    // CCCD không mã hóa nữa, bỏ qua
-                    //Xử lý SĐT
-                    if (row["SDTNV"] != DBNull.Value)
+                    bool updated = false;
+                    // Mã hóa SĐT
+                    if (row["SDTNV"] != DBNull.Value && IsNumber(row["SDTNV"].ToString()))
                     {
-                        string val = row["SDTNV"].ToString();
-                        if (IsNumber(val)) 
-                        {
-                            row["SDTNV"] = MaHoa.Encrypt(val);
-                            isUpdated = true;
-                        }
+                        string plain = row["SDTNV"].ToString();
+                        row["SDTNV"] = ApplyEncrypt(plain, method);
+                        updated = true;
                     }
-                    if (isUpdated) countNV++;
+                    // Mã hóa CCCD 
+                    if (row["CCCD"] != DBNull.Value && IsNumber(row["CCCD"].ToString()))
+                    {
+                        string plain = row["CCCD"].ToString();
+                        row["CCCD"] = ApplyEncrypt(plain, method);
+                        updated = true;
+                    }
+                    if (updated) count++;
                 }
+                if (count > 0) daNV.Update(dtNV);
 
-                if (countNV > 0)
-                {
-                    OracleCommandBuilder cb = new OracleCommandBuilder(da);
-                    da.Update(dtTemp);
-                }
-                string selectTK = "Select * from DANGNHAP";
-                OracleDataAdapter daTK = new OracleDataAdapter(selectTK, connsql);
-                daTK.MissingSchemaAction = MissingSchemaAction.AddWithKey; 
+                // 2. Xử lý Tài khoản (Mật khẩu)
+                OracleDataAdapter daTK = new OracleDataAdapter("Select * from DANGNHAP", connsql);
+                OracleCommandBuilder cbTK = new OracleCommandBuilder(daTK);
                 DataTable dtTK = new DataTable();
                 daTK.Fill(dtTK);
 
@@ -768,51 +769,39 @@ namespace QL_GiayTT.Admin
                 {
                     if (row["MATKHAU"] != DBNull.Value)
                     {
-                        string val = row["MATKHAU"].ToString();
-                        if (!IsBase64(val))
+                        string plain = row["MATKHAU"].ToString();
+                        if (plain.Length < 30)
                         {
-                            row["MATKHAU"] = MaHoa.Encrypt(val);
+                            row["MATKHAU"] = ApplyEncrypt(plain, method);
                             countTK++;
                         }
                     }
                 }
+                if (countTK > 0) daTK.Update(dtTK);
+                // Ghi Log vào DB để bên Nhật ký xuất được
+                LogActionToDB($"Mã hóa toàn bộ ({method})", $"Thành công: {count} NV, {countTK} TK");
 
-                if (countTK > 0)
-                {
-                    OracleCommandBuilder cbTK = new OracleCommandBuilder(daTK);
-                    daTK.Update(dtTK);
-                }
-                if (countNV > 0 || countTK > 0)
-                {
-                    if (connsql.State == ConnectionState.Open)
-                        connsql.Close();
-                        
-                    MessageBox.Show($"Hoàn tất!\n- Đã mã hóa {countNV} nhân viên (SĐT).\n- Đã mã hóa {countTK} mật khẩu.");
-                    
-                    // Reload dữ liệu để hiển thị
-                    loadDGV_NhanVien();
-                    loadDGV_TaiKhoan();
-                    
-                    // Force refresh DataGridView
-                    dtGV_NhanVien.Refresh();
-                    dtGV_TaiKhoan.Refresh();
-                }
-                else
-                {
-                    MessageBox.Show("Tất cả dữ liệu đã được mã hóa trước đó!");
-                }
+                MessageBox.Show("Hoàn tất mã hóa!");
+                loadDGV_NhanVien();
+                loadDGV_TaiKhoan();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi: " + ex.Message);
+                MessageBox.Show("Lỗi (có thể do cột DB quá ngắn): " + ex.Message);
             }
         }
 
 
         private void btnGiaiMaALL_Click(object sender, EventArgs e)
         {
+            // Bước 1: Hỏi người dùng xem dữ liệu đang bị mã hóa bằng kiểu gì
+            string method = ShowEncryptionOption();
+            if (string.IsNullOrEmpty(method)) return;
+
             DialogResult r = MessageBox.Show(
-                "CẢNH BÁO: Bạn có muốn GIẢI MÃ toàn bộ dữ liệu (SĐT và MẬT KHẨU) về dạng văn bản thường không?",
+                $"CẢNH BÁO: Bạn sắp giải mã toàn bộ bằng thuật toán {method}.\n\n" +
+                "Nếu chọn sai thuật toán, dữ liệu sẽ bị lỗi hoặc không giải mã được.\n" +
+                "Bạn có chắc chắn muốn tiếp tục?",
                 "Xác nhận giải mã",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
@@ -822,39 +811,54 @@ namespace QL_GiayTT.Admin
             try
             {
                 if (connsql.State == ConnectionState.Closed) connsql.Open();
+
+                // --- XỬ LÝ BẢNG NHÂN VIÊN (SĐT, CCCD) ---
                 string selectStr = "Select * from NHANVIEN";
                 OracleDataAdapter da = new OracleDataAdapter(selectStr, connsql);
-                da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-
+                OracleCommandBuilder cb = new OracleCommandBuilder(da); // Tự động sinh lệnh Update
                 DataTable dtTemp = new DataTable();
                 da.Fill(dtTemp);
 
                 int countNV = 0;
+                RSAEncryption rsa = new RSAEncryption(); // Khởi tạo sẵn để dùng
+
                 foreach (DataRow row in dtTemp.Rows)
                 {
                     bool isUpdated = false;
-                    // CCCD không mã hóa nữa, bỏ qua
-                    //SĐT
+
+                    // Giải mã SĐT
                     if (row["SDTNV"] != DBNull.Value)
                     {
                         string val = row["SDTNV"].ToString();
-                        if (IsBase64(val))
+                        string decrypted = ApplyDecrypt(val, method, rsa);
+                        if (decrypted != val) // Nếu có sự thay đổi (giải mã thành công)
                         {
-                            row["SDTNV"] = MaHoa.Decrypt(val);
+                            row["SDTNV"] = decrypted;
                             isUpdated = true;
                         }
                     }
+
+                    // Giải mã CCCD
+                    if (row["CCCD"] != DBNull.Value)
+                    {
+                        string val = row["CCCD"].ToString();
+                        string decrypted = ApplyDecrypt(val, method, rsa);
+                        if (decrypted != val)
+                        {
+                            row["CCCD"] = decrypted;
+                            isUpdated = true;
+                        }
+                    }
+
                     if (isUpdated) countNV++;
                 }
 
-                if (countNV > 0)
-                {
-                    OracleCommandBuilder cb = new OracleCommandBuilder(da);
-                    da.Update(dtTemp);
-                }
+                if (countNV > 0) da.Update(dtTemp); // Lưu xuống DB
+
+                // --- XỬ LÝ BẢNG TÀI KHOẢN (MẬT KHẨU) ---
                 string selectTK = "Select * from DANGNHAP";
                 OracleDataAdapter daTK = new OracleDataAdapter(selectTK, connsql);
-                daTK.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+                OracleCommandBuilder cbTK = new OracleCommandBuilder(daTK);
                 DataTable dtTK = new DataTable();
                 daTK.Fill(dtTK);
 
@@ -864,48 +868,130 @@ namespace QL_GiayTT.Admin
                     if (row["MATKHAU"] != DBNull.Value)
                     {
                         string val = row["MATKHAU"].ToString();
-                        if (IsBase64(val))
+                        string decrypted = ApplyDecrypt(val, method, rsa);
+
+                        if (decrypted != val)
                         {
-                            string decrypted = MaHoa.Decrypt(val);
-                            if (decrypted != val)
-                            {
-                                row["MATKHAU"] = decrypted;
-                                countTK++;
-                            }
+                            row["MATKHAU"] = decrypted;
+                            countTK++;
                         }
                     }
                 }
-                if (countTK > 0)
-                {
-                    OracleCommandBuilder cbTK = new OracleCommandBuilder(daTK);
-                    daTK.Update(dtTK);
-                }
-                if (countNV > 0 || countTK > 0)
-                {
-                    if (connsql.State == ConnectionState.Open)
-                        connsql.Close();
-                        
-                    MessageBox.Show($"Hoàn tất!\n- Đã giải mã {countNV} nhân viên.\n- Đã giải mã {countTK} mật khẩu.");
-                    
-                    // Reload dữ liệu để hiển thị
-                    loadDGV_NhanVien();
-                    loadDGV_TaiKhoan();
-                    
-                    // Force refresh DataGridView
-                    dtGV_NhanVien.Refresh();
-                    dtGV_TaiKhoan.Refresh();
-                }
-                else
-                {
-                    MessageBox.Show("Dữ liệu đã ở dạng thường hoặc không thể giải mã!");
-                }
+
+                if (countTK > 0) daTK.Update(dtTK); // Lưu xuống DB
+
+                // Ghi Log (để bên Nhật ký có thể xuất báo cáo)
+                LogActionToDB($"Giải mã ({method})", $"Đã giải mã {countNV} nhân viên và {countTK} tài khoản.");
+
+                if (connsql.State == ConnectionState.Open) connsql.Close();
+
+                MessageBox.Show($"Hoàn tất!\n- Nhân viên đã cập nhật: {countNV}\n- Tài khoản đã cập nhật: {countTK}");
+
+                // Tải lại dữ liệu lên lưới
+                loadDGV_NhanVien();
+                loadDGV_TaiKhoan();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi: " + ex.Message);
+                MessageBox.Show("Lỗi quá trình giải mã: " + ex.Message);
             }
         }
 
+
+        // chon ham ma hoa theo phuong thuc
+        private string ApplyEncrypt(string plain, string method)
+        {
+            if (method == "RSA")
+            {
+                byte[] encBytes = new RSAEncryption().Encrypt(plain);
+                return Convert.ToBase64String(encBytes);
+            }
+            if (method == "HYBRID") return MaHoa.HybridEncryption.EncryptHybrid(plain);
+            return MaHoa.Encrypt(plain);
+        }
+
+
+
+        // tao hop thoai de chon phuong thuc ma hoa
+
+        private string ShowEncryptionOption()
+        {
+            Form prompt = new Form()
+            {
+                Width = 350,
+                Height = 200,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = "Chọn phương thức mã hóa",
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            Label textLabel = new Label() { Left = 20, Top = 20, Text = "Chọn thuật toán:", AutoSize = true };
+            RadioButton rbAES = new RadioButton() { Left = 20, Top = 50, Text = "Đối xứng (AES)", Checked = true, Width = 200 };
+            RadioButton rbRSA = new RadioButton() { Left = 20, Top = 80, Text = "Bất đối xứng (RSA)", Width = 200 };
+            RadioButton rbHybrid = new RadioButton() { Left = 20, Top = 110, Text = "Lai (Hybrid: RSA + AES)", Width = 200 };
+            Button confirmation = new Button() { Text = "Thực hiện", Left = 220, Width = 100, Top = 120, DialogResult = DialogResult.OK };
+
+            prompt.Controls.Add(textLabel);
+            prompt.Controls.Add(rbAES);
+            prompt.Controls.Add(rbRSA);
+            prompt.Controls.Add(rbHybrid);
+            prompt.Controls.Add(confirmation);
+            prompt.AcceptButton = confirmation;
+
+            return prompt.ShowDialog() == DialogResult.OK ?
+                   (rbAES.Checked ? "AES" : (rbRSA.Checked ? "RSA" : "HYBRID")) : "";
+        }
+
+        // ham ghi log vao db
+        private void LogActionToDB(string action, string desc)
+        {
+            try
+            {
+                string sql = "INSERT INTO AUDIT_LOG (TABLE_NAME, OPERATION, USER_NAME, THOI_GIAN, DESCRIPTION) " +
+                             "VALUES ('HE_THONG', :Op, :User, SYSDATE, :Desc)";
+                OracleCommand cmd = new OracleCommand(sql, connsql);
+                cmd.Parameters.Add(":Op", "MA_HOA_DATA"); // Đánh dấu để lọc
+                cmd.Parameters.Add(":User", "ADMIN"); // Hoặc lấy user hiện tại
+                cmd.Parameters.Add(":Desc", $"{action} - {desc}");
+                cmd.ExecuteNonQuery();
+            }
+            catch { }
+        }
+
+        private string ApplyDecrypt(string cipherText, string method, RSAEncryption rsaInstance)
+        {
+            if (string.IsNullOrEmpty(cipherText) || !IsBase64(cipherText))
+                return cipherText;
+
+            try
+            {
+                if (method == "AES")
+                {
+                    return MaHoa.Decrypt(cipherText);
+                }
+                else if (method == "RSA")
+                {
+                    // Code cũ RSA yêu cầu byte[] và xmlKey
+                    // 1. Lấy Private Key
+                    string privateKeyXml = rsaInstance.GetPrivateKey();
+                    // 2. Chuyển chuỗi mã hóa trong DB (Base64) sang byte[]
+                    byte[] dataBytes = Convert.FromBase64String(cipherText);
+                    // 3. Gọi hàm Decrypt cũ
+                    return rsaInstance.Decrypt(dataBytes, privateKeyXml);
+                }
+                else if (method == "HYBRID")
+                {
+                    return MaHoa.HybridEncryption.DecryptHybrid(cipherText);
+                }
+            }
+            catch
+            {
+                // Nếu giải mã lỗi (do sai key, sai thuật toán), giữ nguyên giá trị cũ
+                return cipherText;
+            }
+            return cipherText;
+        }
+
+        // Hàm kiểm tra chuỗi có phải là Base64 không
         private bool IsBase64(string base64String)
         {
             if (string.IsNullOrEmpty(base64String) || base64String.Length % 4 != 0 ||
@@ -922,6 +1008,8 @@ namespace QL_GiayTT.Admin
                 return false;
             }
         }
+
+        // Hàm kiểm tra chuỗi có phải là số không
         private bool IsNumber(string value)
         {
             return long.TryParse(value, out _);
