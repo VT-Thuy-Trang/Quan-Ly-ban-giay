@@ -46,11 +46,11 @@
           "dependencies": {
             "Oracle.ManagedDataAccess": {
               "target": "Package",
-              "version": "[23.26.0, )"
+              "version": "[21.9.0, )"
             },
             "Oracle.ManagedDataAccess.EntityFramework": {
               "target": "Package",
-              "version": "[23.26.0, )"
+              "version": "[21.9.0, )"
             }
           }
         }

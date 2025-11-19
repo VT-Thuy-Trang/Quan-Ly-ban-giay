@@ -187,8 +187,6 @@ D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\bin\Debug\Microsoft.
 D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\bin\Debug\Oracle.ManagedDataAccess.dll
 D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\bin\Debug\Oracle.ManagedDataAccess.EntityFramework.dll
 D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\bin\Debug\System.Buffers.dll
-D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\bin\Debug\System.Diagnostics.DiagnosticSource.dll
-D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\bin\Debug\System.Formats.Asn1.dll
 D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\bin\Debug\System.Memory.dll
 D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\bin\Debug\System.Numerics.Vectors.dll
 D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
@@ -218,3 +216,4 @@ D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\obj\Debug\QL_GiayTT.
 D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\obj\Debug\QL_GiayTT.csproj.Up2Date
 D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\obj\Debug\QL_GiayTT.exe
 D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\obj\Debug\QL_GiayTT.pdb
+D:\tài liệu học\Bao_mat_csdl\Do_an\code\fix4\QL_GiayTT\bin\Debug\Oracle.Web.dll

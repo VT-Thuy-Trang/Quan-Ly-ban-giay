@@ -19,11 +19,14 @@ namespace QL_GiayTT.Class
             {
                 byte[] iv = new byte[16];
                 byte[] array;
+
                 using (Aes aes = Aes.Create())
                 {
                     aes.Key = Encoding.UTF8.GetBytes(key);
                     aes.IV = iv;
+
                     ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+
                     using (MemoryStream ms = new MemoryStream())
                     {
                         using (CryptoStream cs = new CryptoStream((Stream)ms, encryptor, CryptoStreamMode.Write))
@@ -38,21 +41,31 @@ namespace QL_GiayTT.Class
                 }
                 return Convert.ToBase64String(array);
             }
-            catch { return plainText; }
+            catch
+            {
+                return plainText;
+            }
         }
 
         public static string Decrypt(string cipherText)
         {
-            if (string.IsNullOrEmpty(cipherText)) return cipherText;
+            if (string.IsNullOrEmpty(cipherText)) return "";
+            string textToDecrypt = cipherText.Trim();
+
+            if (textToDecrypt.Contains(" ") || textToDecrypt.Length % 4 != 0)
+                return textToDecrypt;
+
             try
             {
                 byte[] iv = new byte[16];
-                byte[] buffer = Convert.FromBase64String(cipherText);
+                byte[] buffer = Convert.FromBase64String(textToDecrypt);
+
                 using (Aes aes = Aes.Create())
                 {
                     aes.Key = Encoding.UTF8.GetBytes(key);
                     aes.IV = iv;
                     ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
                     using (MemoryStream ms = new MemoryStream(buffer))
                     {
                         using (CryptoStream cs = new CryptoStream((Stream)ms, decryptor, CryptoStreamMode.Read))
@@ -65,7 +78,10 @@ namespace QL_GiayTT.Class
                     }
                 }
             }
-            catch { return cipherText; } // Nếu lỗi (do dữ liệu cũ chưa mã hóa) thì trả về gốc
+            catch
+            {
+                return cipherText;
+            }
         }
     }
 }
