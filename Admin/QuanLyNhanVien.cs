@@ -32,6 +32,12 @@ namespace QL_GiayTT.Admin
 
         private void loadDGV_NhanVien()
         {
+            // Clear dữ liệu cũ trước khi load lại
+            if (dtNhanVien.Tables.Contains("NHANVIEN"))
+            {
+                dtNhanVien.Tables["NHANVIEN"].Clear();
+            }
+            
             string selectStr = "Select * from NHANVIEN";
             data = new OracleDataAdapter(selectStr, connsql);
             data.Fill(dtNhanVien, "NHANVIEN");
@@ -39,10 +45,17 @@ namespace QL_GiayTT.Admin
             foreach (DataRow row in dtNhanVien.Tables["NHANVIEN"].Rows)
             {
                 if (row["SDTNV"] != DBNull.Value)
-                    row["SDTNV"] = MaHoa.Decrypt(row["SDTNV"].ToString());
+                {
+                    string sdtValue = row["SDTNV"].ToString();
+                    // Chỉ giải mã nếu là Base64 (đã mã hóa)
+                    if (IsBase64(sdtValue))
+                    {
+                        row["SDTNV"] = MaHoa.Decrypt(sdtValue);
+                    }
+                    // Nếu không phải Base64 thì giữ nguyên (chưa mã hóa)
+                }
 
-                if (row["CCCD"] != DBNull.Value)
-                    row["CCCD"] = MaHoa.Decrypt(row["CCCD"].ToString());
+                // CCCD không mã hóa nữa, giữ nguyên giá trị gốc
             }
             //
             DataColumn[] key = new DataColumn[1];
@@ -65,7 +78,15 @@ namespace QL_GiayTT.Admin
 
         private void loadDGV_TaiKhoan()
         {
-            listShopQuanAo = new DataSet();
+            // Clear dữ liệu cũ trước khi load lại
+            if (listShopQuanAo.Tables.Contains("DANGNHAP"))
+            {
+                listShopQuanAo.Tables["DANGNHAP"].Clear();
+            }
+            else
+            {
+                listShopQuanAo = new DataSet();
+            }
 
             string selectStr = "Select * from DANGNHAP";
             OracleDataAdapter data = new OracleDataAdapter(selectStr, connsql);
@@ -75,8 +96,13 @@ namespace QL_GiayTT.Admin
             {
                 if (row["MATKHAU"] != DBNull.Value)
                 {
-                    string encryptedPass = row["MATKHAU"].ToString().Trim();
-                    row["MATKHAU"] = MaHoa.Decrypt(encryptedPass);
+                    string matKhauValue = row["MATKHAU"].ToString();
+                    // Chỉ giải mã nếu là Base64 (đã mã hóa)
+                    if (IsBase64(matKhauValue))
+                    {
+                        row["MATKHAU"] = MaHoa.Decrypt(matKhauValue);
+                    }
+                    // Nếu không phải Base64 thì giữ nguyên (chưa mã hóa)
                 }
             }
             //
@@ -388,12 +414,14 @@ namespace QL_GiayTT.Admin
                             }
                             else insertRow["NgaySinhNV"] = DBNull.Value;
                             insertRow["DiaChiNV"] = txtDiaChi.Text;
-                            //insertRow["CCCD"] = txtCCCD.Text;
-                            //insertRow["CCCD"] = MaHoa.Encrypt(txtCCCD.Text);   // Mã hóa
-                            // Gọi hàm Encrypt
+                            // CCCD không mã hóa, lưu giá trị gốc
                             if (!string.IsNullOrEmpty(txtCCCD.Text))
                             {
-                                insertRow["CCCD"] = MaHoa.Encrypt(txtCCCD.Text);
+                                insertRow["CCCD"] = txtCCCD.Text;
+                            }
+                            else
+                            {
+                                insertRow["CCCD"] = DBNull.Value;
                             }
 
                             if (txtLương.Text == string.Empty)
@@ -432,8 +460,15 @@ namespace QL_GiayTT.Admin
                             else updateRow["NgaySinhNV"] = DBNull.Value;
 
                             updateRow["DiaChiNV"] = txtDiaChi.Text;
-                            //updateRow["CCCD"] = txtCCCD.Text;
-                            updateRow["CCCD"] = MaHoa.Encrypt(txtCCCD.Text);   // Mã hóa
+                            // CCCD không mã hóa, lưu giá trị gốc
+                            if (!string.IsNullOrEmpty(txtCCCD.Text))
+                            {
+                                updateRow["CCCD"] = txtCCCD.Text;
+                            }
+                            else
+                            {
+                                updateRow["CCCD"] = DBNull.Value;
+                            }
 
                             if (txtLương.Text == string.Empty)
                                 updateRow["Luong"] = 0;
@@ -541,20 +576,17 @@ namespace QL_GiayTT.Admin
             {
                 if (dtGV_TaiKhoan.Columns[0].ReadOnly != true)
                 {
-                    DataTable dtSource = listShopQuanAo.Tables["DANGNHAP"];
-                    //DataTable dt = listShopQuanAo.Tables["DANGNHAP"];
 
-                    DataTable dtSave = dtSource.Copy();
-                    //
-                    foreach (DataRow row in dtSave.Rows)
+                    DataTable dt = listShopQuanAo.Tables["DANGNHAP"];
+                    foreach (DataRow row in dt.Rows)
                     {
-                        if (row.RowState == DataRowState.Added || row.RowState == DataRowState.Modified)
+                        if (row.RowState != DataRowState.Deleted) // Không xử lý dòng đã xóa
                         {
-                            string plainPass = row["MATKHAU"].ToString();
-                            row["MATKHAU"] = MaHoa.Encrypt(plainPass);
+                            string passRaw = row["MATKHAU"].ToString();
+                            // Luôn mã hóa lại giá trị hiện tại
+                            row["MATKHAU"] = MaHoa.Encrypt(passRaw);
                         }
                     }
-                    //
 
                     string selectStr = "select * from DANGNHAP";
                     OracleDataAdapter dataTK = new OracleDataAdapter(selectStr, connsql);
@@ -685,51 +717,49 @@ namespace QL_GiayTT.Admin
         private void btnMaHoaALL_Click_1(object sender, EventArgs e)
         {
             DialogResult r = MessageBox.Show(
-                    "Bạn có muốn MÃ HÓA toàn bộ dữ liệu (SĐT, CCCD và MẬT KHẨU) để bảo mật không?",
-                    "Xác nhận Mã Hóa",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
+                "Bạn có muốn mã hóa toàn bộ dữ liệu (SĐT và MẬT KHẨU) chưa được bảo mật không?",
+                "Xác nhận mã hóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
             if (r == DialogResult.No) return;
 
             try
             {
                 if (connsql.State == ConnectionState.Closed) connsql.Open();
-                string sqlNV = "Select * from NHANVIEN";
-                OracleDataAdapter daNV = new OracleDataAdapter(sqlNV, connsql);
-                OracleCommandBuilder cbNV = new OracleCommandBuilder(daNV);
-                DataTable dtNV = new DataTable();
-                daNV.Fill(dtNV);
+                string selectStr = "Select * from NHANVIEN";
+                OracleDataAdapter da = new OracleDataAdapter(selectStr, connsql);
+                da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+
+                DataTable dtTemp = new DataTable();
+                da.Fill(dtTemp);
 
                 int countNV = 0;
-                foreach (DataRow row in dtNV.Rows)
+                foreach (DataRow row in dtTemp.Rows)
                 {
-                    bool changed = false;
+                    bool isUpdated = false;
+                    // CCCD không mã hóa nữa, bỏ qua
+                    //Xử lý SĐT
                     if (row["SDTNV"] != DBNull.Value)
                     {
-                        string val = row["SDTNV"].ToString().Trim();
-                        if (IsAllDigits(val)) 
+                        string val = row["SDTNV"].ToString();
+                        if (IsNumber(val)) 
                         {
                             row["SDTNV"] = MaHoa.Encrypt(val);
-                            changed = true;
+                            isUpdated = true;
                         }
                     }
-                    if (row["CCCD"] != DBNull.Value)
-                    {
-                        string val = row["CCCD"].ToString().Trim();
-                        if (IsAllDigits(val))
-                        {
-                            row["CCCD"] = MaHoa.Encrypt(val);
-                            changed = true;
-                        }
-                    }
-
-                    if (changed) countNV++;
+                    if (isUpdated) countNV++;
                 }
-                if (countNV > 0) daNV.Update(dtNV);
-                string sqlTK = "Select * from DANGNHAP";
-                OracleDataAdapter daTK = new OracleDataAdapter(sqlTK, connsql);
-                OracleCommandBuilder cbTK = new OracleCommandBuilder(daTK);
+
+                if (countNV > 0)
+                {
+                    OracleCommandBuilder cb = new OracleCommandBuilder(da);
+                    da.Update(dtTemp);
+                }
+                string selectTK = "Select * from DANGNHAP";
+                OracleDataAdapter daTK = new OracleDataAdapter(selectTK, connsql);
+                daTK.MissingSchemaAction = MissingSchemaAction.AddWithKey; 
                 DataTable dtTK = new DataTable();
                 daTK.Fill(dtTK);
 
@@ -738,18 +768,39 @@ namespace QL_GiayTT.Admin
                 {
                     if (row["MATKHAU"] != DBNull.Value)
                     {
-                        string passRaw = row["MATKHAU"].ToString().Trim();
-                        if (!IsBase64String(passRaw))
+                        string val = row["MATKHAU"].ToString();
+                        if (!IsBase64(val))
                         {
-                            row["MATKHAU"] = MaHoa.Encrypt(passRaw);
+                            row["MATKHAU"] = MaHoa.Encrypt(val);
                             countTK++;
                         }
                     }
                 }
-                if (countTK > 0) daTK.Update(dtTK);
-                MessageBox.Show($"Bảo mật thành công!\n- Mã hóa {countNV} dòng nhân viên.\n- Mã hóa {countTK} mật khẩu tài khoản.", "Thông báo");
-                loadDGV_NhanVien();
-                loadDGV_TaiKhoan();
+
+                if (countTK > 0)
+                {
+                    OracleCommandBuilder cbTK = new OracleCommandBuilder(daTK);
+                    daTK.Update(dtTK);
+                }
+                if (countNV > 0 || countTK > 0)
+                {
+                    if (connsql.State == ConnectionState.Open)
+                        connsql.Close();
+                        
+                    MessageBox.Show($"Hoàn tất!\n- Đã mã hóa {countNV} nhân viên (SĐT).\n- Đã mã hóa {countTK} mật khẩu.");
+                    
+                    // Reload dữ liệu để hiển thị
+                    loadDGV_NhanVien();
+                    loadDGV_TaiKhoan();
+                    
+                    // Force refresh DataGridView
+                    dtGV_NhanVien.Refresh();
+                    dtGV_TaiKhoan.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Tất cả dữ liệu đã được mã hóa trước đó!");
+                }
             }
             catch (Exception ex)
             {
@@ -758,65 +809,62 @@ namespace QL_GiayTT.Admin
         }
 
 
-
         private void btnGiaiMaALL_Click(object sender, EventArgs e)
         {
             DialogResult r = MessageBox.Show(
-                   "CẢNH BÁO: Bạn có muốn GIẢI MÃ toàn bộ dữ liệu (SĐT, CCCD và MẬT KHẨU) về dạng văn bản thường không?",
-                   "Xác nhận Giải Mã",
-                   MessageBoxButtons.YesNo,
-                   MessageBoxIcon.Warning);
+                "CẢNH BÁO: Bạn có muốn GIẢI MÃ toàn bộ dữ liệu (SĐT và MẬT KHẨU) về dạng văn bản thường không?",
+                "Xác nhận giải mã",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
             if (r == DialogResult.No) return;
 
             try
             {
                 if (connsql.State == ConnectionState.Closed) connsql.Open();
-                string sqlNV = "Select * from NHANVIEN";
-                OracleDataAdapter daNV = new OracleDataAdapter(sqlNV, connsql);
-                OracleCommandBuilder cbNV = new OracleCommandBuilder(daNV);
-                DataTable dtNV = new DataTable();
-                daNV.Fill(dtNV);
+                string selectStr = "Select * from NHANVIEN";
+                OracleDataAdapter da = new OracleDataAdapter(selectStr, connsql);
+                da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+
+                DataTable dtTemp = new DataTable();
+                da.Fill(dtTemp);
 
                 int countNV = 0;
-                foreach (DataRow row in dtNV.Rows)
+                foreach (DataRow row in dtTemp.Rows)
                 {
-                    bool changed = false;
-                    // Giải mã SĐT
+                    bool isUpdated = false;
+                    // CCCD không mã hóa nữa, bỏ qua
+                    //SĐT
                     if (row["SDTNV"] != DBNull.Value)
                     {
-                        string val = row["SDTNV"].ToString().Trim();
-                        if (IsBase64String(val))
+                        string val = row["SDTNV"].ToString();
+                        if (IsBase64(val))
                         {
                             row["SDTNV"] = MaHoa.Decrypt(val);
-                            changed = true;
+                            isUpdated = true;
                         }
                     }
-                    if (row["CCCD"] != DBNull.Value)
-                    {
-                        string val = row["CCCD"].ToString().Trim();
-                        if (IsBase64String(val))
-                        {
-                            row["CCCD"] = MaHoa.Decrypt(val);
-                            changed = true;
-                        }
-                    }
-
-                    if (changed) countNV++;
+                    if (isUpdated) countNV++;
                 }
-                if (countNV > 0) daNV.Update(dtNV);
-                string sqlTK = "Select * from DANGNHAP";
-                OracleDataAdapter daTK = new OracleDataAdapter(sqlTK, connsql);
-                OracleCommandBuilder cbTK = new OracleCommandBuilder(daTK);
+
+                if (countNV > 0)
+                {
+                    OracleCommandBuilder cb = new OracleCommandBuilder(da);
+                    da.Update(dtTemp);
+                }
+                string selectTK = "Select * from DANGNHAP";
+                OracleDataAdapter daTK = new OracleDataAdapter(selectTK, connsql);
+                daTK.MissingSchemaAction = MissingSchemaAction.AddWithKey;
                 DataTable dtTK = new DataTable();
                 daTK.Fill(dtTK);
+
                 int countTK = 0;
                 foreach (DataRow row in dtTK.Rows)
                 {
                     if (row["MATKHAU"] != DBNull.Value)
                     {
-                        string val = row["MATKHAU"].ToString().Trim();
-                        if (IsBase64String(val))
+                        string val = row["MATKHAU"].ToString();
+                        if (IsBase64(val))
                         {
                             string decrypted = MaHoa.Decrypt(val);
                             if (decrypted != val)
@@ -827,11 +875,30 @@ namespace QL_GiayTT.Admin
                         }
                     }
                 }
-                if (countTK > 0) daTK.Update(dtTK);
-                MessageBox.Show($"Giải mã hoàn tất!\n- Đã giải mã {countNV} nhân viên.\n- Đã giải mã {countTK} mật khẩu.", "Thông báo");
-
-                loadDGV_NhanVien();
-                loadDGV_TaiKhoan();
+                if (countTK > 0)
+                {
+                    OracleCommandBuilder cbTK = new OracleCommandBuilder(daTK);
+                    daTK.Update(dtTK);
+                }
+                if (countNV > 0 || countTK > 0)
+                {
+                    if (connsql.State == ConnectionState.Open)
+                        connsql.Close();
+                        
+                    MessageBox.Show($"Hoàn tất!\n- Đã giải mã {countNV} nhân viên.\n- Đã giải mã {countTK} mật khẩu.");
+                    
+                    // Reload dữ liệu để hiển thị
+                    loadDGV_NhanVien();
+                    loadDGV_TaiKhoan();
+                    
+                    // Force refresh DataGridView
+                    dtGV_NhanVien.Refresh();
+                    dtGV_TaiKhoan.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Dữ liệu đã ở dạng thường hoặc không thể giải mã!");
+                }
             }
             catch (Exception ex)
             {
@@ -839,14 +906,15 @@ namespace QL_GiayTT.Admin
             }
         }
 
-        private bool IsBase64String(string s)
+        private bool IsBase64(string base64String)
         {
-            if (string.IsNullOrEmpty(s)) return false;
-            s = s.Trim();
-            if (s.Length % 4 != 0 || s.Contains(" ")) return false;
+            if (string.IsNullOrEmpty(base64String) || base64String.Length % 4 != 0 ||
+                base64String.Contains(" ") || base64String.Contains("\t") ||
+                base64String.Contains("\r") || base64String.Contains("\n"))
+                return false;
             try
             {
-                Convert.FromBase64String(s);
+                Convert.FromBase64String(base64String);
                 return true;
             }
             catch
@@ -854,20 +922,10 @@ namespace QL_GiayTT.Admin
                 return false;
             }
         }
-
-
-        private bool IsAllDigits(string s)
+        private bool IsNumber(string value)
         {
-            if (string.IsNullOrEmpty(s)) return false;
-            foreach (char c in s)
-            {
-                if (!char.IsDigit(c)) return false;
-            }
-            return true;
+            return long.TryParse(value, out _);
         }
-
-
-
 
     }
 }

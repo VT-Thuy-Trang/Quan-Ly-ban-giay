@@ -31,6 +31,8 @@ namespace QL_GiayTT.frm
                 btnSanPham.Enabled = false;
                 btnNhanVien.Enabled = false;
                 btnKhachHang.Enabled = false;
+                btnNhatKy.Enabled = false;
+                btnNhatKy.Visible = false;
             }
         }
 
@@ -176,6 +178,21 @@ namespace QL_GiayTT.frm
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
             frmQuanLyKhachHang uc = new frmQuanLyKhachHang();
+            string tagName = uc.Text;
+            Form fromTonTan = kiemTraFormTonTai(tagName);
+
+            if (fromTonTan == null)
+                addTabControl(uc, tagName);
+            else
+            {
+                uc.Close();
+                tabControl.SelectedTab = fromTonTan.Parent as TabPage;
+            }
+        }
+
+        private void btnNhatKy_Click(object sender, EventArgs e)
+        {
+            QuanLyNhatKy uc = new QuanLyNhatKy();
             string tagName = uc.Text;
             Form fromTonTan = kiemTraFormTonTai(tagName);
 

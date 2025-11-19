@@ -50,12 +50,26 @@ namespace QL_GiayTT.Class
                         if (reader.Read())
                         {
                             // Tài khoản tồn tại, lấy mật khẩu và loại TK từ CSDL
-                            string dbMatKhau = reader["MATKHAU"].ToString().Trim();
-                            string dbLoaiTK = reader["LOAITK"].ToString().Trim();
-
-                            string inputEncrypted = MaHoa.Encrypt(this.MatKhau);
+                            string dbMatKhau = reader["MATKHAU"].ToString();
+                            string dbLoaiTK = reader["LOAITK"].ToString();
+                            
                             // 2. So sánh mật khẩu người dùng nhập với mật khẩu trong CSDL
-                            if (dbMatKhau == this.MatKhau)
+                            bool matKhauDung = false;
+                            
+                            // Kiểm tra xem mật khẩu trong DB có phải Base64 (đã mã hóa) không
+                            if (IsBase64(dbMatKhau))
+                            {
+                                // Mật khẩu trong DB đã mã hóa, cần mã hóa mật khẩu người dùng nhập để so sánh
+                                string inputEncrypted = MaHoa.Encrypt(this.MatKhau);
+                                matKhauDung = (dbMatKhau == inputEncrypted);
+                            }
+                            else
+                            {
+                                // Mật khẩu trong DB chưa mã hóa, so sánh trực tiếp
+                                matKhauDung = (dbMatKhau == this.MatKhau);
+                            }
+                            
+                            if (matKhauDung)
                             {
                                 // Mật khẩu đúng, kiểm tra loại tài khoản
                                 if (dbLoaiTK.Equals("admin", StringComparison.OrdinalIgnoreCase))
@@ -86,6 +100,24 @@ namespace QL_GiayTT.Class
                     System.Windows.Forms.MessageBox.Show("Lỗi CSDL: " + ex.Message);
                     return -2; // Trả về mã lỗi khác
                 }
+            }
+        }
+        
+        // Kiểm tra chuỗi có phải là Base64 (đã mã hóa) hay không
+        private bool IsBase64(string base64String)
+        {
+            if (string.IsNullOrEmpty(base64String) || base64String.Length % 4 != 0 ||
+                base64String.Contains(" ") || base64String.Contains("\t") ||
+                base64String.Contains("\r") || base64String.Contains("\n"))
+                return false;
+            try
+            {
+                Convert.FromBase64String(base64String);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

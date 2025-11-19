@@ -198,6 +198,7 @@ namespace QL_GiayTT.Admin
             this.btnLuu.Text = "Lưu hoá don";
             this.btnLuu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLuu.UseVisualStyleBackColor = true;
+            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // btnReset
             // 
@@ -212,6 +213,7 @@ namespace QL_GiayTT.Admin
             this.btnReset.Text = "Reset công cụ";
             this.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnResetDuLieu
             // 

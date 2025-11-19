@@ -213,8 +213,16 @@ namespace QL_GiayTT.Admin
                         OracleCommand cmdInsert = new OracleCommand(insertStr, connsql);
                         cmdInsert.Parameters.Add(":TenKH", OracleDbType.Varchar2).Value = txtTenKH.Text;
                         //cmdInsert.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = txtSDT.Text;
-                        string sdtMaHoa = MaHoa.Encrypt(txtSDT.Text);
-                        cmdInsert.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = sdtMaHoa;
+                        // Kiểm tra và mã hóa SDTKH
+                        if (!string.IsNullOrEmpty(txtSDT.Text.Trim()))
+                        {
+                            string sdtMaHoa = MaHoa.Encrypt(txtSDT.Text.Trim());
+                            cmdInsert.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = sdtMaHoa;
+                        }
+                        else
+                        {
+                            cmdInsert.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = DBNull.Value;
+                        }
 
                         cmdInsert.Parameters.Add(":DiaChiKH", OracleDbType.Varchar2).Value = txtDiaChi.Text;
                         cmdInsert.Parameters.Add(":GioiTinhKH", OracleDbType.Varchar2).Value = cboGioiTinh.Text;
@@ -232,8 +240,16 @@ namespace QL_GiayTT.Admin
                         OracleCommand cmdUpdate = new OracleCommand(updateStr, connsql);
                         cmdUpdate.Parameters.Add(":TenKH", OracleDbType.Varchar2).Value = txtTenKH.Text;
                         //cmdUpdate.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = txtSDT.Text;
-                        string sdtMaHoa = MaHoa.Encrypt(txtSDT.Text);
-                        cmdUpdate.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = sdtMaHoa;
+                        // Kiểm tra và mã hóa SDTKH
+                        if (!string.IsNullOrEmpty(txtSDT.Text.Trim()))
+                        {
+                            string sdtMaHoa = MaHoa.Encrypt(txtSDT.Text.Trim());
+                            cmdUpdate.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = sdtMaHoa;
+                        }
+                        else
+                        {
+                            cmdUpdate.Parameters.Add(":SDTKH", OracleDbType.Varchar2).Value = DBNull.Value;
+                        }
 
                         cmdUpdate.Parameters.Add(":DiaChiKH", OracleDbType.Varchar2).Value = txtDiaChi.Text;
                         cmdUpdate.Parameters.Add(":GioiTinhKH", OracleDbType.Varchar2).Value = cboGioiTinh.Text;

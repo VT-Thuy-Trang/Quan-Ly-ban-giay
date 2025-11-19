@@ -367,6 +367,20 @@ namespace QL_GiayTT.Admin
             }
         }
 
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            // Hủy chế độ chỉnh sửa
+            dtGV_HoaDon.ReadOnly = true;
+            btnLuu.Enabled = false;
+            btnSua.Enabled = true;
+
+            // Reload lại dữ liệu từ database để hủy các thay đổi chưa lưu
+            load_DtGV_HoaDon();
+            tinhTongDoanhThu();
+
+            MessageBox.Show("Đã hủy chế độ chỉnh sửa và reload lại dữ liệu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void btnResetDuLieu_Click(object sender, EventArgs e)
         {
             dtGV_CTHD.DataSource = QL_ShopQuanAo.Tables["CTHD"];
@@ -374,7 +388,150 @@ namespace QL_GiayTT.Admin
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            if (dtGV_HoaDon.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn hóa đơn cần sửa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            // Lấy dòng được chọn
+            DataGridViewCell selectedCell = dtGV_HoaDon.SelectedCells[0];
+            DataGridViewRow selectedRow = dtGV_HoaDon.Rows[selectedCell.RowIndex];
+
+            if (selectedRow.Cells["MaHD"].Value == null)
+            {
+                MessageBox.Show("Không thể lấy mã hóa đơn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Cho phép chỉnh sửa các cột có thể sửa (không cho sửa MaHD, MaNV, MaKH, NgayBan)
+            dtGV_HoaDon.ReadOnly = false;
+            
+            // Chỉ cho phép sửa các cột: TrangThai, HinhThucThanhToan, GhiChu, TongThanhToan
+            dtGV_HoaDon.Columns["MaHD"].ReadOnly = true;
+            dtGV_HoaDon.Columns["MaNV"].ReadOnly = true;
+            dtGV_HoaDon.Columns["MaKH"].ReadOnly = true;
+            dtGV_HoaDon.Columns["NgayBan"].ReadOnly = true;
+            dtGV_HoaDon.Columns["TrangThai"].ReadOnly = false;
+            dtGV_HoaDon.Columns["HinhThucThanhToan"].ReadOnly = false;
+            dtGV_HoaDon.Columns["GhiChu"].ReadOnly = false;
+            dtGV_HoaDon.Columns["TongThanhToan"].ReadOnly = false;
+
+            // Bật nút Lưu
+            btnLuu.Enabled = true;
+            btnSua.Enabled = false;
+
+            // Focus vào dòng được chọn
+            selectedRow.Selected = true;
+            dtGV_HoaDon.CurrentCell = selectedRow.Cells["TrangThai"];
+            dtGV_HoaDon.BeginEdit(true);
+
+            MessageBox.Show("Bạn có thể chỉnh sửa thông tin hóa đơn. Nhấn 'Lưu hóa đơn' để lưu thay đổi.", 
+                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            if (dtGV_HoaDon.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn hóa đơn cần lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // Lấy dòng được chọn
+                DataGridViewCell selectedCell = dtGV_HoaDon.SelectedCells[0];
+                DataGridViewRow selectedRow = dtGV_HoaDon.Rows[selectedCell.RowIndex];
+
+                if (selectedRow.Cells["MaHD"].Value == null)
+                {
+                    MessageBox.Show("Không thể lấy mã hóa đơn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string maHD = selectedRow.Cells["MaHD"].Value.ToString();
+                
+                // Chuyển đổi MaHD sang Int32
+                if (!int.TryParse(maHD, out int maHDInt))
+                {
+                    MessageBox.Show("Mã hóa đơn không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Lấy giá trị từ DataGridView
+                string trangThai = selectedRow.Cells["TrangThai"].Value != null ? 
+                    selectedRow.Cells["TrangThai"].Value.ToString() : "";
+                string hinhThucThanhToan = selectedRow.Cells["HinhThucThanhToan"].Value != null ? 
+                    selectedRow.Cells["HinhThucThanhToan"].Value.ToString() : "";
+                string ghiChu = selectedRow.Cells["GhiChu"].Value != null ? 
+                    selectedRow.Cells["GhiChu"].Value.ToString() : "";
+                
+                // Lấy TongThanhToan
+                decimal tongThanhToan = 0;
+                if (selectedRow.Cells["TongThanhToan"].Value != null)
+                {
+                    if (!decimal.TryParse(selectedRow.Cells["TongThanhToan"].Value.ToString(), out tongThanhToan))
+                    {
+                        MessageBox.Show("Tổng thanh toán không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+                OpenConnection();
+
+                // Cập nhật vào database
+                string updateSql = @"UPDATE HOADON 
+                                    SET TrangThai = :TrangThai, 
+                                        HinhThucThanhToan = :HinhThucThanhToan, 
+                                        GhiChu = :GhiChu,
+                                        TongThanhToan = :TongThanhToan
+                                    WHERE MaHD = :MaHD";
+
+                OracleCommand command = new OracleCommand(updateSql, connsql);
+                command.Parameters.Add(":TrangThai", OracleDbType.NVarchar2).Value = trangThai;
+                command.Parameters.Add(":HinhThucThanhToan", OracleDbType.NVarchar2).Value = 
+                    string.IsNullOrEmpty(hinhThucThanhToan) ? DBNull.Value : (object)hinhThucThanhToan;
+                command.Parameters.Add(":GhiChu", OracleDbType.NVarchar2).Value = 
+                    string.IsNullOrEmpty(ghiChu) ? DBNull.Value : (object)ghiChu;
+                command.Parameters.Add(":TongThanhToan", OracleDbType.Decimal).Value = tongThanhToan;
+                command.Parameters.Add(":MaHD", OracleDbType.Int32).Value = maHDInt;
+
+                int rowsAffected = command.ExecuteNonQuery();
+                CloseConnection();
+
+                if (rowsAffected > 0)
+                {
+                    // Cập nhật vào DataSet
+                    DataRow dataRow = QL_ShopQuanAo.Tables["HOADON"].Rows.Find(maHDInt);
+                    if (dataRow != null)
+                    {
+                        dataRow["TrangThai"] = trangThai;
+                        dataRow["HinhThucThanhToan"] = string.IsNullOrEmpty(hinhThucThanhToan) ? DBNull.Value : (object)hinhThucThanhToan;
+                        dataRow["GhiChu"] = string.IsNullOrEmpty(ghiChu) ? DBNull.Value : (object)ghiChu;
+                        dataRow["TongThanhToan"] = tongThanhToan;
+                    }
+
+                    // Tắt chế độ chỉnh sửa
+                    dtGV_HoaDon.ReadOnly = true;
+                    btnLuu.Enabled = false;
+                    btnSua.Enabled = true;
+
+                    // Cập nhật lại tổng doanh thu
+                    tinhTongDoanhThu();
+
+                    MessageBox.Show("Lưu hóa đơn thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy hóa đơn cần cập nhật!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu hóa đơn: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CloseConnection();
+            }
         }
 
         private void loadDGV_HoaDon(string trangThai)

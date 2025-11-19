@@ -36,7 +36,15 @@
     <Reference Include="Oracle.DataAccess">
       <HintPath>C:\Users\LENOVO\Downloads\WINDOWS.X64_213000_db_home\ODP.NET\bin\4\Oracle.DataAccess.dll</HintPath>
     </Reference>
-    <Reference Include="Oracle.Web, Version=2.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64" />
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>bin\Debug\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework">
+      <HintPath>bin\Debug\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.Web">
+      <HintPath>..\..\..\..\..\..\..\app\LENOVO\product\12.1.0\dbhome\ASP.NET\bin\2.x\Oracle.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient">
@@ -90,10 +98,17 @@
     <Compile Include="Admin\QuanLySanPham.Designer.cs">
       <DependentUpon>QuanLySanPham.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\QuanLyNhatKy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\QuanLyNhatKy.Designer.cs">
+      <DependentUpon>QuanLyNhatKy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class\DangNhap.cs" />
     <Compile Include="Class\KetNoi.cs" />
     <Compile Include="Class\MaHoa.cs" />
     <Compile Include="Class\OracleSession.cs" />
+    <Compile Include="Class\RSAEncryption.cs" />
     <Compile Include="ObjectClass\KhachHang.cs" />
     <Compile Include="ObjectClass\SanPham.cs" />
     <Compile Include="frm\BanHang.cs">
@@ -161,6 +176,9 @@
     <EmbeddedResource Include="Admin\QuanLySanPham.resx">
       <DependentUpon>QuanLySanPham.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Admin\QuanLyNhatKy.resx">
+      <DependentUpon>QuanLyNhatKy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm\BanHang.resx">
       <DependentUpon>BanHang.cs</DependentUpon>
     </EmbeddedResource>
@@ -197,6 +215,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Oracle.ManagedDataAccess">
+      <Version>23.26.0</Version>
+    </PackageReference>
+    <PackageReference Include="Oracle.ManagedDataAccess.EntityFramework">
+      <Version>23.26.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Image\AnhMain.jpeg" />
   </ItemGroup>
   <ItemGroup>
@@ -211,17 +237,6 @@
     <Content Include="Resources\load.png" />
     <Content Include="Resources\load1.png" />
     <Content Include="Resources\xao.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Oracle.ManagedDataAccess">
-      <Version>21.9.0</Version>
-    </PackageReference>
-    <PackageReference Include="Oracle.ManagedDataAccess.EntityFramework">
-      <Version>21.9.0</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

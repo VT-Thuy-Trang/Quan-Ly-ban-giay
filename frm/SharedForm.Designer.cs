@@ -35,6 +35,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDongTab = new System.Windows.Forms.Button();
             this.btnDangXuat = new System.Windows.Forms.Button();
+            this.btnNhatKy = new System.Windows.Forms.Button();
             this.btnKhachHang = new System.Windows.Forms.Button();
             this.btnSanPham = new System.Windows.Forms.Button();
             this.btnNhanVien = new System.Windows.Forms.Button();
@@ -89,6 +90,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.btnDongTab);
             this.panel2.Controls.Add(this.btnDangXuat);
+            this.panel2.Controls.Add(this.btnNhatKy);
             this.panel2.Controls.Add(this.btnKhachHang);
             this.panel2.Controls.Add(this.btnSanPham);
             this.panel2.Controls.Add(this.btnNhanVien);
@@ -106,7 +108,7 @@
             // 
             this.btnDongTab.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnDongTab.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDongTab.Location = new System.Drawing.Point(979, 0);
+            this.btnDongTab.Location = new System.Drawing.Point(892, 0);
             this.btnDongTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDongTab.Name = "btnDongTab";
             this.btnDongTab.Size = new System.Drawing.Size(87, 31);
@@ -115,11 +117,23 @@
             this.btnDongTab.UseVisualStyleBackColor = true;
             this.btnDongTab.Click += new System.EventHandler(this.btnDongTab_Click);
             // 
+            // btnNhatKy
+            // 
+            this.btnNhatKy.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNhatKy.Location = new System.Drawing.Point(572, -1);
+            this.btnNhatKy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNhatKy.Name = "btnNhatKy";
+            this.btnNhatKy.Size = new System.Drawing.Size(87, 32);
+            this.btnNhatKy.TabIndex = 6;
+            this.btnNhatKy.Text = "Nhật Ký";
+            this.btnNhatKy.UseVisualStyleBackColor = true;
+            this.btnNhatKy.Click += new System.EventHandler(this.btnNhatKy_Click);
+            // 
             // btnDangXuat
             // 
             this.btnDangXuat.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnDangXuat.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDangXuat.Location = new System.Drawing.Point(1066, 0);
+            this.btnDangXuat.Location = new System.Drawing.Point(979, 0);
             this.btnDangXuat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDangXuat.Name = "btnDangXuat";
             this.btnDangXuat.Size = new System.Drawing.Size(117, 31);
@@ -256,6 +270,7 @@
         private System.Windows.Forms.Button btnNhanVien;
         private System.Windows.Forms.Button btnKhachHang;
         private System.Windows.Forms.Button btnSanPham;
+        private System.Windows.Forms.Button btnNhatKy;
         private System.Windows.Forms.Button btnDongTab;
         private System.Windows.Forms.Button btnDangXuat;
     }
