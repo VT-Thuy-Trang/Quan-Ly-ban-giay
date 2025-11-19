@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NBEWgZR4l/c=",
+  "dgSpecHash": "B6ywgzH3m7c=",
   "success": true,
-  "projectFilePath": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix2\\QL_GiayTT\\QL_GiayTT.csproj",
+  "projectFilePath": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix3\\QL_GiayTT\\QL_GiayTT.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LENOVO\\.nuget\\packages\\entityframework\\6.5.1\\entityframework.6.5.1.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",

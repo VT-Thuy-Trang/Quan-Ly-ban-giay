@@ -29,10 +29,10 @@ namespace QL_GiayTT.Admin
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuanLyNhanVien));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -41,6 +41,7 @@ namespace QL_GiayTT.Admin
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.btnMaHoaALL = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -99,7 +100,7 @@ namespace QL_GiayTT.Admin
             this.NVL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Lương = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MATK = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnMaHoaALL = new System.Windows.Forms.Button();
+            this.btnGiaiMaALL = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -198,6 +199,7 @@ namespace QL_GiayTT.Admin
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.btnGiaiMaALL);
             this.panel7.Controls.Add(this.btnMaHoaALL);
             this.panel7.Controls.Add(this.panel1);
             this.panel7.Controls.Add(this.btnXoa);
@@ -215,6 +217,16 @@ namespace QL_GiayTT.Admin
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(717, 195);
             this.panel7.TabIndex = 29;
+            // 
+            // btnMaHoaALL
+            // 
+            this.btnMaHoaALL.Location = new System.Drawing.Point(428, 48);
+            this.btnMaHoaALL.Name = "btnMaHoaALL";
+            this.btnMaHoaALL.Size = new System.Drawing.Size(127, 35);
+            this.btnMaHoaALL.TabIndex = 21;
+            this.btnMaHoaALL.Text = "Mã Hóa ALL";
+            this.btnMaHoaALL.UseVisualStyleBackColor = true;
+            this.btnMaHoaALL.Click += new System.EventHandler(this.btnMaHoaALL_Click_1);
             // 
             // panel1
             // 
@@ -684,28 +696,28 @@ namespace QL_GiayTT.Admin
             // dtGV_TaiKhoan
             // 
             this.dtGV_TaiKhoan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Sitka Text", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtGV_TaiKhoan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Sitka Text", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtGV_TaiKhoan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dtGV_TaiKhoan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGV_TaiKhoan.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaTKDN,
             this.TAIKHOAN,
             this.MATKHAU,
             this.LOAITK});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtGV_TaiKhoan.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtGV_TaiKhoan.DefaultCellStyle = dataGridViewCellStyle6;
             this.dtGV_TaiKhoan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtGV_TaiKhoan.Location = new System.Drawing.Point(0, 27);
             this.dtGV_TaiKhoan.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -775,14 +787,14 @@ namespace QL_GiayTT.Admin
             // dtGV_NhanVien
             // 
             this.dtGV_NhanVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Sitka Text", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtGV_NhanVien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Sitka Text", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtGV_NhanVien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dtGV_NhanVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGV_NhanVien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaNV,
@@ -795,14 +807,14 @@ namespace QL_GiayTT.Admin
             this.NVL,
             this.Lương,
             this.MATK});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtGV_NhanVien.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Franklin Gothic Medium", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtGV_NhanVien.DefaultCellStyle = dataGridViewCellStyle8;
             this.dtGV_NhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtGV_NhanVien.Location = new System.Drawing.Point(0, 27);
             this.dtGV_NhanVien.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -863,15 +875,15 @@ namespace QL_GiayTT.Admin
             this.MATK.HeaderText = "Mã tài khoản";
             this.MATK.Name = "MATK";
             // 
-            // btnMaHoaALL
+            // btnGiaiMaALL
             // 
-            this.btnMaHoaALL.Location = new System.Drawing.Point(428, 48);
-            this.btnMaHoaALL.Name = "btnMaHoaALL";
-            this.btnMaHoaALL.Size = new System.Drawing.Size(127, 35);
-            this.btnMaHoaALL.TabIndex = 21;
-            this.btnMaHoaALL.Text = "Mã Hóa ALL";
-            this.btnMaHoaALL.UseVisualStyleBackColor = true;
-            this.btnMaHoaALL.Click += new System.EventHandler(this.btnMaHoaALL_Click_1);
+            this.btnGiaiMaALL.Location = new System.Drawing.Point(428, 98);
+            this.btnGiaiMaALL.Name = "btnGiaiMaALL";
+            this.btnGiaiMaALL.Size = new System.Drawing.Size(127, 35);
+            this.btnGiaiMaALL.TabIndex = 26;
+            this.btnGiaiMaALL.Text = "Giải Mã ALL";
+            this.btnGiaiMaALL.UseVisualStyleBackColor = true;
+            this.btnGiaiMaALL.Click += new System.EventHandler(this.btnGiaiMaALL_Click);
             // 
             // frmQuanLyNhanVien
             // 
@@ -980,5 +992,6 @@ namespace QL_GiayTT.Admin
         private System.Windows.Forms.DataGridViewTextBoxColumn Lương;
         private System.Windows.Forms.DataGridViewTextBoxColumn MATK;
         private System.Windows.Forms.Button btnMaHoaALL;
+        private System.Windows.Forms.Button btnGiaiMaALL;
     }
 }

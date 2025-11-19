@@ -28,7 +28,7 @@ namespace QL_GiayTT.Admin
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -41,6 +41,7 @@ namespace QL_GiayTT.Admin
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnMaHoaKH = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button7 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -69,7 +70,7 @@ namespace QL_GiayTT.Admin
             this.NamSinhKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SDTKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiaChiKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnMaHoaKH = new System.Windows.Forms.Button();
+            this.btnGiaiMa = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
@@ -220,6 +221,7 @@ namespace QL_GiayTT.Admin
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.btnGiaiMa);
             this.panel4.Controls.Add(this.btnMaHoaKH);
             this.panel4.Controls.Add(this.groupBox3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -228,6 +230,16 @@ namespace QL_GiayTT.Admin
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(922, 65);
             this.panel4.TabIndex = 39;
+            // 
+            // btnMaHoaKH
+            // 
+            this.btnMaHoaKH.Location = new System.Drawing.Point(275, 15);
+            this.btnMaHoaKH.Name = "btnMaHoaKH";
+            this.btnMaHoaKH.Size = new System.Drawing.Size(117, 33);
+            this.btnMaHoaKH.TabIndex = 36;
+            this.btnMaHoaKH.Text = "Mã Hóa";
+            this.btnMaHoaKH.UseVisualStyleBackColor = true;
+            this.btnMaHoaKH.Click += new System.EventHandler(this.btnMaHoaKH_Click);
             // 
             // groupBox3
             // 
@@ -479,14 +491,14 @@ namespace QL_GiayTT.Admin
             // dtGV_KhachHang
             // 
             this.dtGV_KhachHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtGV_KhachHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Sitka Text", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtGV_KhachHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dtGV_KhachHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGV_KhachHang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaKH,
@@ -534,15 +546,15 @@ namespace QL_GiayTT.Admin
             this.DiaChiKH.HeaderText = "Địa chỉ";
             this.DiaChiKH.Name = "DiaChiKH";
             // 
-            // btnMaHoaKH
+            // btnGiaiMa
             // 
-            this.btnMaHoaKH.Location = new System.Drawing.Point(275, 15);
-            this.btnMaHoaKH.Name = "btnMaHoaKH";
-            this.btnMaHoaKH.Size = new System.Drawing.Size(117, 33);
-            this.btnMaHoaKH.TabIndex = 36;
-            this.btnMaHoaKH.Text = "Mã Hóa";
-            this.btnMaHoaKH.UseVisualStyleBackColor = true;
-            this.btnMaHoaKH.Click += new System.EventHandler(this.btnMaHoaKH_Click);
+            this.btnGiaiMa.Location = new System.Drawing.Point(402, 15);
+            this.btnGiaiMa.Name = "btnGiaiMa";
+            this.btnGiaiMa.Size = new System.Drawing.Size(117, 33);
+            this.btnGiaiMa.TabIndex = 37;
+            this.btnGiaiMa.Text = "Giải Mã";
+            this.btnGiaiMa.UseVisualStyleBackColor = true;
+            this.btnGiaiMa.Click += new System.EventHandler(this.btnGiaiMa_Click);
             // 
             // frmQuanLyKhachHang
             // 
@@ -622,5 +634,6 @@ namespace QL_GiayTT.Admin
         private System.Windows.Forms.DataGridViewTextBoxColumn SDTKH;
         private System.Windows.Forms.DataGridViewTextBoxColumn DiaChiKH;
         private System.Windows.Forms.Button btnMaHoaKH;
+        private System.Windows.Forms.Button btnGiaiMa;
     }
 }

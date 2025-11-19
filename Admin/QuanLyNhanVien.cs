@@ -38,8 +38,11 @@ namespace QL_GiayTT.Admin
             //
             foreach (DataRow row in dtNhanVien.Tables["NHANVIEN"].Rows)
             {
-                row["SDTNV"] = MaHoa.Decrypt(row["SDTNV"].ToString());
-                row["CCCD"] = MaHoa.Decrypt(row["CCCD"].ToString());
+                if (row["SDTNV"] != DBNull.Value)
+                    row["SDTNV"] = MaHoa.Decrypt(row["SDTNV"].ToString());
+
+                if (row["CCCD"] != DBNull.Value)
+                    row["CCCD"] = MaHoa.Decrypt(row["CCCD"].ToString());
             }
             //
             DataColumn[] key = new DataColumn[1];
@@ -367,8 +370,13 @@ namespace QL_GiayTT.Admin
                             insertRow["TenNV"] = txtTenNV.Text;
                             insertRow["GioiTinhNV"] = cbo_GioiTinh.Text;
                             //insertRow["SDTNV"] = txtSDTNV.Text;
-                            insertRow["SDTNV"] = MaHoa.Encrypt(txtSDTNV.Text); // Mã hóa
-                            
+                            //insertRow["SDTNV"] = MaHoa.Encrypt(txtSDTNV.Text); // Mã hóa
+                            // Gọi hàm Encrypt trước khi gán vào Row
+                            if (!string.IsNullOrEmpty(txtSDTNV.Text))
+                            {
+                                insertRow["SDTNV"] = MaHoa.Encrypt(txtSDTNV.Text);
+                            }
+
                             if (txtNgaySinh.Text != string.Empty)
                             {
                                 DateTime NgaySinhNV = DateTime.Parse(txtNgaySinh.Text);
@@ -377,7 +385,12 @@ namespace QL_GiayTT.Admin
                             else insertRow["NgaySinhNV"] = DBNull.Value;
                             insertRow["DiaChiNV"] = txtDiaChi.Text;
                             //insertRow["CCCD"] = txtCCCD.Text;
-                            insertRow["CCCD"] = MaHoa.Encrypt(txtCCCD.Text);   // Mã hóa
+                            //insertRow["CCCD"] = MaHoa.Encrypt(txtCCCD.Text);   // Mã hóa
+                            // Gọi hàm Encrypt
+                            if (!string.IsNullOrEmpty(txtCCCD.Text))
+                            {
+                                insertRow["CCCD"] = MaHoa.Encrypt(txtCCCD.Text);
+                            }
 
                             if (txtLương.Text == string.Empty)
                                 insertRow["Luong"] = 0;
@@ -664,11 +677,12 @@ namespace QL_GiayTT.Admin
 
         private void btnMaHoaALL_Click_1(object sender, EventArgs e)
         {
+            // Thông báo xác nhận CHỈ nhắc đến CCCD và SĐT
             DialogResult r = MessageBox.Show(
-        "Bạn có muốn mã hóa toàn bộ dữ liệu (Lương, CCCD, SĐT) chưa được bảo mật không?",
-        "Xác nhận mã hóa",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Warning);
+                "Bạn có muốn mã hóa toàn bộ dữ liệu (CCCD, SĐT) chưa được bảo mật không?",
+                "Xác nhận mã hóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
             if (r == DialogResult.No) return;
 
@@ -676,8 +690,6 @@ namespace QL_GiayTT.Admin
             {
                 if (connsql.State == ConnectionState.Closed) connsql.Open();
 
-                // 2. Load toàn bộ dữ liệu lên để xử lý
-                // Quan trọng: Phải có MissingSchemaAction.AddWithKey để update được dữ liệu
                 string selectStr = "Select * from NHANVIEN";
                 OracleDataAdapter da = new OracleDataAdapter(selectStr, connsql);
                 da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
@@ -687,14 +699,15 @@ namespace QL_GiayTT.Admin
 
                 int count = 0;
 
-                // 3. Duyệt qua từng nhân viên
                 foreach (DataRow row in dtTemp.Rows)
                 {
                     bool isUpdated = false;
+
                     // --- Xử lý CCCD ---
                     if (row["CCCD"] != DBNull.Value)
                     {
                         string val = row["CCCD"].ToString();
+                        // Chỉ mã hóa nếu nó là SỐ (tức là chưa bị mã hóa)
                         if (IsNumber(val))
                         {
                             row["CCCD"] = MaHoa.Encrypt(val);
@@ -706,6 +719,7 @@ namespace QL_GiayTT.Admin
                     if (row["SDTNV"] != DBNull.Value)
                     {
                         string val = row["SDTNV"].ToString();
+                        // Chỉ mã hóa nếu nó là SỐ (tức là chưa bị mã hóa)
                         if (IsNumber(val))
                         {
                             row["SDTNV"] = MaHoa.Encrypt(val);
@@ -716,32 +730,100 @@ namespace QL_GiayTT.Admin
                     if (isUpdated) count++;
                 }
 
-                // 4. Nếu có dữ liệu thay đổi thì cập nhật xuống Database
                 if (count > 0)
                 {
                     OracleCommandBuilder cb = new OracleCommandBuilder(da);
                     da.Update(dtTemp);
                     MessageBox.Show($"Đã mã hóa thành công cho {count} nhân viên!");
-
-                    // Load lại lưới để hiển thị kết quả (lúc này code Load sẽ tự giải mã để hiển thị lại)
                     loadDGV_NhanVien();
                 }
                 else
                 {
-                    MessageBox.Show("Tất cả dữ liệu đã được mã hóa trước đó rồi!");
+                    MessageBox.Show("Tất cả dữ liệu CCCD và SĐT đã được mã hóa trước đó rồi!");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi: " + ex.Message + "\n(Hãy đảm bảo bạn đã mở rộng cột trong Oracle lên VARCHAR2(200))");
+                MessageBox.Show("Lỗi: " + ex.Message + "\n(Hãy đảm bảo cột CCCD và SDTNV trong Database là VARCHAR2(200))");
             }
         }
 
 
-        // ham kiem tra 1 chuoi co phai base64 hay khong
+        private void btnGiaiMaALL_Click(object sender, EventArgs e)
+        {
+            // Thông báo xác nhận CHỈ nhắc đến CCCD và SĐT
+            DialogResult r = MessageBox.Show(
+                "CẢNH BÁO: Bạn có muốn GIẢI MÃ toàn bộ dữ liệu (CCCD, SĐT) về dạng văn bản thường không?",
+                "Xác nhận giải mã",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (r == DialogResult.No) return;
+
+            try
+            {
+                if (connsql.State == ConnectionState.Closed) connsql.Open();
+
+                string selectStr = "Select * from NHANVIEN";
+                OracleDataAdapter da = new OracleDataAdapter(selectStr, connsql);
+                da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+
+                DataTable dtTemp = new DataTable();
+                da.Fill(dtTemp);
+
+                int count = 0;
+
+                foreach (DataRow row in dtTemp.Rows)
+                {
+                    bool isUpdated = false;
+
+                    // --- Xử lý CCCD ---
+                    if (row["CCCD"] != DBNull.Value)
+                    {
+                        string val = row["CCCD"].ToString();
+                        if (IsBase64(val))
+                        {
+                            row["CCCD"] = MaHoa.Decrypt(val);
+                            isUpdated = true;
+                        }
+                    }
+
+                    // --- Xử lý SĐT ---
+                    if (row["SDTNV"] != DBNull.Value)
+                    {
+                        string val = row["SDTNV"].ToString();
+                        if (IsBase64(val))
+                        {
+                            row["SDTNV"] = MaHoa.Decrypt(val);
+                            isUpdated = true;
+                        }
+                    }
+                    if (isUpdated) count++;
+                }
+
+                if (count > 0)
+                {
+                    OracleCommandBuilder cb = new OracleCommandBuilder(da);
+                    da.Update(dtTemp);
+                    MessageBox.Show($"Đã giải mã thành công cho {count} nhân viên (Chỉ SĐT và CCCD)!");
+                    loadDGV_NhanVien(); 
+                }
+                else
+                {
+                    MessageBox.Show("Dữ liệu đã ở dạng thường, không cần giải mã!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
+        }
+
         private bool IsBase64(string base64String)
         {
-            if (string.IsNullOrEmpty(base64String) || base64String.Length % 4 != 0 || base64String.Contains(" ") || base64String.Contains("\t") || base64String.Contains("\r") || base64String.Contains("\n"))
+            if (string.IsNullOrEmpty(base64String) || base64String.Length % 4 != 0 ||
+                base64String.Contains(" ") || base64String.Contains("\t") ||
+                base64String.Contains("\r") || base64String.Contains("\n"))
                 return false;
             try
             {
@@ -753,10 +835,10 @@ namespace QL_GiayTT.Admin
                 return false;
             }
         }
-
         private bool IsNumber(string value)
         {
             return long.TryParse(value, out _);
         }
+
     }
 }
