@@ -31,10 +31,11 @@ namespace QL_GiayTT.Admin
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnXuatFileGiaiMa = new System.Windows.Forms.Button();
+            this.btnXuatFileMaHoa = new System.Windows.Forms.Button();
             this.btnNhapTXT = new System.Windows.Forms.Button();
             this.btnXoaTatCa = new System.Windows.Forms.Button();
             this.btnThongKe = new System.Windows.Forms.Button();
-            this.btnXuatExcel = new System.Windows.Forms.Button();
             this.btnXemChiTiet = new System.Windows.Forms.Button();
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnTimKiem = new System.Windows.Forms.Button();
@@ -52,8 +53,6 @@ namespace QL_GiayTT.Admin
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblTongSo = new System.Windows.Forms.Label();
             this.dgvNhatKy = new System.Windows.Forms.DataGridView();
-            this.btnXuatFileMaHoa = new System.Windows.Forms.Button();
-            this.btnXuatFileGiaiMa = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -87,7 +86,6 @@ namespace QL_GiayTT.Admin
             this.panel2.Controls.Add(this.btnNhapTXT);
             this.panel2.Controls.Add(this.btnXoaTatCa);
             this.panel2.Controls.Add(this.btnThongKe);
-            this.panel2.Controls.Add(this.btnXuatExcel);
             this.panel2.Controls.Add(this.btnXemChiTiet);
             this.panel2.Controls.Add(this.btnLamMoi);
             this.panel2.Controls.Add(this.btnTimKiem);
@@ -97,11 +95,37 @@ namespace QL_GiayTT.Admin
             this.panel2.Size = new System.Drawing.Size(200, 600);
             this.panel2.TabIndex = 1;
             // 
+            // btnXuatFileGiaiMa
+            // 
+            this.btnXuatFileGiaiMa.BackColor = System.Drawing.Color.Teal;
+            this.btnXuatFileGiaiMa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXuatFileGiaiMa.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnXuatFileGiaiMa.Location = new System.Drawing.Point(10, 332);
+            this.btnXuatFileGiaiMa.Name = "btnXuatFileGiaiMa";
+            this.btnXuatFileGiaiMa.Size = new System.Drawing.Size(180, 35);
+            this.btnXuatFileGiaiMa.TabIndex = 8;
+            this.btnXuatFileGiaiMa.Text = "Xuất FILE.txt";
+            this.btnXuatFileGiaiMa.UseVisualStyleBackColor = false;
+            this.btnXuatFileGiaiMa.Click += new System.EventHandler(this.btnXuatFileGiaiMa_Click);
+            // 
+            // btnXuatFileMaHoa
+            // 
+            this.btnXuatFileMaHoa.BackColor = System.Drawing.Color.Teal;
+            this.btnXuatFileMaHoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXuatFileMaHoa.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.btnXuatFileMaHoa.Location = new System.Drawing.Point(10, 291);
+            this.btnXuatFileMaHoa.Name = "btnXuatFileMaHoa";
+            this.btnXuatFileMaHoa.Size = new System.Drawing.Size(180, 35);
+            this.btnXuatFileMaHoa.TabIndex = 7;
+            this.btnXuatFileMaHoa.Text = "Xuất FILE mã hóa";
+            this.btnXuatFileMaHoa.UseVisualStyleBackColor = false;
+            this.btnXuatFileMaHoa.Click += new System.EventHandler(this.btnXuatFileMaHoa_Click);
+            // 
             // btnNhapTXT
             // 
             this.btnNhapTXT.BackColor = System.Drawing.Color.Gray;
             this.btnNhapTXT.ForeColor = System.Drawing.Color.White;
-            this.btnNhapTXT.Location = new System.Drawing.Point(10, 290);
+            this.btnNhapTXT.Location = new System.Drawing.Point(10, 241);
             this.btnNhapTXT.Name = "btnNhapTXT";
             this.btnNhapTXT.Size = new System.Drawing.Size(180, 35);
             this.btnNhapTXT.TabIndex = 6;
@@ -113,7 +137,7 @@ namespace QL_GiayTT.Admin
             // 
             this.btnXoaTatCa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnXoaTatCa.ForeColor = System.Drawing.Color.White;
-            this.btnXoaTatCa.Location = new System.Drawing.Point(10, 245);
+            this.btnXoaTatCa.Location = new System.Drawing.Point(10, 196);
             this.btnXoaTatCa.Name = "btnXoaTatCa";
             this.btnXoaTatCa.Size = new System.Drawing.Size(180, 35);
             this.btnXoaTatCa.TabIndex = 5;
@@ -123,23 +147,13 @@ namespace QL_GiayTT.Admin
             // 
             // btnThongKe
             // 
-            this.btnThongKe.Location = new System.Drawing.Point(10, 200);
+            this.btnThongKe.Location = new System.Drawing.Point(10, 151);
             this.btnThongKe.Name = "btnThongKe";
             this.btnThongKe.Size = new System.Drawing.Size(180, 35);
             this.btnThongKe.TabIndex = 4;
             this.btnThongKe.Text = "Thống kê";
             this.btnThongKe.UseVisualStyleBackColor = true;
             this.btnThongKe.Click += new System.EventHandler(this.btnThongKe_Click);
-            // 
-            // btnXuatExcel
-            // 
-            this.btnXuatExcel.Location = new System.Drawing.Point(10, 155);
-            this.btnXuatExcel.Name = "btnXuatExcel";
-            this.btnXuatExcel.Size = new System.Drawing.Size(180, 35);
-            this.btnXuatExcel.TabIndex = 3;
-            this.btnXuatExcel.Text = "Xuất TXT (RSA)";
-            this.btnXuatExcel.UseVisualStyleBackColor = true;
-            this.btnXuatExcel.Click += new System.EventHandler(this.btnXuatExcel_Click);
             // 
             // btnXemChiTiet
             // 
@@ -308,32 +322,6 @@ namespace QL_GiayTT.Admin
             this.dgvNhatKy.Size = new System.Drawing.Size(1000, 500);
             this.dgvNhatKy.TabIndex = 0;
             // 
-            // btnXuatFileMaHoa
-            // 
-            this.btnXuatFileMaHoa.BackColor = System.Drawing.Color.Navy;
-            this.btnXuatFileMaHoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXuatFileMaHoa.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnXuatFileMaHoa.Location = new System.Drawing.Point(10, 340);
-            this.btnXuatFileMaHoa.Name = "btnXuatFileMaHoa";
-            this.btnXuatFileMaHoa.Size = new System.Drawing.Size(180, 35);
-            this.btnXuatFileMaHoa.TabIndex = 7;
-            this.btnXuatFileMaHoa.Text = "Xuất file mã hóa";
-            this.btnXuatFileMaHoa.UseVisualStyleBackColor = false;
-            this.btnXuatFileMaHoa.Click += new System.EventHandler(this.btnXuatFileMaHoa_Click);
-            // 
-            // btnXuatFileGiaiMa
-            // 
-            this.btnXuatFileGiaiMa.BackColor = System.Drawing.Color.Navy;
-            this.btnXuatFileGiaiMa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXuatFileGiaiMa.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnXuatFileGiaiMa.Location = new System.Drawing.Point(10, 381);
-            this.btnXuatFileGiaiMa.Name = "btnXuatFileGiaiMa";
-            this.btnXuatFileGiaiMa.Size = new System.Drawing.Size(180, 35);
-            this.btnXuatFileGiaiMa.TabIndex = 8;
-            this.btnXuatFileGiaiMa.Text = "Xuất file Giải mã";
-            this.btnXuatFileGiaiMa.UseVisualStyleBackColor = false;
-            this.btnXuatFileGiaiMa.Click += new System.EventHandler(this.btnXuatFileGiaiMa_Click);
-            // 
             // QuanLyNhatKy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -366,7 +354,6 @@ namespace QL_GiayTT.Admin
         private System.Windows.Forms.Button btnTimKiem;
         private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.Button btnXemChiTiet;
-        private System.Windows.Forms.Button btnXuatExcel;
         private System.Windows.Forms.Button btnThongKe;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ComboBox cboBang;

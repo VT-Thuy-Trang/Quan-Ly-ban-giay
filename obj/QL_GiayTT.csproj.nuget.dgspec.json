@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix7\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT.csproj": {}
+    "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix8\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT.csproj": {}
   },
   "projects": {
-    "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix7\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT.csproj": {
+    "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix8\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix7\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT.csproj",
+        "projectUniqueName": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix8\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT.csproj",
         "projectName": "QL_GiayTT",
-        "projectPath": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix7\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT.csproj",
+        "projectPath": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix8\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT.csproj",
         "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix7\\QL_GiayTT\\QL_GiayTT\\obj\\",
+        "outputPath": "D:\\tài liệu học\\Bao_mat_csdl\\Do_an\\code\\fix8\\QL_GiayTT\\QL_GiayTT\\QL_GiayTT\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "UsingMicrosoftNETSdk": false,
