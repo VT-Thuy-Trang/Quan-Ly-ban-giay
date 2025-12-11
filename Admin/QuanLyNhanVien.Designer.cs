@@ -163,7 +163,7 @@ namespace QL_GiayTT.Admin
             this.groupBox3.Size = new System.Drawing.Size(283, 41);
             this.groupBox3.TabIndex = 28;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Tìm kiểm theo tên NV";
+            this.groupBox3.Text = "Tìm kiếm theo tên NV";
             // 
             // button7
             // 
@@ -328,7 +328,7 @@ namespace QL_GiayTT.Admin
             this.btnXoaTK.Name = "btnXoaTK";
             this.btnXoaTK.Size = new System.Drawing.Size(113, 39);
             this.btnXoaTK.TabIndex = 7;
-            this.btnXoaTK.Text = "Xoá tài khoản";
+            this.btnXoaTK.Text = "Xóa tài khoản";
             this.btnXoaTK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoaTK.UseVisualStyleBackColor = true;
             this.btnXoaTK.Click += new System.EventHandler(this.btnXoaTK_Click);
@@ -439,7 +439,7 @@ namespace QL_GiayTT.Admin
             this.gb_TTNV.Size = new System.Drawing.Size(780, 195);
             this.gb_TTNV.TabIndex = 28;
             this.gb_TTNV.TabStop = false;
-            this.gb_TTNV.Text = "Thông tin  nhân viên";
+            this.gb_TTNV.Text = "Thông tin nhân viên";
             // 
             // cboMaTK
             // 
@@ -586,7 +586,7 @@ namespace QL_GiayTT.Admin
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(71, 20);
             this.label7.TabIndex = 5;
-            this.label7.Text = "Gi?i tính:";
+            this.label7.Text = "Giới tính:";
             // 
             // label6
             // 
@@ -669,7 +669,7 @@ namespace QL_GiayTT.Admin
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(157, 20);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Danh sách  nhân viên";
+            this.label12.Text = "Danh sách nhân viên";
             // 
             // panel8
             // 
@@ -847,7 +847,7 @@ namespace QL_GiayTT.Admin
             // 
             // DiaChiNV
             // 
-            this.DiaChiNV.HeaderText = "Ðịa chỉ";
+            this.DiaChiNV.HeaderText = "Địa chỉ";
             this.DiaChiNV.Name = "DiaChiNV";
             // 
             // GioiTinhNV

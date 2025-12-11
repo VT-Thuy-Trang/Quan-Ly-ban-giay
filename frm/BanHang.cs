@@ -27,7 +27,7 @@ namespace QL_GiayTT.frm
 
         private void load_FLP_DMSO(string selectStr)
         {
-            //Xoá dữ liệu hiện tại
+            //Xóa dữ liệu hiện tại
             fLP_DMSO.Controls.Clear();
 
             // Hiển thị dữ liệu sau khi lọc trong một DataGridView hoặc điều chỉnh dữ liệu hiển thị theo yêu cầu của bạn

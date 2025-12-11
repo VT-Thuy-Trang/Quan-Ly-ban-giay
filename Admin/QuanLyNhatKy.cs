@@ -30,6 +30,46 @@ namespace QL_GiayTT.Admin
             // Thiết lập DataGridView giống các form khác
             dgvNhatKy.ReadOnly = true;
             dgvNhatKy.AllowUserToAddRows = false;
+
+            // Thêm hướng dẫn xem lịch sử đăng nhập sai (ORA-1017) từ sys.sql
+            AddAuditGuidePanel();
+        }
+
+        /// <summary>
+        /// Hiển thị hướng dẫn truy vấn xem lịch sử đăng nhập sai (ORA-1017) như trong sys.sql (69-75)
+        /// </summary>
+        private void AddAuditGuidePanel()
+        {
+            const string guideText =
+@"Xem lịch sử đăng nhập sai (ORA-1017):
+SELECT username, timestamp, returncode, client_identifier, os_username
+FROM dba_audit_trail
+WHERE returncode = 1017  -- invalid username/password
+ORDER BY timestamp DESC;";
+
+            var txtGuide = new TextBox
+            {
+                Multiline = true,
+                ReadOnly = true,
+                ScrollBars = ScrollBars.Vertical,
+                Text = guideText,
+                BackColor = Color.AliceBlue,
+                BorderStyle = BorderStyle.FixedSingle,
+                Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom,
+                Height = 80,
+                Width = this.Width - 60,
+                Left = 20,
+                Top = this.Height - 140
+            };
+
+            // Đảm bảo khi resize form, textbox giữ vị trí hợp lý
+            this.Controls.Add(txtGuide);
+            this.Resize += (s, e) =>
+            {
+                txtGuide.Width = this.ClientSize.Width - 40;
+                txtGuide.Top = this.ClientSize.Height - txtGuide.Height - 20;
+            };
         }
 
         private void LoadComboBoxes()
@@ -362,43 +402,98 @@ namespace QL_GiayTT.Admin
         {
             try
             {
-                // Bước 1: Chọn file mã hóa
+                // Bước 1: Chọn loại mã hóa
+                string method = ShowEncryptionOption("Chọn loại mã hóa của file");
+                if (string.IsNullOrEmpty(method))
+                    return;
+
+                // Bước 2: Chọn file mã hóa
                 OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "TXT files (*_encrypted.txt)|*_encrypted.txt|All files (*.*)|*.*";
-                openFileDialog.Title = "Chọn file mã hóa (encrypted)";
+                string filter = "";
+                string title = "";
+                
+                if (method == "RSA")
+                {
+                    filter = "Encrypted files (*.rsa)|*.rsa|Binary files (*.bin)|*.bin|All files (*.*)|*.*";
+                    title = "Chọn file mã hóa RSA";
+                }
+                else if (method == "AES")
+                {
+                    filter = "Encrypted files (*.aes)|*.aes|TXT files (*.txt)|*.txt|All files (*.*)|*.*";
+                    title = "Chọn file mã hóa AES";
+                }
+                else if (method == "HYBRID")
+                {
+                    filter = "Encrypted files (*.hybrid)|*.hybrid|TXT files (*.txt)|*.txt|All files (*.*)|*.*";
+                    title = "Chọn file mã hóa Hybrid";
+                }
+                
+                openFileDialog.Filter = filter;
+                openFileDialog.Title = title;
                 
                 if (openFileDialog.ShowDialog() != DialogResult.OK)
                     return;
 
                 string encryptedFilePath = openFileDialog.FileName;
 
-                // Bước 2: Chọn file key
-                openFileDialog.Filter = "TXT files (*_key.txt)|*_key.txt|All files (*.*)|*.*";
-                openFileDialog.Title = "Chọn file key (private key)";
+                // Bước 3: Chọn file key (nếu cần - chỉ RSA và Hybrid cần key)
+                string privateKey = null;
+                if (method == "RSA" || method == "HYBRID")
+                {
+                    openFileDialog.Filter = "Key files (*.key)|*.key|TXT files (*.txt)|*.txt|All files (*.*)|*.*";
+                    openFileDialog.Title = "Chọn file key (private key)";
+                    
+                    if (openFileDialog.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    string keyFilePath = openFileDialog.FileName;
+                    privateKey = File.ReadAllText(keyFilePath, Encoding.UTF8);
+                    if (string.IsNullOrWhiteSpace(privateKey))
+                    {
+                        MessageBox.Show("File key không hợp lệ hoặc rỗng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+                // Bước 4: Đọc và giải mã file theo loại mã hóa
+                string decryptedText = "";
                 
-                if (openFileDialog.ShowDialog() != DialogResult.OK)
-                    return;
-
-                string keyFilePath = openFileDialog.FileName;
-
-                // Bước 3: Đọc file key
-                string privateKey = File.ReadAllText(keyFilePath, Encoding.UTF8);
-                if (string.IsNullOrWhiteSpace(privateKey))
+                if (method == "AES")
                 {
-                    MessageBox.Show("File key không hợp lệ hoặc rỗng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    // Đọc file text và giải mã bằng AES
+                    string encryptedText = File.ReadAllText(encryptedFilePath, Encoding.UTF8);
+                    if (string.IsNullOrWhiteSpace(encryptedText))
+                    {
+                        MessageBox.Show("File mã hóa không hợp lệ hoặc rỗng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    decryptedText = MaHoa.Decrypt(encryptedText);
                 }
-
-                // Bước 4: Đọc và giải mã file encrypted
-                byte[] encryptedData = File.ReadAllBytes(encryptedFilePath);
-                if (encryptedData == null || encryptedData.Length == 0)
+                else if (method == "RSA")
                 {
-                    MessageBox.Show("File mã hóa không hợp lệ hoặc rỗng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    // Đọc file binary và giải mã bằng RSA
+                    byte[] encryptedData = File.ReadAllBytes(encryptedFilePath);
+                    if (encryptedData == null || encryptedData.Length == 0)
+                    {
+                        MessageBox.Show("File mã hóa không hợp lệ hoặc rỗng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    RSAEncryption rsa = new RSAEncryption();
+                    decryptedText = rsa.DecryptLargeData(encryptedData, privateKey);
                 }
-
-                RSAEncryption rsa = new RSAEncryption();
-                string decryptedText = rsa.DecryptLargeData(encryptedData, privateKey);
+                else if (method == "HYBRID")
+                {
+                    // Đọc file text và giải mã bằng Hybrid
+                    string encryptedText = File.ReadAllText(encryptedFilePath, Encoding.UTF8);
+                    if (string.IsNullOrWhiteSpace(encryptedText))
+                    {
+                        MessageBox.Show("File mã hóa không hợp lệ hoặc rỗng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    
+                    // Hybrid cần private key để giải mã AES key
+                    decryptedText = DecryptHybridWithKey(encryptedText, privateKey);
+                }
 
                 if (string.IsNullOrWhiteSpace(decryptedText))
                 {
@@ -649,9 +744,19 @@ namespace QL_GiayTT.Admin
                     }
                     else if (method == "HYBRID")
                     {
-                        encryptedData = MaHoa.HybridEncryption.EncryptHybrid(plainText);
+                        // Hybrid cần RSA để mã hóa AES key, nên cần xuất private key
+                        encryptedData = EncryptHybridWithKey(plainText, out string privateKey);
+                        
+                        // Xuất file mã hóa
+                        File.WriteAllText(saveFileDialog.FileName, encryptedData, Encoding.UTF8);
+                        
+                        // Xuất file key (private key để giải mã)
+                        File.WriteAllText(saveFileDialog.FileName + ".key", privateKey, Encoding.UTF8);
+                        extraInfo = "\n\nĐã xuất kèm file Private Key (.key). Hãy giữ bí mật file này!";
+                        
+                        MessageBox.Show($"Xuất file Hybrid thành công!{extraInfo}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return; // Hybrid đã xử lý xong nên return
                     }
-
 
                     File.WriteAllText(saveFileDialog.FileName, encryptedData, Encoding.UTF8);
                     MessageBox.Show($"Xuất file ({method}) thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -660,6 +765,95 @@ namespace QL_GiayTT.Admin
                 {
                     MessageBox.Show("Lỗi khi xuất file: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        // Hàm mã hóa Hybrid và trả về private key
+        private string EncryptHybridWithKey(string plainText, out string privateKey)
+        {
+            try
+            {
+                using (Aes aes = Aes.Create())
+                {
+                    aes.GenerateKey();
+                    aes.GenerateIV();
+
+                    // 1. Mã hóa dữ liệu bằng AES
+                    string aesEncryptedData;
+                    using (ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        ms.Write(aes.IV, 0, aes.IV.Length);
+                        using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                        using (StreamWriter sw = new StreamWriter(cs))
+                        {
+                            sw.Write(plainText);
+                        }
+                        aesEncryptedData = Convert.ToBase64String(ms.ToArray());
+                    }
+
+                    // 2. Mã hóa Key AES bằng RSA
+                    RSAEncryption rsa = new RSAEncryption();
+                    string aesKeyString = Convert.ToBase64String(aes.Key);
+
+                    byte[] encryptedKeyBytes = rsa.Encrypt(aesKeyString);
+                    string encryptedAesKey = Convert.ToBase64String(encryptedKeyBytes);
+
+                    // Lấy private key để trả về
+                    privateKey = rsa.GetPrivateKey();
+
+                    return $"{encryptedAesKey}||{aesEncryptedData}";
+                }
+            }
+            catch (Exception ex)
+            {
+                privateKey = "";
+                MessageBox.Show("Lỗi khi mã hóa Hybrid: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return plainText;
+            }
+        }
+
+        // Hàm giải mã Hybrid với private key từ file
+        private string DecryptHybridWithKey(string hybridCipherText, string privateKeyXml)
+        {
+            try
+            {
+                string[] parts = hybridCipherText.Split(new[] { "||" }, StringSplitOptions.None);
+                if (parts.Length != 2) return hybridCipherText;
+
+                string encryptedAesKey = parts[0];
+                string aesEncryptedData = parts[1];
+
+                // Giải mã Key AES bằng RSA với private key từ file
+                RSAEncryption rsa = new RSAEncryption();
+                
+                // Chuyển string Base64 về byte[] để giải mã
+                byte[] encryptedKeyBytes = Convert.FromBase64String(encryptedAesKey);
+                string aesKeyBase64 = rsa.Decrypt(encryptedKeyBytes, privateKeyXml);
+                byte[] aesKey = Convert.FromBase64String(aesKeyBase64);
+
+                // Giải mã dữ liệu AES
+                byte[] fullCipher = Convert.FromBase64String(aesEncryptedData);
+                using (Aes aes = Aes.Create())
+                {
+                    aes.Key = aesKey;
+                    byte[] iv = new byte[16];
+                    Array.Copy(fullCipher, 0, iv, 0, 16);
+                    aes.IV = iv;
+
+                    using (MemoryStream ms = new MemoryStream(fullCipher, 16, fullCipher.Length - 16))
+                    using (ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV))
+                    using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                    using (StreamReader sr = new StreamReader(cs))
+                    {
+                        return sr.ReadToEnd();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi giải mã Hybrid: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return hybridCipherText;
             }
         }
 

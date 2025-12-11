@@ -52,12 +52,12 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.DimGray;
+            this.panel1.BackColor = System.Drawing.Color.LightGray;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1185, 32);
             this.panel1.TabIndex = 0;
@@ -69,15 +69,15 @@
             this.label1.Location = new System.Drawing.Point(44, 7);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(155, 19);
+            this.label1.Size = new System.Drawing.Size(151, 19);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Shop Giày Thể THao";
+            this.label1.Text = "Shop Giày Thể Thao";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(7, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(33, 32);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -99,7 +99,7 @@
             this.panel2.Controls.Add(this.btnTrangChu);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 32);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1185, 33);
             this.panel2.TabIndex = 14;
@@ -108,8 +108,8 @@
             // 
             this.btnDongTab.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnDongTab.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDongTab.Location = new System.Drawing.Point(892, 0);
-            this.btnDongTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDongTab.Location = new System.Drawing.Point(979, 0);
+            this.btnDongTab.Margin = new System.Windows.Forms.Padding(2);
             this.btnDongTab.Name = "btnDongTab";
             this.btnDongTab.Size = new System.Drawing.Size(87, 31);
             this.btnDongTab.TabIndex = 7;
@@ -117,24 +117,12 @@
             this.btnDongTab.UseVisualStyleBackColor = true;
             this.btnDongTab.Click += new System.EventHandler(this.btnDongTab_Click);
             // 
-            // btnNhatKy
-            // 
-            this.btnNhatKy.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNhatKy.Location = new System.Drawing.Point(572, -1);
-            this.btnNhatKy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnNhatKy.Name = "btnNhatKy";
-            this.btnNhatKy.Size = new System.Drawing.Size(87, 32);
-            this.btnNhatKy.TabIndex = 6;
-            this.btnNhatKy.Text = "Nhật Ký";
-            this.btnNhatKy.UseVisualStyleBackColor = true;
-            this.btnNhatKy.Click += new System.EventHandler(this.btnNhatKy_Click);
-            // 
             // btnDangXuat
             // 
             this.btnDangXuat.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnDangXuat.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDangXuat.Location = new System.Drawing.Point(979, 0);
-            this.btnDangXuat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDangXuat.Location = new System.Drawing.Point(1066, 0);
+            this.btnDangXuat.Margin = new System.Windows.Forms.Padding(2);
             this.btnDangXuat.Name = "btnDangXuat";
             this.btnDangXuat.Size = new System.Drawing.Size(117, 31);
             this.btnDangXuat.TabIndex = 8;
@@ -142,11 +130,23 @@
             this.btnDangXuat.UseVisualStyleBackColor = true;
             this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
+            // btnNhatKy
+            // 
+            this.btnNhatKy.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNhatKy.Location = new System.Drawing.Point(572, -1);
+            this.btnNhatKy.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNhatKy.Name = "btnNhatKy";
+            this.btnNhatKy.Size = new System.Drawing.Size(87, 32);
+            this.btnNhatKy.TabIndex = 6;
+            this.btnNhatKy.Text = "Nhật Ký";
+            this.btnNhatKy.UseVisualStyleBackColor = true;
+            this.btnNhatKy.Click += new System.EventHandler(this.btnNhatKy_Click);
+            // 
             // btnKhachHang
             // 
             this.btnKhachHang.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnKhachHang.Location = new System.Drawing.Point(453, -1);
-            this.btnKhachHang.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnKhachHang.Margin = new System.Windows.Forms.Padding(2);
             this.btnKhachHang.Name = "btnKhachHang";
             this.btnKhachHang.Size = new System.Drawing.Size(117, 32);
             this.btnKhachHang.TabIndex = 5;
@@ -158,7 +158,7 @@
             // 
             this.btnSanPham.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSanPham.Location = new System.Drawing.Point(272, -1);
-            this.btnSanPham.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSanPham.Margin = new System.Windows.Forms.Padding(2);
             this.btnSanPham.Name = "btnSanPham";
             this.btnSanPham.Size = new System.Drawing.Size(87, 32);
             this.btnSanPham.TabIndex = 3;
@@ -170,7 +170,7 @@
             // 
             this.btnNhanVien.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNhanVien.Location = new System.Drawing.Point(363, -1);
-            this.btnNhanVien.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNhanVien.Margin = new System.Windows.Forms.Padding(2);
             this.btnNhanVien.Name = "btnNhanVien";
             this.btnNhanVien.Size = new System.Drawing.Size(87, 32);
             this.btnNhanVien.TabIndex = 4;
@@ -182,7 +182,7 @@
             // 
             this.btnHoaDon.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHoaDon.Location = new System.Drawing.Point(181, -1);
-            this.btnHoaDon.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnHoaDon.Margin = new System.Windows.Forms.Padding(2);
             this.btnHoaDon.Name = "btnHoaDon";
             this.btnHoaDon.Size = new System.Drawing.Size(87, 32);
             this.btnHoaDon.TabIndex = 2;
@@ -194,7 +194,7 @@
             // 
             this.btnBanHang.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBanHang.Location = new System.Drawing.Point(91, -1);
-            this.btnBanHang.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBanHang.Margin = new System.Windows.Forms.Padding(2);
             this.btnBanHang.Name = "btnBanHang";
             this.btnBanHang.Size = new System.Drawing.Size(87, 32);
             this.btnBanHang.TabIndex = 1;
@@ -206,7 +206,7 @@
             // 
             this.btnTrangChu.Font = new System.Drawing.Font("Constantia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTrangChu.Location = new System.Drawing.Point(0, -1);
-            this.btnTrangChu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTrangChu.Margin = new System.Windows.Forms.Padding(2);
             this.btnTrangChu.Name = "btnTrangChu";
             this.btnTrangChu.Size = new System.Drawing.Size(87, 32);
             this.btnTrangChu.TabIndex = 0;
@@ -219,7 +219,7 @@
             this.panelConTrols.Controls.Add(this.tabControl);
             this.panelConTrols.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelConTrols.Location = new System.Drawing.Point(0, 65);
-            this.panelConTrols.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelConTrols.Margin = new System.Windows.Forms.Padding(2);
             this.panelConTrols.Name = "panelConTrols";
             this.panelConTrols.Size = new System.Drawing.Size(1185, 549);
             this.panelConTrols.TabIndex = 15;
@@ -228,7 +228,7 @@
             // 
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
-            this.tabControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1185, 549);
@@ -242,7 +242,7 @@
             this.Controls.Add(this.panelConTrols);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SharedForm";
             this.Text = "Hệ thống quản lý cửa hàng";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

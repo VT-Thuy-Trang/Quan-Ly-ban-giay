@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,6 +93,8 @@ namespace QL_GiayTT.Admin
 
             string selectStr = "Select * from DANGNHAP";
             OracleDataAdapter data = new OracleDataAdapter(selectStr, connsql);
+            // Lấy đầy đủ schema (bao gồm khóa chính) để phục vụ cập nhật
+            data.MissingSchemaAction = MissingSchemaAction.AddWithKey;
             data.Fill(listShopQuanAo, "DANGNHAP");
             //
             foreach (DataRow row in listShopQuanAo.Tables["DANGNHAP"].Rows)
@@ -120,6 +123,41 @@ namespace QL_GiayTT.Admin
             cboLoaiTK.DataSource = loaiTK;
 
             dtGV_TaiKhoan.DataSource = listShopQuanAo.Tables["DANGNHAP"];
+        }
+
+        /// <summary>
+        /// Tạo adapter DANGNHAP với lệnh Insert/Update/Delete rõ ràng để tránh so sánh giá trị đã giải mã gây lỗi concurrency
+        /// </summary>
+        private OracleDataAdapter CreateDangNhapAdapter()
+        {
+            string selectStr = "SELECT MATK, TAIKHOAN, MATKHAU, LOAITK FROM DANGNHAP";
+            var adapter = new OracleDataAdapter(selectStr, connsql)
+            {
+                MissingSchemaAction = MissingSchemaAction.AddWithKey
+            };
+
+            // Update
+            var update = new OracleCommand("UPDATE DANGNHAP SET TAIKHOAN = :TAIKHOAN, MATKHAU = :MATKHAU, LOAITK = :LOAITK WHERE MATK = :MATK", connsql);
+            update.Parameters.Add(":TAIKHOAN", OracleDbType.Varchar2, 20, "TAIKHOAN").SourceVersion = DataRowVersion.Current;
+            update.Parameters.Add(":MATKHAU", OracleDbType.Varchar2, 30, "MATKHAU").SourceVersion = DataRowVersion.Current;
+            update.Parameters.Add(":LOAITK", OracleDbType.Varchar2, 8, "LOAITK").SourceVersion = DataRowVersion.Current;
+            update.Parameters.Add(":MATK", OracleDbType.Varchar2, 10, "MATK").SourceVersion = DataRowVersion.Original;
+            adapter.UpdateCommand = update;
+
+            // Insert
+            var insert = new OracleCommand("INSERT INTO DANGNHAP (MATK, TAIKHOAN, MATKHAU, LOAITK) VALUES (:MATK, :TAIKHOAN, :MATKHAU, :LOAITK)", connsql);
+            insert.Parameters.Add(":MATK", OracleDbType.Varchar2, 10, "MATK");
+            insert.Parameters.Add(":TAIKHOAN", OracleDbType.Varchar2, 20, "TAIKHOAN");
+            insert.Parameters.Add(":MATKHAU", OracleDbType.Varchar2, 30, "MATKHAU");
+            insert.Parameters.Add(":LOAITK", OracleDbType.Varchar2, 8, "LOAITK");
+            adapter.InsertCommand = insert;
+
+            // Delete
+            var delete = new OracleCommand("DELETE FROM DANGNHAP WHERE MATK = :MATK", connsql);
+            delete.Parameters.Add(":MATK", OracleDbType.Varchar2, 10, "MATK").SourceVersion = DataRowVersion.Original;
+            adapter.DeleteCommand = delete;
+
+            return adapter;
         }
 
         private void load_CBOMaTK()
@@ -573,7 +611,7 @@ namespace QL_GiayTT.Admin
 
         private void btnLuuTK_Click(object sender, EventArgs e)
         {
-            DialogResult r = MessageBox.Show("Lưu thay d?i tài kho?n?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            DialogResult r = MessageBox.Show("Lưu thay d?i tài khoản?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (r == DialogResult.Yes)
             {
                 if (dtGV_TaiKhoan.Columns[0].ReadOnly != true)
@@ -594,7 +632,7 @@ namespace QL_GiayTT.Admin
                     OracleDataAdapter dataTK = new OracleDataAdapter(selectStr, connsql);
                     try
                     {
-                        OracleCommandBuilder cmb = new OracleCommandBuilder(dataTK);
+                        dataTK = CreateDangNhapAdapter();
                         dataTK.Update(listShopQuanAo, "DANGNHAP");
                     }
                     catch (Exception)
@@ -617,15 +655,11 @@ namespace QL_GiayTT.Admin
                         }
                     }
 
-                    if (tempTable.PrimaryKey.Length > 0)
+                    if (tempTable.PrimaryKey.Length == 0 && tempTable.Columns.Contains("MATK"))
                     {
-                        // Xoá ràng bu?c khóa chính
-                        tempTable.Constraints.Remove("PrimaryKey");
-                        tempTable.PrimaryKey = null;
+                        tempTable.PrimaryKey = new[] { tempTable.Columns["MATK"] };
                     }
-                    string selectStr = "SELECT * FROM DANGNHAP";
-                    OracleDataAdapter dataAdapter = new OracleDataAdapter(selectStr, connsql);
-                    OracleCommandBuilder commandBuilder = new OracleCommandBuilder(dataAdapter);
+                    OracleDataAdapter dataAdapter = CreateDangNhapAdapter();
                     dataAdapter.Update(tempTable);
                 }
                     
@@ -723,71 +757,93 @@ namespace QL_GiayTT.Admin
             string method = ShowEncryptionOption();
             if (string.IsNullOrEmpty(method)) return;
 
-            DialogResult r = MessageBox.Show($"Bạn muốn mã hóa bằng {method}?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult r = MessageBox.Show($"Bạn muốn mã hóa bằng {method} và xuất ra file txt?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (r == DialogResult.No) return;
 
             try
             {
+                // Chọn file để lưu
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                saveFileDialog.FileName = $"MaHoa_All_{method}_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
+                
+                if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
                 if (connsql.State == ConnectionState.Closed) connsql.Open();
+
+                StringBuilder content = new StringBuilder();
+                content.AppendLine("=== DỮ LIỆU MÃ HÓA ===");
+                content.AppendLine($"Phương thức: {method}");
+                content.AppendLine($"Ngày xuất: {DateTime.Now:dd/MM/yyyy HH:mm:ss}");
+                content.AppendLine();
 
                 // 1. Xử lý Nhân viên (SĐT, CCCD)
                 OracleDataAdapter daNV = new OracleDataAdapter("Select * from NHANVIEN", connsql);
-                OracleCommandBuilder cbNV = new OracleCommandBuilder(daNV);
                 DataTable dtNV = new DataTable();
                 daNV.Fill(dtNV);
 
+                content.AppendLine("=== NHÂN VIÊN ===");
                 int count = 0;
                 foreach (DataRow row in dtNV.Rows)
                 {
-                    bool updated = false;
+                    string maNV = row["MaNV"].ToString();
+                    bool hasData = false;
+                    
                     // Mã hóa SĐT
                     if (row["SDTNV"] != DBNull.Value && IsNumber(row["SDTNV"].ToString()))
                     {
                         string plain = row["SDTNV"].ToString();
-                        row["SDTNV"] = ApplyEncrypt(plain, method);
-                        updated = true;
+                        string encrypted = ApplyEncrypt(plain, method);
+                        content.AppendLine($"MaNV={maNV}|SDTNV={encrypted}");
+                        hasData = true;
                     }
                     // Mã hóa CCCD 
                     if (row["CCCD"] != DBNull.Value && IsNumber(row["CCCD"].ToString()))
                     {
                         string plain = row["CCCD"].ToString();
-                        row["CCCD"] = ApplyEncrypt(plain, method);
-                        updated = true;
+                        string encrypted = ApplyEncrypt(plain, method);
+                        content.AppendLine($"MaNV={maNV}|CCCD={encrypted}");
+                        hasData = true;
                     }
-                    if (updated) count++;
+                    if (hasData) count++;
                 }
-                if (count > 0) daNV.Update(dtNV);
+                content.AppendLine($"Tổng: {count} nhân viên");
+                content.AppendLine();
 
                 // 2. Xử lý Tài khoản (Mật khẩu)
                 OracleDataAdapter daTK = new OracleDataAdapter("Select * from DANGNHAP", connsql);
-                OracleCommandBuilder cbTK = new OracleCommandBuilder(daTK);
                 DataTable dtTK = new DataTable();
                 daTK.Fill(dtTK);
 
+                content.AppendLine("=== TÀI KHOẢN ===");
                 int countTK = 0;
                 foreach (DataRow row in dtTK.Rows)
                 {
                     if (row["MATKHAU"] != DBNull.Value)
                     {
+                        string maTK = row["MaTK"].ToString();
                         string plain = row["MATKHAU"].ToString();
                         if (plain.Length < 30)
                         {
-                            row["MATKHAU"] = ApplyEncrypt(plain, method);
+                            string encrypted = ApplyEncrypt(plain, method);
+                            content.AppendLine($"MaTK={maTK}|MATKHAU={encrypted}");
                             countTK++;
                         }
                     }
                 }
-                if (countTK > 0) daTK.Update(dtTK);
-                // Ghi Log vào DB để bên Nhật ký xuất được
-                LogActionToDB($"Mã hóa toàn bộ ({method})", $"Thành công: {count} NV, {countTK} TK");
+                content.AppendLine($"Tổng: {countTK} tài khoản");
 
-                MessageBox.Show("Hoàn tất mã hóa!");
-                loadDGV_NhanVien();
-                loadDGV_TaiKhoan();
+                // Ghi vào file
+                File.WriteAllText(saveFileDialog.FileName, content.ToString(), Encoding.UTF8);
+
+                // Ghi Log vào DB để bên Nhật ký xuất được
+                LogActionToDB($"Xuất file mã hóa ({method})", $"Thành công: {count} NV, {countTK} TK - File: {Path.GetFileName(saveFileDialog.FileName)}");
+
+                MessageBox.Show($"Đã xuất file mã hóa thành công!\n- Nhân viên: {count}\n- Tài khoản: {countTK}\n\nFile: {saveFileDialog.FileName}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi (có thể do cột DB quá ngắn): " + ex.Message);
+                MessageBox.Show("Lỗi khi xuất file mã hóa: " + ex.Message);
             }
         }
 
@@ -798,8 +854,15 @@ namespace QL_GiayTT.Admin
             string method = ShowEncryptionOption();
             if (string.IsNullOrEmpty(method)) return;
 
+            // Bước 2: Chọn file txt để giải mã
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog.Title = "Chọn file txt chứa dữ liệu mã hóa";
+            
+            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+
             DialogResult r = MessageBox.Show(
-                $"CẢNH BÁO: Bạn sắp giải mã toàn bộ bằng thuật toán {method}.\n\n" +
+                $"Bạn sắp giải mã file bằng thuật toán {method}.\n\n" +
                 "Nếu chọn sai thuật toán, dữ liệu sẽ bị lỗi hoặc không giải mã được.\n" +
                 "Bạn có chắc chắn muốn tiếp tục?",
                 "Xác nhận giải mã",
@@ -810,86 +873,86 @@ namespace QL_GiayTT.Admin
 
             try
             {
-                if (connsql.State == ConnectionState.Closed) connsql.Open();
+                // Đọc file txt
+                string fileContent = File.ReadAllText(openFileDialog.FileName, Encoding.UTF8);
+                if (string.IsNullOrWhiteSpace(fileContent))
+                {
+                    MessageBox.Show("File rỗng hoặc không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-                // --- XỬ LÝ BẢNG NHÂN VIÊN (SĐT, CCCD) ---
-                string selectStr = "Select * from NHANVIEN";
-                OracleDataAdapter da = new OracleDataAdapter(selectStr, connsql);
-                OracleCommandBuilder cb = new OracleCommandBuilder(da); // Tự động sinh lệnh Update
-                DataTable dtTemp = new DataTable();
-                da.Fill(dtTemp);
+                // Chọn file để lưu kết quả giải mã
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                saveFileDialog.FileName = $"GiaiMa_All_{method}_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
+                
+                if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
 
+                RSAEncryption rsa = new RSAEncryption();
+                StringBuilder result = new StringBuilder();
+                result.AppendLine("=== DỮ LIỆU ĐÃ GIẢI MÃ ===");
+                result.AppendLine($"Phương thức: {method}");
+                result.AppendLine($"Ngày giải mã: {DateTime.Now:dd/MM/yyyy HH:mm:ss}");
+                result.AppendLine($"File nguồn: {Path.GetFileName(openFileDialog.FileName)}");
+                result.AppendLine();
+
+                string[] lines = fileContent.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
                 int countNV = 0;
-                RSAEncryption rsa = new RSAEncryption(); // Khởi tạo sẵn để dùng
-
-                foreach (DataRow row in dtTemp.Rows)
-                {
-                    bool isUpdated = false;
-
-                    // Giải mã SĐT
-                    if (row["SDTNV"] != DBNull.Value)
-                    {
-                        string val = row["SDTNV"].ToString();
-                        string decrypted = ApplyDecrypt(val, method, rsa);
-                        if (decrypted != val) // Nếu có sự thay đổi (giải mã thành công)
-                        {
-                            row["SDTNV"] = decrypted;
-                            isUpdated = true;
-                        }
-                    }
-
-                    // Giải mã CCCD
-                    if (row["CCCD"] != DBNull.Value)
-                    {
-                        string val = row["CCCD"].ToString();
-                        string decrypted = ApplyDecrypt(val, method, rsa);
-                        if (decrypted != val)
-                        {
-                            row["CCCD"] = decrypted;
-                            isUpdated = true;
-                        }
-                    }
-
-                    if (isUpdated) countNV++;
-                }
-
-                if (countNV > 0) da.Update(dtTemp); // Lưu xuống DB
-
-                // --- XỬ LÝ BẢNG TÀI KHOẢN (MẬT KHẨU) ---
-                string selectTK = "Select * from DANGNHAP";
-                OracleDataAdapter daTK = new OracleDataAdapter(selectTK, connsql);
-                OracleCommandBuilder cbTK = new OracleCommandBuilder(daTK);
-                DataTable dtTK = new DataTable();
-                daTK.Fill(dtTK);
-
                 int countTK = 0;
-                foreach (DataRow row in dtTK.Rows)
-                {
-                    if (row["MATKHAU"] != DBNull.Value)
-                    {
-                        string val = row["MATKHAU"].ToString();
-                        string decrypted = ApplyDecrypt(val, method, rsa);
 
-                        if (decrypted != val)
+                foreach (string line in lines)
+                {
+                    // Bỏ qua các dòng header
+                    if (line.StartsWith("===") || line.StartsWith("Phương thức:") || 
+                        line.StartsWith("Ngày xuất:") || line.StartsWith("Tổng:") ||
+                        string.IsNullOrWhiteSpace(line))
+                        continue;
+
+                    // Xử lý dòng dữ liệu: MaNV=xxx|SDTNV=encrypted hoặc MaNV=xxx|CCCD=encrypted hoặc MaTK=xxx|MATKHAU=encrypted
+                    if (line.Contains("|"))
+                    {
+                        string[] parts = line.Split('|');
+                        if (parts.Length == 2)
                         {
-                            row["MATKHAU"] = decrypted;
-                            countTK++;
+                            string[] keyValue1 = parts[0].Split('=');
+                            string[] keyValue2 = parts[1].Split('=');
+                            
+                            if (keyValue1.Length == 2 && keyValue2.Length == 2)
+                            {
+                                string key1 = keyValue1[0].Trim();
+                                string value1 = keyValue1[1].Trim();
+                                string key2 = keyValue2[0].Trim();
+                                string encrypted = keyValue2[1].Trim();
+
+                                // Giải mã
+                                string decrypted = ApplyDecrypt(encrypted, method, rsa);
+                                
+                                if (key1 == "MaNV")
+                                {
+                                    result.AppendLine($"{key1}={value1}|{key2}={decrypted}");
+                                    if (key2 == "SDTNV" || key2 == "CCCD") countNV++;
+                                }
+                                else if (key1 == "MaTK" && key2 == "MATKHAU")
+                                {
+                                    result.AppendLine($"{key1}={value1}|{key2}={decrypted}");
+                                    countTK++;
+                                }
+                            }
                         }
                     }
                 }
 
-                if (countTK > 0) daTK.Update(dtTK); // Lưu xuống DB
+                result.AppendLine();
+                result.AppendLine($"Tổng nhân viên đã giải mã: {countNV}");
+                result.AppendLine($"Tổng tài khoản đã giải mã: {countTK}");
 
-                // Ghi Log (để bên Nhật ký có thể xuất báo cáo)
-                LogActionToDB($"Giải mã ({method})", $"Đã giải mã {countNV} nhân viên và {countTK} tài khoản.");
+                // Ghi kết quả vào file
+                File.WriteAllText(saveFileDialog.FileName, result.ToString(), Encoding.UTF8);
 
-                if (connsql.State == ConnectionState.Open) connsql.Close();
+                // Ghi Log vào DB
+                LogActionToDB($"Giải mã file ({method})", $"Đã giải mã {countNV} nhân viên và {countTK} tài khoản từ file: {Path.GetFileName(openFileDialog.FileName)}");
 
-                MessageBox.Show($"Hoàn tất!\n- Nhân viên đã cập nhật: {countNV}\n- Tài khoản đã cập nhật: {countTK}");
-
-                // Tải lại dữ liệu lên lưới
-                loadDGV_NhanVien();
-                loadDGV_TaiKhoan();
+                MessageBox.Show($"Đã giải mã thành công!\n- Nhân viên: {countNV}\n- Tài khoản: {countTK}\n\nKết quả đã lưu tại: {saveFileDialog.FileName}");
             }
             catch (Exception ex)
             {

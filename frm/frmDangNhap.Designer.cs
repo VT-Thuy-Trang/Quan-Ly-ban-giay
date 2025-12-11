@@ -40,7 +40,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 71);
+            this.label1.Location = new System.Drawing.Point(9, 70);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
@@ -49,7 +49,7 @@
             // 
             // txtTK
             // 
-            this.txtTK.Location = new System.Drawing.Point(71, 70);
+            this.txtTK.Location = new System.Drawing.Point(71, 67);
             this.txtTK.Margin = new System.Windows.Forms.Padding(2);
             this.txtTK.Name = "txtTK";
             this.txtTK.Size = new System.Drawing.Size(200, 20);
@@ -116,6 +116,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(299, 206);
+            this.ControlBox = false;
             this.Controls.Add(this.label3);
             this.Controls.Add(this.chk_HienMK);
             this.Controls.Add(this.btnDN);

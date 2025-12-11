@@ -690,13 +690,25 @@
             // 
             // SoLuong
             // 
+            this.SoLuong.DecimalPlaces = 0;
             this.SoLuong.HeaderText = "Số lượng";
+            this.SoLuong.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.SoLuong.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.SoLuong.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.SoLuong.MinimumWidth = 8;
             this.SoLuong.Name = "SoLuong";
-            this.SoLuong.Minimum = new decimal(new int[] {1, 0, 0, 0});
-            this.SoLuong.Maximum = new decimal(new int[] {999, 0, 0, 0});
-            this.SoLuong.Increment = new decimal(new int[] {1, 0, 0, 0});
-            this.SoLuong.DecimalPlaces = 0;
             // 
             // GiaBan
             // 
@@ -780,9 +792,9 @@
             this.label1.Location = new System.Drawing.Point(44, 16);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 14);
+            this.label1.Size = new System.Drawing.Size(80, 14);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Tên quần áo";
+            this.label1.Text = "Tên sản phẩm";
             // 
             // button1
             // 
@@ -859,7 +871,7 @@
             // 
             this.tsmi_Xoa.Name = "tsmi_Xoa";
             this.tsmi_Xoa.Size = new System.Drawing.Size(94, 22);
-            this.tsmi_Xoa.Text = "Xoá";
+            this.tsmi_Xoa.Text = "Xóa";
             this.tsmi_Xoa.Click += new System.EventHandler(this.tsmi_Xoa_Click);
             // 
             // frmBanHang

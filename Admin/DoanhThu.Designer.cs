@@ -59,7 +59,7 @@ namespace QL_GiayTT.Admin
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(91, 13);
             this.label5.TabIndex = 26;
-            this.label5.Text = "Mã khách  hàng :";
+            this.label5.Text = "Mã khách hàng:";
             // 
             // dataGridView1
             // 
@@ -108,7 +108,7 @@ namespace QL_GiayTT.Admin
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 20;
-            this.label4.Text = "Ðến ngày :";
+            this.label4.Text = "Đến ngày :";
             // 
             // textBox1
             // 
@@ -124,7 +124,7 @@ namespace QL_GiayTT.Admin
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 13);
             this.label2.TabIndex = 18;
-            this.label2.Text = "Mã don hàng :";
+            this.label2.Text = "Mã đơn hàng :";
             // 
             // dateTimePicker1
             // 

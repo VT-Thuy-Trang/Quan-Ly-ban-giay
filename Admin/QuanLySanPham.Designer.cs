@@ -612,7 +612,7 @@ namespace QL_GiayTT.Admin
             this.btnXoaDM.Name = "btnXoaDM";
             this.btnXoaDM.Size = new System.Drawing.Size(113, 39);
             this.btnXoaDM.TabIndex = 7;
-            this.btnXoaDM.Text = "Xoá danh mục";
+            this.btnXoaDM.Text = "Xóa danh mục";
             this.btnXoaDM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoaDM.UseVisualStyleBackColor = true;
             this.btnXoaDM.Click += new System.EventHandler(this.btnXoaDM_Click);
@@ -725,7 +725,7 @@ namespace QL_GiayTT.Admin
             this.gb_TTSP.Size = new System.Drawing.Size(742, 195);
             this.gb_TTSP.TabIndex = 28;
             this.gb_TTSP.TabStop = false;
-            this.gb_TTSP.Text = "Thông tin  sản phẩm";
+            this.gb_TTSP.Text = "Thông tin sản phẩm";
             // 
             // txtDaBan
             // 
@@ -952,13 +952,13 @@ namespace QL_GiayTT.Admin
             // 
             // dataGridViewTextBoxColumn12
             // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "Mã Loai";
+            this.dataGridViewTextBoxColumn12.HeaderText = "Mã Loại";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.Width = 140;
             // 
             // dataGridViewTextBoxColumn13
             // 
-            this.dataGridViewTextBoxColumn13.HeaderText = "Tên Loạii";
+            this.dataGridViewTextBoxColumn13.HeaderText = "Tên Loại";
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             this.dataGridViewTextBoxColumn13.Width = 140;
             // 
@@ -1019,12 +1019,12 @@ namespace QL_GiayTT.Admin
             // 
             // MaLSP
             // 
-            this.MaLSP.HeaderText = "Mã Loai";
+            this.MaLSP.HeaderText = "Mã Loại";
             this.MaLSP.Name = "MaLSP";
             // 
             // TenL
             // 
-            this.TenL.HeaderText = "Tên Loạii";
+            this.TenL.HeaderText = "Tên Loại";
             this.TenL.Name = "TenL";
             // 
             // frmQuanLySanPham

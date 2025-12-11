@@ -36,6 +36,7 @@
     <Reference Include="Oracle.DataAccess">
       <HintPath>C:\Users\LENOVO\Downloads\WINDOWS.X64_213000_db_home\ODP.NET\bin\4\Oracle.DataAccess.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.DataAccess.EntityFramework, Version=6.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL" />
     <Reference Include="Oracle.ManagedDataAccess">
       <HintPath>bin\Debug\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
@@ -133,6 +134,12 @@
     <Compile Include="frm\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm\frmRegisterOracle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm\frmRegisterOracle.Designer.cs">
+      <DependentUpon>frmRegisterOracle.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm\SharedForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +195,9 @@
     <EmbeddedResource Include="frm\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm\frmRegisterOracle.resx">
+      <DependentUpon>frmRegisterOracle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm\SharedForm.resx">
       <DependentUpon>SharedForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -237,6 +247,9 @@
     <Content Include="Resources\load.png" />
     <Content Include="Resources\load1.png" />
     <Content Include="Resources\xao.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -233,7 +233,7 @@ namespace QL_GiayTT.Admin
 
         private void btnHuy_Click(object sender, EventArgs e)
         {
-            DialogResult r = MessageBox.Show("B?n có Hu? hoá donô đang được chọn ch??", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            DialogResult r = MessageBox.Show("B?n có Hu? hóa đơnô đang được chọn ch??", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (r == DialogResult.Yes)
             {
                 if (dtGV_HoaDon.SelectedCells.Count > 0)
@@ -251,11 +251,11 @@ namespace QL_GiayTT.Admin
 
                         if (dataRow != null)
                         {
-                            dataRow["TrangThai"] = "Hu? hoá don";
+                            dataRow["TrangThai"] = "Hu? hóa đơn";
 
                             OpenConnection();
                             OracleCommand command = new OracleCommand("UPDATE HOADON SET TrangThai = :TrangThai WHERE MaHD = :MaHD", connsql);
-                            command.Parameters.Add(":TrangThai", OracleDbType.Varchar2).Value = "Hu? hoá don";
+                            command.Parameters.Add(":TrangThai", OracleDbType.Varchar2).Value = "Hu? hóa đơn";
                             command.Parameters.Add(":MaHD", OracleDbType.Varchar2).Value = maHD;
                             command.ExecuteNonQuery();
 

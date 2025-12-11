@@ -1,5 +1,6 @@
 ﻿using QL_GiayTT.Class;
 using QL_GiayTT.frm;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +25,10 @@ namespace QL_GiayTT
         {
             CenterToScreen();
             InitializeComponent();
+            // Giá trị mặc định cho kết nối Oracle
+            if (string.IsNullOrWhiteSpace(txtHost.Text)) txtHost.Text = "localhost";
+            if (string.IsNullOrWhiteSpace(txtPort.Text)) txtPort.Text = "1521";
+            if (string.IsNullOrWhiteSpace(txtSID.Text))  txtSID.Text  = "orcl";
         }
         public frmLogin(string host, string port, string sid, string user)
         {
@@ -57,6 +62,19 @@ namespace QL_GiayTT
             if (chk_HienMK.Checked == true)
                 txtPassword.PasswordChar = '\0';
             else txtPassword.PasswordChar = '*';
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            // Mở form đăng ký (độc lập, không cần thông tin từ form login)
+            frmRegisterOracle frmRegister = new frmRegisterOracle();
+            frmRegister.StartPosition = FormStartPosition.CenterParent;
+            
+            // Nếu đã nhập thông tin kết nối, điền sẵn vào form đăng ký (tùy chọn)
+            if (!string.IsNullOrWhiteSpace(Host))
+                frmRegister.SetConnectionInfo(Host, Port, Sid);
+            
+            frmRegister.ShowDialog(this);
         }
     }
 }

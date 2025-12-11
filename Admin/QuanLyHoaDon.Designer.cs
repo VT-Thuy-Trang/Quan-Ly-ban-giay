@@ -149,7 +149,7 @@ namespace QL_GiayTT.Admin
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(127, 39);
             this.btnHuy.TabIndex = 7;
-            this.btnHuy.Text = "Huỷ hoá don";
+            this.btnHuy.Text = "Hủy hóa đơn";
             this.btnHuy.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnHuy.UseVisualStyleBackColor = true;
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
@@ -164,7 +164,7 @@ namespace QL_GiayTT.Admin
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(127, 39);
             this.btnXoa.TabIndex = 8;
-            this.btnXoa.Text = "Xóa hoá don";
+            this.btnXoa.Text = "Xóa hóa đơn";
             this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
@@ -179,7 +179,7 @@ namespace QL_GiayTT.Admin
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(127, 39);
             this.btnSua.TabIndex = 11;
-            this.btnSua.Text = "Sửa hoá don";
+            this.btnSua.Text = "Sửa hóa đơn";
             this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
@@ -195,7 +195,7 @@ namespace QL_GiayTT.Admin
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(127, 39);
             this.btnLuu.TabIndex = 9;
-            this.btnLuu.Text = "Lưu hoá don";
+            this.btnLuu.Text = "Lưu hóa đơn";
             this.btnLuu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLuu.UseVisualStyleBackColor = true;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
@@ -300,7 +300,7 @@ namespace QL_GiayTT.Admin
             // 
             // MaHD_CTHD
             // 
-            this.MaHD_CTHD.HeaderText = "Mã hoá don";
+            this.MaHD_CTHD.HeaderText = "Mã hóa đơn";
             this.MaHD_CTHD.Name = "MaHD_CTHD";
             // 
             // MaSP
@@ -347,7 +347,7 @@ namespace QL_GiayTT.Admin
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(114, 19);
             this.label4.TabIndex = 18;
-            this.label4.Text = "Chi tiết hoá don";
+            this.label4.Text = "Chi tiết hóa đơn";
             // 
             // dtGV_HoaDon
             // 
@@ -387,7 +387,7 @@ namespace QL_GiayTT.Admin
             // 
             // MaHD
             // 
-            this.MaHD.HeaderText = "Mã hoá don";
+            this.MaHD.HeaderText = "Mã hóa đơn";
             this.MaHD.Name = "MaHD";
             // 
             // MaNV
@@ -573,7 +573,7 @@ namespace QL_GiayTT.Admin
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(128, 19);
             this.label2.TabIndex = 18;
-            this.label2.Text = "Thông tin hoá don";
+            this.label2.Text = "Thông tin hóa đơn";
             // 
             // frmQuanLyHoaDon
             // 

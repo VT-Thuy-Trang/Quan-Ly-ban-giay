@@ -97,10 +97,10 @@ namespace QL_GiayTT.Admin
             // 
             // btnXuatFileGiaiMa
             // 
-            this.btnXuatFileGiaiMa.BackColor = System.Drawing.Color.Teal;
+            this.btnXuatFileGiaiMa.BackColor = System.Drawing.Color.SlateBlue;
             this.btnXuatFileGiaiMa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXuatFileGiaiMa.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnXuatFileGiaiMa.Location = new System.Drawing.Point(10, 332);
+            this.btnXuatFileGiaiMa.ForeColor = System.Drawing.SystemColors.Menu;
+            this.btnXuatFileGiaiMa.Location = new System.Drawing.Point(8, 298);
             this.btnXuatFileGiaiMa.Name = "btnXuatFileGiaiMa";
             this.btnXuatFileGiaiMa.Size = new System.Drawing.Size(180, 35);
             this.btnXuatFileGiaiMa.TabIndex = 8;
@@ -110,10 +110,10 @@ namespace QL_GiayTT.Admin
             // 
             // btnXuatFileMaHoa
             // 
-            this.btnXuatFileMaHoa.BackColor = System.Drawing.Color.Teal;
+            this.btnXuatFileMaHoa.BackColor = System.Drawing.Color.SlateBlue;
             this.btnXuatFileMaHoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXuatFileMaHoa.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.btnXuatFileMaHoa.Location = new System.Drawing.Point(10, 291);
+            this.btnXuatFileMaHoa.ForeColor = System.Drawing.SystemColors.Menu;
+            this.btnXuatFileMaHoa.Location = new System.Drawing.Point(8, 257);
             this.btnXuatFileMaHoa.Name = "btnXuatFileMaHoa";
             this.btnXuatFileMaHoa.Size = new System.Drawing.Size(180, 35);
             this.btnXuatFileMaHoa.TabIndex = 7;
@@ -125,11 +125,11 @@ namespace QL_GiayTT.Admin
             // 
             this.btnNhapTXT.BackColor = System.Drawing.Color.Gray;
             this.btnNhapTXT.ForeColor = System.Drawing.Color.White;
-            this.btnNhapTXT.Location = new System.Drawing.Point(10, 241);
+            this.btnNhapTXT.Location = new System.Drawing.Point(8, 339);
             this.btnNhapTXT.Name = "btnNhapTXT";
             this.btnNhapTXT.Size = new System.Drawing.Size(180, 35);
             this.btnNhapTXT.TabIndex = 6;
-            this.btnNhapTXT.Text = "Nhập TXT (RSA)";
+            this.btnNhapTXT.Text = "Nhập FILE mã hóa";
             this.btnNhapTXT.UseVisualStyleBackColor = false;
             this.btnNhapTXT.Click += new System.EventHandler(this.btnNhapTXT_Click);
             // 
@@ -137,7 +137,7 @@ namespace QL_GiayTT.Admin
             // 
             this.btnXoaTatCa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnXoaTatCa.ForeColor = System.Drawing.Color.White;
-            this.btnXoaTatCa.Location = new System.Drawing.Point(10, 196);
+            this.btnXoaTatCa.Location = new System.Drawing.Point(8, 533);
             this.btnXoaTatCa.Name = "btnXoaTatCa";
             this.btnXoaTatCa.Size = new System.Drawing.Size(180, 35);
             this.btnXoaTatCa.TabIndex = 5;

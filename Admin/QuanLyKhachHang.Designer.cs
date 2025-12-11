@@ -41,7 +41,6 @@ namespace QL_GiayTT.Admin
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.btnMaHoaKH = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button7 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -70,7 +69,6 @@ namespace QL_GiayTT.Admin
             this.NamSinhKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SDTKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiaChiKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnGiaiMa = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
@@ -221,8 +219,6 @@ namespace QL_GiayTT.Admin
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.btnGiaiMa);
-            this.panel4.Controls.Add(this.btnMaHoaKH);
             this.panel4.Controls.Add(this.groupBox3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 195);
@@ -230,16 +226,6 @@ namespace QL_GiayTT.Admin
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(922, 65);
             this.panel4.TabIndex = 39;
-            // 
-            // btnMaHoaKH
-            // 
-            this.btnMaHoaKH.Location = new System.Drawing.Point(275, 15);
-            this.btnMaHoaKH.Name = "btnMaHoaKH";
-            this.btnMaHoaKH.Size = new System.Drawing.Size(117, 33);
-            this.btnMaHoaKH.TabIndex = 36;
-            this.btnMaHoaKH.Text = "Mã Hóa";
-            this.btnMaHoaKH.UseVisualStyleBackColor = true;
-            this.btnMaHoaKH.Click += new System.EventHandler(this.btnMaHoaKH_Click);
             // 
             // groupBox3
             // 
@@ -485,7 +471,7 @@ namespace QL_GiayTT.Admin
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(167, 20);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Danh sách  khách hàng";
+            this.label12.Text = "Danh sách khách hàng";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dtGV_KhachHang
@@ -545,16 +531,6 @@ namespace QL_GiayTT.Admin
             // 
             this.DiaChiKH.HeaderText = "Địa chỉ";
             this.DiaChiKH.Name = "DiaChiKH";
-            // 
-            // btnGiaiMa
-            // 
-            this.btnGiaiMa.Location = new System.Drawing.Point(402, 15);
-            this.btnGiaiMa.Name = "btnGiaiMa";
-            this.btnGiaiMa.Size = new System.Drawing.Size(117, 33);
-            this.btnGiaiMa.TabIndex = 37;
-            this.btnGiaiMa.Text = "Giải Mã";
-            this.btnGiaiMa.UseVisualStyleBackColor = true;
-            this.btnGiaiMa.Click += new System.EventHandler(this.btnGiaiMa_Click);
             // 
             // frmQuanLyKhachHang
             // 
@@ -633,7 +609,5 @@ namespace QL_GiayTT.Admin
         private System.Windows.Forms.DataGridViewTextBoxColumn NamSinhKH;
         private System.Windows.Forms.DataGridViewTextBoxColumn SDTKH;
         private System.Windows.Forms.DataGridViewTextBoxColumn DiaChiKH;
-        private System.Windows.Forms.Button btnMaHoaKH;
-        private System.Windows.Forms.Button btnGiaiMa;
     }
 }
